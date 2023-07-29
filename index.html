@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <Link Rel="SHORTCUT ICON" href="icon.png">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <meta name="description" content="STUDY WITH MIKU WEB Ver.">
+  <title>STUDY WITH MIKU</title>
+  <link rel="apple-touch-icon" href="icon.png">
+  <link href="https://fonts.loli.net/css?family=Quicksand:400" rel="stylesheet">
+  <link charset="utf-8" href="css/shared/sp/css/common.css" rel="stylesheet">
+  <link charset="utf-8" href="css/mikutap.css" rel="stylesheet">
+  <link charset="utf-8" href="css/player.css" rel="stylesheet"> 
+  <link href="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/meting/2.0.1/Meting.min.js"></script>
+  <script charset="utf-8" src="https://cdnjs.loli.net/ajax/libs/jquery/2.2.4/jquery.min.js" type="text/javascript"></script>
+  <script charset="utf-8" src="https://cdnjs.loli.net/ajax/libs/pixi.js/3.0.11/pixi.min.js" type="text/javascript"></script>
+  <script charset="utf-8" src="https://cdnjs.loli.net/ajax/libs/gsap/1.19.1/TweenMax.min.js" type="text/javascript"></script>
+  <script charset="utf-8" src="js/shared/js/common-2.min.js" type="text/javascript"></script>
+  <script charset="utf-8" src="js/mikutap.min.js" type="text/javascript"></script>
+  <script charset="utf-8" src="js/mainfunction.js" type="text/javascript"></script>
+</head>
+
+<body>
+  <div id="view"></div>
+  <div id="scene_top">
+    <h1>STUDY WITH MIKU</h1>
+    <div id="ng">
+      <p class="atten">十分抱歉<br>您的浏览器并不支持本页面需要的特性</p>
+    </div>
+    <div class="ok">
+      <p id="bt_start"><a onclick="$('.aplayer-play').trigger('click')" href="">!STUDY!</a></p>
+    </div>
+    <p id="bt_about"><a href="">*关于*</a></p>
+    <div class="ok">
+      <p class="attention">※请打开声音并享受。</p>
+    </div>
+  </div>
+  <!-- <div id="scene_loading"> -->
+  <div id="scene_loading">
+    <video id="v1" autoplay loop muted>
+      <source src="oneloop.mp4" type="video/mp4"  />
+    </video>
+    <!-- <div class="set">
+      <p class="attention">点击 &amp; 拖动或者按任意键!</p>
+      <p id="bt_backtrack"><a href="">音乐: 开启</a></p>
+    </div> -->
+  </div>
+  <div id="about_cover"></div>
+  <div id="about">
+    <div id="about_in">
+      <p class="close"><span id="bt_close">×</span></p>
+      <p class="con"> 视频来源 <a href="https://www.bilibili.com/video/BV1hA411y7UC/" target="_blank">STUDY WITH MIKU</a> </p>
+      <!-- <p class="con"> 作者 <a href="https://aidn.jp" target="_blank">daniwell</a> (<a href="https://twitter.com/daniwell_aidn" target="_blank">twitter</a>) </p> -->
+      <!-- <p class="link"> 灵感来源 <a href="http://patatap.com/" target="_blank">Patatap</a><br>(令人赞叹的网页!)</p> -->
+    </div>
+  </div>
+  <div id="bt_back">＜返回</div>
+  <div id="bt_fs">∷全屏显示</div>
+  <meting-js
+	server="netease"
+	type="playlist"
+	id="8390208866"
+  fixed="true"
+  theme="#39c5bb">
+  </meting-js>
+</body>
+
+</html>
