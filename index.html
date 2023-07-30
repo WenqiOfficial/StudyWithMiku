@@ -26,6 +26,7 @@
 </head>
 
 <body>
+  <div id="container">
   <div id="view"></div>
   <div id="scene_top">
     <h1>STUDY WITH MIKU</h1>
@@ -61,12 +62,16 @@
   </div>
   <div id="bt_back">＜返回</div>
   <div id="bt_fs">∷全屏显示</div>
+  </div>
   <meting-js
 	server="netease"
 	type="playlist"
 	id="8390208866"
   fixed="true"
-  theme="#39c5bb">
+  theme="#39c5bb"
+  order="random"
+  mutex="true"
+  storage-name="mikuplayer">
   </meting-js>
 </body>
 
