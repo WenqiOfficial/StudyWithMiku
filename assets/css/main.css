@@ -14,7 +14,8 @@ body,html{
     position:absolute;
     overflow:hidden;
     text-align:center;
-    background:#8cc;
+    /* background:#8cc; */
+    background: #448a91;
     color:#fff;
     font-family:Quicksand,"游ゴシック","Yu Gothic","游ゴシック体",YuGothic,"Yu Gothic UI","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","Meiryo UI","メイリオ",Meiryo,sans-serif
 }
@@ -95,13 +96,15 @@ body,html{
 }
 #about_cover{
     z-index:900;
-    background:#fff;
+    /* background:#fff; */
+    background: #000;
     opacity:.5
 }
 #about{
     z-index:1000;
     color:#fff;
-    background:#8cc;
+    /* background:#8cc; */
+    background: #448a91;
     max-width:640px;
     letter-spacing:.2rem;
     line-height:1.2;
