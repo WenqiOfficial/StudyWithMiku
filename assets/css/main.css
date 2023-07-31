@@ -15,7 +15,7 @@
     height:100%;
     width:100%
 }
-#about,#menu,#about_cover,#menu_cover,#rest_cover,#bt_fs,#ng,.ok{
+#about,#menu,#about_cover,#menu_cover,#rest_cover,#bt_fs,#ng{
     display:none
 }
 #about a,#menu a,#rest a,#bt_about a,#bt_feedback a,#bt_start a{
