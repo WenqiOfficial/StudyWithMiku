@@ -11,6 +11,7 @@
   <title>STUDY WITH MIKU</title>
   <link rel="apple-touch-icon" href="icon.png">
   <link href="https://fonts.loli.net/css?family=Quicksand:400" rel="stylesheet">
+  <link href="https://fonts.loli.net/css?family=ZCOOL+XiaoWei:400" rel="stylesheet">
   <link charset="utf-8" href="assets/css/shared/sp/css/common.css" rel="stylesheet">
   <link charset="utf-8" href="assets/css/main.css" rel="stylesheet"> 
   <link href="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
@@ -18,12 +19,10 @@
   <script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/meting/2.0.1/Meting.min.js"></script>
   <script charset="utf-8" src="https://cdnjs.loli.net/ajax/libs/jquery/2.2.4/jquery.min.js" type="text/javascript"></script>
-  <script charset="utf-8" src="assets/js/shared/js/common-2.min.js" type="text/javascript"></script>
   <script charset="utf-8" src="assets/js/mikuplayer.min.js" type="text/javascript"></script>
 </head>
 
 <body>
-  <div id="view"></div>
   <div id="scene_top">
     <h1>STUDY WITH MIKU</h1>
     <div id="ng">
@@ -41,21 +40,39 @@
     <video id="v1" autoplay loop muted>
       <source src="assets/video/oneloop.mp4" type="video/mp4"  />
     </video>
-    <!-- <div class="tips">
+    <div class="tips">
       <p class="attention">开始认真学习/工作吧！</p>
-      <p id="bt_break"><a href="#">休息一会</a></p>
-    </div> -->
+    </div>
   </div>
   <div id="about_cover"></div>
   <div id="about">
     <div id="about_in">
-      <p class="close"><span id="bt_close">×</span></p>
+      <p class="close"><span id="bt_aboutclose">×</span></p>
+      <p class="con"> 你已经与MIKU一起努力了  分钟啦 </p>
+      <p class="con">----------------------</p>
       <p class="con"> 素材来源 <a href="https://www.bilibili.com/video/BV1hA411y7UC/" target="_blank">STUDY WITH MIKU</a> </p>
       <p class="con"> 作者 <a href="https://github.com/WenqiOfficial/" target="_blank">WenqiOfficial</a> (<a href="https://space.bilibili.com/168567806" target="_blank">bilibili</a>) </p>
-      <p class="link"> 感谢以下优秀项目！<br><a href="https://aplayer.js.org/" target="_blank">APlayer</a> & <a href="https://github.com/metowolf/MetingJS" target="_blank">MetingJS</a><br><a href="https://aidn.jp/mikutap/" target="_blank">MikuTap</a> By <a href="https://aidn.jp/" target="_blank">daniwellP</a></p>
+      <p class="link"> 感谢以下优秀项目！<br><a href="https://aplayer.js.org/" target="_blank">APlayer</a> & <a href="https://github.com/metowolf/MetingJS" target="_blank">MetingJS</a><br><a href="https://aidn.jp/mikutap/" target="_blank">MikuTap</a> By <a href="https://aidn.jp/" target="_blank">daniwellP</a> </p>
     </div>
   </div>
-  <div id="bt_back">＜返回</div>
+  <div id="menu_cover"></div>
+  <div id="menu">
+    <div id="menu_in">
+      <p class="close"><span id="bt_menuclose">×</span></p>
+      <p class="con"> 番茄钟 </p>
+    </div>
+  </div>
+  <div id="rest_cover"></div>
+  <div id="rest">
+    <div id="rest_in">
+      <p class="close"><span id="bt_restclose">×</span></p>
+      <p class="con"> 休息中... </p>
+      <p class="con"> 这次已经努力了 分钟啦 </p>
+      <p class="con"> 如果想继续努力的话直接关掉页面就好啦 </p>
+      <p class="link"> <a id="bt_stop" href="#">结 束</a> </p>
+    </div>
+  </div>
+  <div id="bt_rest">＜休息一下</div>
   <div id="bt_fs">∷全屏显示</div>
   <meting-js
 	server="netease"

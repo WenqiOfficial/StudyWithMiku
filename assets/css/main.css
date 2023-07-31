@@ -1,11 +1,24 @@
-#about_cover,#view,#view canvas,body,html{
+@font-face {
+    font-family: "SJsuqian Regular";
+    font-style: normal;
+    font-weight: 400;
+    src: url("fonts/sjsq.woff2") format('woff2');
+}
+@font-face {
+    font-family: "SJsuqian Regular";
+    font-style: normal;
+    font-weight: 400;
+    src: url("fonts/sjsq.ttf") format('ttf');
+}
+
+#about_cover,#menu_cover,#rest_cover,#view,#view canvas,body,html{
     height:100%;
     width:100%
 }
-#about,#about_cover,#bt_fs,#ng,.ok{
+#about,#menu,#about_cover,#menu_cover,#rest_cover,#bt_fs,#ng,.ok{
     display:none
 }
-#about a,#bt_about a,#bt_backtrack a,#bt_feedback a,#bt_start a{
+#about a,#menu a,#rest a,#bt_about a,#bt_feedback a,#bt_start a{
     color:#fff;
     text-decoration:none;
     border-bottom:dashed 1px #fff
@@ -17,14 +30,16 @@ body,html{
     /* background:#8cc; */
     background: #448a91;
     color:#fff;
-    font-family:Quicksand,"游ゴシック","Yu Gothic","游ゴシック体",YuGothic,"Yu Gothic UI","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","Meiryo UI","メイリオ",Meiryo,sans-serif
+    /* font-family:Quicksand,pmzdxxt,"游ゴシック","Yu Gothic","游ゴシック体",YuGothic,"Yu Gothic UI","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","Meiryo UI","メイリオ",Meiryo,sans-serif */
+    font-family:Quicksand,"SJsuqian Regular","游ゴシック","Yu Gothic","游ゴシック体",YuGothic,"Yu Gothic UI","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","Meiryo UI","メイリオ",Meiryo,sans-serif
+
 }
-#about_cover,#view{
+#about_cover,#menu_cover,#rest_cover,#view{
     position:fixed;
     top:0;
     z-index:1
 }
-#bt_back,#bt_fs{
+#bt_rest,#bt_fs{
     position:absolute;
     display: none;
     z-index:100;
@@ -38,13 +53,10 @@ body,html{
     left:auto;
     right:0
 }
-#scene_main,#scene_top{
-    width:90%
-}
-#scene_loading{
+#scene_learning,#scene_top{
     width:100%
 }
-#about,#scene_loading,#scene_main,#scene_top{
+#about,#menu,#rest,#scene_top{
     position:absolute;
     top:50%;
     left:50%;
@@ -83,24 +95,21 @@ body,html{
     font-size:.9rem;
     margin-bottom:20px
 }
-#scene_loading hr{
-    width:"0%"
-}
-#scene_main,#scene_main .attention{
+#scene_learning,#scene_learning .attention{
     pointer-events:none
 }
-#bt_backtrack,#bt_feedback{
+#bt_feedback{
     font-size:.9rem;
     margin-top:20px;
     pointer-events:auto
 }
-#about_cover{
+#about_cover,#menu_cover,#rest_cover{
     z-index:900;
     /* background:#fff; */
     background: #000;
     opacity:.5
 }
-#about{
+#about,#menu,#rest{
     z-index:1000;
     color:#fff;
     /* background:#8cc; */
@@ -110,26 +119,26 @@ body,html{
     line-height:1.2;
     width:100%
 }
-#about_in{
+#about_in,#menu_in,#rest_in{
     padding:40px
 }
-#bt_close{
+#bt_aboutclose,#bt_menuclose,#bt_restclose{
     font-size:2rem;
     cursor:pointer
 }
-#about .close{
+#about .close,#menu .close,#rest .close{
     margin-bottom:30px
 }
-#about .con{
+#about .con,#menu .con,#rest .con{
     line-height:1.7;
     margin-bottom:20px
 }
-#about .link{
+#about .link,#menu .link,#rest .link{
     margin-top:30px;
     margin-bottom:10px;
     line-height:1.5
 }
-#bt_back:hover,#bt_backtrack:hover,#bt_close:hover,#bt_feedback:hover,#bt_fs:hover,#scene_top .sns:hover,a:hover{
+#bt_rest:hover,#bt_aboutclose:hover,#bt_menuclose:hover,#bt_restclose:hover,#bt_feedback:hover,#bt_fs:hover,#scene_top .sns:hover,a:hover{
     animation:animover .2s linear;
     -webkit-animation:animover .2s linear
 }
@@ -181,25 +190,25 @@ body,html{
         font-size:.6rem;
         margin-bottom:15px
     }
-    #bt_backtrack,#bt_feedback{
+    #bt_feedback{
         font-size:.7rem
     }
-    #about_in{
+    #about_in,#menu_in,#rest_in{
         padding:30px
     }
-    #bt_close{
+    #bt_aboutclose,#bt_menuclose,#bt_restclose{
         font-size:1.8rem;
         cursor:pointer
     }
-    #about{
+    #about,#menu,#rest{
         letter-spacing:.1rem
     }
-    #about a{
+    #about a,#menu a,#rest a{
         color:#fff;
         text-decoration:none;
         border-bottom:dashed 1px #fff
     }
-    #about .con,#about .link{
+    #about .con,#about .link,#menu .con,#rest .con,#menu .link,#rest .link{
         font-size:.9rem
     }
 }
@@ -208,23 +217,17 @@ body,html{
     color: black;
     text-align: left;
 }
-/* *{  
-    margin: 0px;  
-    padding: 0px;  
-}   */
 video{  
     position: absolute;  
     left: 0px;  
     top: 0px;  
-    /* min-width: 100%;  
-    min-height: 100%;   */
     height: auto;  
     width: auto;  
     /*加滤镜*/
     /*filter: blur(15px); //背景模糊设置 */
     /*-webkit-filter: grayscale(100%);*/  
     /*filter:grayscale(100%); //背景灰度设置*/  
-    /* z-index:-11; */
+    z-index:-11;
     object-fit: cover;
 }  
 source{  
@@ -235,7 +238,11 @@ source{
 } 
 
 #scene_learning {
-    top: auto !important;
+    position: absolute;
     z-index: 2;
     display: none;
+}
+
+.tips {
+    padding: 10px;
 }
