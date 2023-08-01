@@ -35,3 +35,9 @@ STUDY WITH MIKU web version cover
 ### 今日学习人数等记录
 
 记录学习人数
+
+### 摸鱼自动停止计时
+
+键鼠出现输入
+
+窗口失去焦点
