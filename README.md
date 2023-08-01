@@ -14,7 +14,11 @@ STUDY WITH MIKU web version cover
 
 √全屏
 
+√一言
+
 √丝滑的动画（
+
+√本地学习时长记录
 
 ## TODO
 
