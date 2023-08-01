@@ -53,6 +53,7 @@ var util = {
 		$("#scene_top").fadeOut(300, "linear");
 		$("#scene_learning").fadeIn(300, "linear");
 		$("#bt_rest").fadeIn(300, "linear");
+		$("video").trigger("play");
 		util.videoresize();
 		util.timerecord.start();
 		util.tips.start();
