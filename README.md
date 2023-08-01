@@ -4,7 +4,7 @@ STUDY WITH MIKU web version cover
 
 突发奇想，将其变为现实
 
-[Github Pages](https://wenqiofficial.github.io/StudyWithMiku)
+[WEB](https://studymiku.wenqi.icu)
 
 ## 目前实现的功能
 
