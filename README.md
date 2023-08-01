@@ -18,7 +18,7 @@ STUDY WITH MIKU web version cover
 
 √丝滑的动画（
 
-√本地学习时长记录
+√本地时长记录
 
 ## TODO
 

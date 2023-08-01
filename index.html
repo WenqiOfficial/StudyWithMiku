@@ -8,6 +8,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
   <meta name="description" content="STUDY WITH MIKU WEB Ver.">
+  <meta name="keywords" content="MIKU,Study,Cute,Kawaii,VOCALOID">
+  <meta name="author" content="WenqiOfficial">
   <title>STUDY WITH MIKU</title>
   <link rel="apple-touch-icon" href="icon.png">
   <link href="https://fonts.loli.net/css?family=Quicksand:400" rel="stylesheet">
@@ -18,6 +20,7 @@
   <!-- <link href="assets/aplayer/APlayer.min.css" rel="stylesheet"> -->
   <script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/meting/2.0.1/Meting.min.js"></script>
+  <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
   <script charset="utf-8" src="https://cdnjs.loli.net/ajax/libs/jquery/2.2.4/jquery.min.js" type="text/javascript"></script>
   <script charset="utf-8" src="assets/js/mikuplayer.min.js" type="text/javascript"></script>
 </head>
@@ -26,7 +29,7 @@
   <div id="scene_top">
     <h1>STUDY WITH MIKU</h1>
     <div id="ng">
-      <p class="atten">肥肠抱歉<br>您的浏览器并不支持本页面需要的特性(JavaScript、本地存储)</p>
+      <p class="atten">肥肠抱歉...<br>您的浏览器并不支持本页面需要的特性(JavaScript、本地存储)</p>
     </div>
     <div class="ok">
       <p id="bt_start"><a id="btt_start" href="#">! STUDY !</a></p>
@@ -43,18 +46,18 @@
     </video>
     <div class="tips">
       <p class="attention">开始认真学习/工作吧！</p>
-      <p class="ntime" style="display: none;">已经努力<text id="tipstime">0分钟</text>了呢...</p>
-      <p class="saying" style="display: none;">"<hitokoto>获取一言中...(*/ω＼*)</hitokoto>"</p>
+      <p class="ntime" style="display: none;">已经学习<text id="tipstime">0分钟</text>了呢...</p>
+      <p class="saying" style="display: none;">"<hitokoto id="hitokoto">获取一言中...(*/ω＼*)</hitokoto>"</p>
     </div>
   </div>
   <div id="about_cover"></div>
   <div id="about">
     <div id="about_in">
       <p class="close"><span id="bt_aboutclose">×</span></p>
-      <p class="con"> 你已经与MIKU一起努力<text id="sumtime">0分钟了</text> </p>
+      <p class="con"> 你已经与MIKU一起学习<text id="sumtime">0分钟了</text> </p>
       <p class="con">----------------------</p>
       <p class="con"> 素材来源 <a href="https://www.bilibili.com/video/BV1hA411y7UC/" target="_blank">STUDY WITH MIKU</a> </p>
-      <p class="con"> 作者 <a href="https://github.com/WenqiOfficial/" target="_blank">WenqiOfficial</a> (<a href="https://space.bilibili.com/168567806" target="_blank">bilibili</a>) <a href="https://github.com/WenqiOfficial/StudyWithMiku/issues/new/choose" target="_blank">反馈</a> </p>
+      <p class="con"> 作者 <a href="https://github.com/WenqiOfficial/" target="_blank">WenqiOfficial</a> (<a href="https://space.bilibili.com/168567806" target="_blank">bilibili</a>) <a href="https://github.com/WenqiOfficial/StudyWithMiku/issues/new/choose" target="_blank">向我反馈</a> </p>
       <p class="link"> 感谢以下优秀项目！<br><a href="https://aplayer.js.org/" target="_blank">APlayer</a> & <a href="https://github.com/metowolf/MetingJS" target="_blank">MetingJS</a><br><a href="https://aidn.jp/mikutap/" target="_blank">MikuTap</a> By <a href="https://aidn.jp/" target="_blank">daniwellP</a> </p>
     </div>
   </div>
@@ -62,7 +65,7 @@
   <div id="menu">
     <div id="menu_in">
       <p class="close"><span id="bt_menuclose">×</span></p>
-      <p class="con"> (尚在开发中...) </p>
+      <p class="con"> (尚在开发中...) (｀・ω・´)</p>
     </div>
   </div>
   <div id="rest_cover"></div>
@@ -70,7 +73,7 @@
     <div id="rest_in">
       <p class="close"><span id="bt_restclose">×</span></p>
       <p class="con"> 休息中... </p>
-      <p class="con"> 已经努力<text id="time">0分钟</text> </p>
+      <p class="con"> 已经学习<text id="time">0分钟</text> </p>
       <p class="con">----------------------</p>
       <p class="con"> 音乐已经自动暂停 <a href="#" id="bt_musicswitch">点我来切换</a> </p>
       <p class="link"> <a id="bt_stop" href="#">结 束</a> </p>
