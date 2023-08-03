@@ -27,16 +27,16 @@ var util = {
 			$('.aplayer-pause').trigger('click');
 			$('#bt_restclose').on('click', function() {
 				$('.aplayer-play').trigger('click');
-				util.timerecord.start();
+				util.timerecord.start()
 			});
 			$("#bt_musicswitch").on('click', function() {
-				$(".aplayer-button").trigger("click");
-			});
+				$(".aplayer-button").trigger("click")
+			})
 		});
 		$("#about_cover").on('click', function() {
 			$("#about").fadeOut(300, "linear");
 			$("#about_cover").fadeOut(300, "linear");
-			$("#scene_top").fadeIn(300, "linear");
+			$("#scene_top").fadeIn(300, "linear")
 		});
 		util.readstoragetime()
 	},
@@ -205,7 +205,7 @@ var util = {
 			$(".ntime").fadeOut(300, "linear");
 			setTimeout(function() {
 				$(".attention").fadeIn(300, "linear")
-			}, 300);
+			}, 300)
 		}
 	},
 	videoresize: function() {
