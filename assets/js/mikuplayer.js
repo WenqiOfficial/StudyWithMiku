@@ -1,6 +1,9 @@
-$(function() {
+/* STUDY WITH MIKU
+    CORE FUNCTION
+   V1.0.1 2023.08.03 */
+   $(function() {
 	if (window.localStorage) {
-		util.init()
+		util.init();
 	} else {
 		$(".ok").fadeOut(300, "linear");
 		$("#ng").fadeIn(300, "linear")
@@ -39,6 +42,8 @@ var util = {
 			$("#scene_top").fadeIn(300, "linear")
 		});
 		util.readstoragetime()
+	},
+	check: function(){
 	},
 	menuopen: function(e) {
 		$("#" + e).fadeIn(300, "linear");
@@ -136,7 +141,8 @@ var util = {
 			}
 			pastsDate = sDate;
 			pastmDate = mDate;
-			pasthDate = hDate
+			pasthDate = hDate;
+			$("video").trigger("play")
 		}, 1000)
 	},
 	readstoragetime: function() {
@@ -166,7 +172,7 @@ var util = {
 				if (tipstype == 0 || tipstype == 2) {
 					tipstype = 1;
 					async function fetchHitokoto() {
-						const response = await fetch('https://v1.hitokoto.cn/?c=a&c=d&c=i&c=k&max_length=10');
+						const response = await fetch('https://v1.hitokoto.cn/?c=d&c=i&c=k&max_length=10');
 						const {
 							uuid, hitokoto: hitokotoText
 						} = await response.json();
@@ -226,4 +232,4 @@ var util = {
 		return !!(document.webkitFullscreenElement || document.mozFullScreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.fullscreenElement)
 	}
 }, hour = minutes = seconds = recorded = sumhour = summinutes = sumseconds = tipstype = tipstimein = tipstimeout = sayingin = sayingout = attentionout = 0;
-console.log("\n %c Study With Miku V1.0 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
+console.log("\n %c Study With Miku V1.0.1 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
