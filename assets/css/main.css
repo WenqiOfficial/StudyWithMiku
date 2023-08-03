@@ -16,12 +16,6 @@
     font-weight: 400;
     src: url("https://cdn.jsdelivr.net/gh/WenqiOfficial/StudyWithMiku/assets/css/fonts/sjsq.woff2") format('woff2');
 } */
-/* @font-face {
-    font-family: "SJsuqian Regular";
-    font-style: normal;
-    font-weight: 400;
-    src: url("fonts/sjsq.ttf") format('ttf');
-} */
 
 #about_cover,#menu_cover,#rest_cover,#view,#view canvas,body,html{
     height:100%;
