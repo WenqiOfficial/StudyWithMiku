@@ -216,7 +216,9 @@ var util = {
 		return stat
 	},
 	initStrictMode: function() {
-		if (util.checkStrictMode()) {
+		if (util.checkStrictMode()==null) {
+			localStorage.setItem("conf_strict", 0);
+		}else if(util.checkStrictMode()){
 			$("#btt_strict")[0].innerText = '严格模式(离开页面自动停止): 开';
 		}
 	},
