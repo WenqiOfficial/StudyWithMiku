@@ -51,6 +51,8 @@ var util = {
 			$("#about_cover").fadeOut(300, "linear");
 			$("#scene_top").fadeIn(300, "linear")
 		});
+		util.useStrictMode()
+		// init localStorage
 		util.readstoragetime()
 	},
 	addVisibilityListener: function(){
