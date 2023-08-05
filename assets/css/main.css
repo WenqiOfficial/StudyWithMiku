@@ -24,7 +24,7 @@
 #about,#menu,#about_cover,#menu_cover,#rest_cover,#bt_fs,#ng{
     display:none
 }
-#about a,#menu a,#rest a,#bt_about a,#bt_feedback a,#bt_start a{
+#about a,#rest a,#bt_about a,#bt_feedback a,#bt_start a{
     color:#fff;
     text-decoration:none;
     border-bottom:dashed 1px #fff
@@ -127,6 +127,12 @@ body,html{
 }
 #about_in,#menu_in,#rest_in{
     padding:40px
+}
+#btt_strict{
+    padding: 4px 18px;
+    border: dotted 2px;
+    color:#fff;
+    text-decoration:none;
 }
 #bt_aboutclose,#bt_menuclose,#bt_restclose{
     font-size:2rem;
