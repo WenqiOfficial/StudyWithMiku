@@ -1,7 +1,7 @@
 /* STUDY WITH MIKU
     CORE FUNCTION
    V1.0.1 2023.08.03 */
-   $(function() {
+$(function() {
 	if (window.localStorage) {
 		util.init();
 	} else {
@@ -9,6 +9,8 @@
 		$("#ng").fadeIn(300, "linear")
 	}
 });
+
+
 var util = {
 	init: function() {
 		$(window).resize(util.videoresize);
@@ -17,7 +19,15 @@ var util = {
 		$("#bt_fs").on('click', function() {
 			util.fullscreen()
 		});
-		$("#btt_start").on('click', util.study);
+		$("#bt_strict").on('click', function() {
+			util.switchStrictMode();
+		});
+		$("#btt_start").on('click', function() {
+			if(util.useStrictMode()){
+				util.addVisibilityListener();
+			}
+			util.study();
+		});
 		$("#btt_setting").on('click', function() {
 			util.menuopen("menu")
 		});
@@ -41,7 +51,24 @@ var util = {
 			$("#about_cover").fadeOut(300, "linear");
 			$("#scene_top").fadeIn(300, "linear")
 		});
+		util.useStrictMode()
+		// init localStorage
 		util.readstoragetime()
+	},
+	addVisibilityListener: function(){
+		document.addEventListener('visibilitychange', function () {
+			if (document.visibilityState === 'hidden') {
+				util.timerecord.pause();
+				util.menuopen("rest");
+				document.title = '摸鱼中...';
+				$('.aplayer-pause').trigger('click');
+			}
+			if (document.visibilityState === 'visible') {
+				document.title = 'STUDY WITH MIKU';
+				$('.aplayer-play').trigger('click');
+				$('#bt_restclose').trigger('click');
+			}
+		});
 	},
 	check: function(){
 	},
@@ -165,6 +192,26 @@ var util = {
 		localStorage.setItem("studym", summinutes.toString(16));
 		localStorage.setItem("studys", sumseconds.toString(16));
 		util.readstoragetime()
+	},
+	useStrictMode: function() {
+		if (localStorage.getItem("conf_strict")===null) {
+			localStorage.setItem("conf_strict", 0);
+			return 0
+		}else{
+			return localStorage.getItem("conf_strict")-'0'
+		}
+	},
+	switchStrictMode: function() {
+		let stat = util.useStrictMode()-'0';
+		// small trick to trans string into int(bool)
+		if(stat) {
+			$("#bt_strict")[0].innerText = '严格模式(离开页面自动停止): 关';
+			 localStorage.setItem("conf_strict", 0); 
+		}
+		else { 
+			$("#bt_strict")[0].innerText = '严格模式(离开页面自动停止): 开';
+			localStorage.setItem("conf_strict", 1); 
+		}
 	},
 	tips: {
 		start: function() {
