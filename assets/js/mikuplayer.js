@@ -1,7 +1,8 @@
 /* STUDY WITH MIKU
     CORE FUNCTION
-   V1.0.1 2023.08.03 */
-$(function() {
+   V1.0.2 2023.08.05 */
+
+   $(function() {
 	if (window.localStorage) {
 		util.init();
 	} else {
@@ -19,11 +20,11 @@ var util = {
 		$("#bt_fs").on('click', function() {
 			util.fullscreen()
 		});
-		$("#bt_strict").on('click', function() {
+		$("#btt_strict").on('click', function() {
 			util.switchStrictMode();
 		});
 		$("#btt_start").on('click', function() {
-			if(util.useStrictMode()){
+			if (util.checkStrictMode()) {
 				util.addVisibilityListener();
 			}
 			util.study();
@@ -51,27 +52,25 @@ var util = {
 			$("#about_cover").fadeOut(300, "linear");
 			$("#scene_top").fadeIn(300, "linear")
 		});
-		util.useStrictMode()
-		// init localStorage
+		util.initStrictMode();
+		util.initWorldTimer();
 		util.readstoragetime()
 	},
-	addVisibilityListener: function(){
-		document.addEventListener('visibilitychange', function () {
-			if (document.visibilityState === 'hidden') {
-				util.timerecord.pause();
-				util.menuopen("rest");
-				document.title = '摸鱼中...';
-				$('.aplayer-pause').trigger('click');
-			}
-			if (document.visibilityState === 'visible') {
-				document.title = 'STUDY WITH MIKU';
-				$('.aplayer-play').trigger('click');
-				$('#bt_restclose').trigger('click');
+	addVisibilityListener: function() {
+		document.addEventListener('visibilitychange', function() {
+			//fix wrong event's action
+			if (util.checkStrictMode() && recorded) {
+				if (document.visibilityState === 'hidden') {
+					$('#bt_rest').trigger('click');
+					document.title = '摸鱼中...';
+				}
+				if (document.visibilityState === 'visible') {
+					document.title = 'STUDY WITH MIKU';
+				}
 			}
 		});
 	},
-	check: function(){
-	},
+	check: function() {},
 	menuopen: function(e) {
 		$("#" + e).fadeIn(300, "linear");
 		$("#" + e + "_cover").fadeIn(300, "linear");
@@ -107,7 +106,6 @@ var util = {
 				hour = minutes = seconds = 0;
 				recorded = 1
 			}
-			recorded = 1;
 			util.timer()
 		},
 		stop: function() {
@@ -132,6 +130,25 @@ var util = {
 		pause: function() {
 			clearInterval(time)
 		}
+	},
+	initWorldTimer: function() {
+		wtime = setInterval(function() {
+			var myDate = new Date,
+				s = m = h = 0;
+				h=myDate.getHours();
+				m=myDate.getMinutes();
+				s=myDate.getSeconds();
+			if(myDate.getHours()<10){
+				h='0'+myDate.getHours()
+			}
+			if(myDate.getMinutes()<10){
+				m='0'+myDate.getMinutes()
+			}
+			if(myDate.getSeconds()<10){
+				s='0'+myDate.getSeconds()
+			}
+			$("#worldtime").text(h + "时" + m + "分" + s + "秒");
+		}, 1000);
 	},
 	timer: function() {
 		var studytime = $("#time"),
@@ -193,30 +210,32 @@ var util = {
 		localStorage.setItem("studys", sumseconds.toString(16));
 		util.readstoragetime()
 	},
-	useStrictMode: function() {
-		if (localStorage.getItem("conf_strict")===null) {
+	checkStrictMode: function() {
+		let stat = localStorage.getItem("conf_strict") - '0';
+		//useful!
+		return stat
+	},
+	initStrictMode: function() {
+		if (util.checkStrictMode()==null) {
 			localStorage.setItem("conf_strict", 0);
-			return 0
-		}else{
-			return localStorage.getItem("conf_strict")-'0'
+		}else if(util.checkStrictMode()){
+			$("#btt_strict")[0].innerText = '严格模式(离开页面自动停止): 开';
 		}
 	},
 	switchStrictMode: function() {
-		let stat = util.useStrictMode()-'0';
-		// small trick to trans string into int(bool)
-		if(stat) {
-			$("#bt_strict")[0].innerText = '严格模式(离开页面自动停止): 关';
-			 localStorage.setItem("conf_strict", 0); 
-		}
-		else { 
-			$("#bt_strict")[0].innerText = '严格模式(离开页面自动停止): 开';
-			localStorage.setItem("conf_strict", 1); 
+		if (util.checkStrictMode()) {
+			$("#btt_strict")[0].innerText = '严格模式(离开页面自动停止): 关';
+			localStorage.setItem("conf_strict", 0);
+		} else {
+			$("#btt_strict")[0].innerText = '严格模式(离开页面自动停止): 开';
+			localStorage.setItem("conf_strict", 1);
 		}
 	},
 	tips: {
 		start: function() {
 			tips = setInterval(function() {
-				if (tipstype == 0 || tipstype == 2) {
+				//1:hitokoto;2:ntime;3:worldtime
+				if (tipstype == 0 || tipstype == 3) {
 					tipstype = 1;
 					async function fetchHitokoto() {
 						const response = await fetch('https://v1.hitokoto.cn/?c=d&c=i&c=k&max_length=10');
@@ -233,13 +252,21 @@ var util = {
 					sayingout = setTimeout(function() {
 						$(".saying").fadeOut(300, "linear")
 					}, 14300)
-				} else {
+				} else if (tipstype == 1) {
 					tipstype = 2;
 					tipstimein = setTimeout(function() {
 						$(".ntime").fadeIn(300, "linear")
 					}, 1000);
 					tipstimeout = setTimeout(function() {
 						$(".ntime").fadeOut(300, "linear")
+					}, 14300)
+				} else {
+					tipstype = 3;
+					tipstimein = setTimeout(function() {
+						$(".wtime").fadeIn(300, "linear")
+					}, 1000);
+					tipstimeout = setTimeout(function() {
+						$(".wtime").fadeOut(300, "linear")
 					}, 14300)
 				}
 			}, 14600);
@@ -279,4 +306,4 @@ var util = {
 		return !!(document.webkitFullscreenElement || document.mozFullScreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.fullscreenElement)
 	}
 }, hour = minutes = seconds = recorded = sumhour = summinutes = sumseconds = tipstype = tipstimein = tipstimeout = sayingin = sayingout = attentionout = 0;
-console.log("\n %c Study With Miku V1.0.1 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
+console.log("\n %c Study With Miku V1.0.2 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
