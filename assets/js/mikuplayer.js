@@ -245,14 +245,16 @@ var util = {
 
 	//0:no display 1:roll display 2:always display
 	initTips: function(n) {
-		if (util.readTipsconf(n) == null || util.readTipsconf(n) == 1) {
-			localStorage.setItem("conf_tips_" + n, '1')
+		if (util.readTipsconf(n) == 1) {
+			localStorage.setItem("conf_tips_" + n, 1)
 		} else if (util.readTipsconf(n) == 2) {
-			localStorage.setItem("conf_tips_" + n, '2');
+			localStorage.setItem("conf_tips_" + n, 2);
 			$("#" + n + "_mode").text("常驻")
-		} else {
-			localStorage.setItem("conf_tips_" + n, '0');
+		} else if (util.readTipsconf(n) == 0) {
+			localStorage.setItem("conf_tips_" + n, 0);
 			$("#" + n + "_mode").text("隐藏")
+		} else {
+			localStorage.setItem("conf_tips_" + n, 1)
 		}
 		$("#btt_mode_" + n).on('click', function() {
 			util.switchTipsconf(n)
