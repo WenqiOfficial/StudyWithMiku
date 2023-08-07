@@ -128,11 +128,11 @@ body,html{
 #about_in,#menu_in,#rest_in{
     padding:40px
 }
-#btt_strict{
+.btt_switcher{
     padding: 4px 18px;
     border: dotted 2px;
-    color:#fff;
-    text-decoration:none;
+    color:#fff !important;
+    text-decoration: unset !important;
 }
 #bt_aboutclose,#bt_menuclose,#bt_restclose{
     font-size:2rem;
