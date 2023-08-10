@@ -81,6 +81,7 @@ var util = {
 		const 	webid="b91d816b-91e7-4974-ba3d-ccb61dbecfd6",
 				apiurl="https://umami.wenqi.icu/api/websites/"+webid+"/",
 				start_time=1691596800000,
+				//ViewOnly Token
 				headers={
 					'Authorization': 'Bearer BwbQio3AW3kFmxVsYJfRq+DWTa2sGFJRBtSmfFArnUfClLJJeZVAUStGt0VDaBu0c6vpHHARMDJfvfxifJaqhkZ/5GZvVo5mbkQfzHA/YcS4EukqUeOH7ARnTYtoQwz13r+fTAIVviRtmfqfzGXtHgcQVqDrHPgVLmqW79gFsUBMA66RRPDDoUidgfmEgsSVMAWbKTmRUufFv3itqzza/S2NUPwwRwHgXCTlay5FBUfC42FIhXdr9MYyzpdhYbhXaMXsq/IkbfN6ppUY4T+G9cAf04GrZ8Bm8QYuqfeDasx/VfuoV+fRqB7DmAqfTnWVmwNGG6HrnxURpPSb8pqN/33+aRsDIyAdJQ==',
 					'Access-Control-Allow-Origin': '*'
