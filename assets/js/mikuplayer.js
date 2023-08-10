@@ -1,6 +1,6 @@
 /* STUDY WITH MIKU
     CORE FUNCTION
-   V1.0.3 2023.08.07 */
+   V1.0.4 2023.08.10 */
 
 $(function() {
 	if (window.localStorage) {
@@ -10,8 +10,6 @@ $(function() {
 		$("#ng").fadeIn(300, "linear")
 	}
 });
-
-
 var util = {
 	init: function() {
 		$(window).resize(util.videoresize);
@@ -21,6 +19,7 @@ var util = {
 		util.initTips("hitokoto");
 		util.initTips("studytime");
 		util.initTips("worldtime");
+		util.musicset.init();
 		util.initClickEvent();
 		util.initStrictMode();
 		util.initWorldTimer();
@@ -44,6 +43,9 @@ var util = {
 		$("#btt_setting").on('click', function() {
 			util.menuopen("menu")
 		});
+		$("#btt_menu_music").on('click', function() {
+			util.musicset.open()
+		});
 		$("#btt_about").on('click', function() {
 			util.menuopen("about")
 		});
@@ -64,6 +66,11 @@ var util = {
 			$("#about_cover").fadeOut(300, "linear");
 			$("#scene_top").fadeIn(300, "linear")
 		});
+		$("#menu_cover").on('click', function() {
+			$("#menu").fadeOut(300, "linear");
+			$("#menu_cover").fadeOut(300, "linear");
+			$("#scene_top").fadeIn(300, "linear")
+		});
 	},
 	menuopen: function(e) {
 		$("#" + e).fadeIn(300, "linear");
@@ -73,8 +80,79 @@ var util = {
 			$("#" + e + "_cover").fadeOut(300, "linear")
 		})
 	},
+	readMusicconf: function(n) {
+		let stat = localStorage.getItem("conf_music_" + n);
+		return stat
+	},
+	musicset: {
+		init: function() {
+			if(util.readMusicconf('platform')==null||util.readMusicconf('id')==null){
+				util.musicset.reset();
+				util.musicset.apply()
+			}
+			util.musicset.apply();
+
+			$('#btt_platform_netease').on('click',function(){
+				localStorage.setItem("conf_music_platform", "netease");
+				util.musicset.load()
+			});
+			$('#btt_platform_tencent').on('click',function(){
+				localStorage.setItem("conf_music_platform", "tencent");
+				util.musicset.load()
+			});
+			$('#btt_platform_kugou').on('click',function(){
+				localStorage.setItem("conf_music_platform", "kugou");
+				util.musicset.load()
+			});
+			$('#btt_music_reset').on('click',function(){util.musicset.reset()});
+			$('#btt_music_submit').on('click',function(){util.musicset.apply()});
+			$('input').on('input', function() { 
+				var value=$(this).val().replace(/[^\d]/g,'');
+				if(value-'0'>0){
+					localStorage.setItem("conf_music_id", value);
+					util.musicset.load()
+				}else{
+					localStorage.setItem("conf_music_id", "39393939");
+					util.musicset.load()
+				}
+			})
+		},
+		load: function() {
+			$('#musicconf').fadeOut(50,'linear');
+			if(util.readMusicconf('platform')=='netease'){
+				$('#nowplatform').text('网易云音乐');
+			}else if(util.readMusicconf('platform')=='tencent'){
+				$('#nowplatform').text('QQ音乐');
+			}else if(util.readMusicconf('platform')=='kugou'){
+				$('#nowplatform').text('酷狗音乐');
+			}
+			$('#nowid').text(util.readMusicconf('id'));
+			$('input').attr('value',util.readMusicconf('id'));
+			$('input').val(util.readMusicconf('id'));
+			$('#musicconf').fadeIn(50,'linear')
+		},
+		open: function() {
+			$("#music").fadeIn(300, "linear");
+			$("#top_cover").fadeIn(300, "linear");
+			$("#bt_musicclose").on('click', function() {
+				$("#music").fadeOut(300, "linear");
+				$("#top_cover").fadeOut(300, "linear")
+			})
+		},
+		reset: function() {
+			localStorage.setItem("conf_music_platform", "netease");
+			localStorage.setItem("conf_music_id", "8611769328");
+			util.musicset.load()
+		},
+		apply: function() {
+			util.musicset.load();
+			$('meting-js').remove();
+			$('#bt_fs').after('<meting-js server="'+util.readMusicconf('platform')+'" type="playlist" id='+util.readMusicconf('id')+' fixed="true" theme="#39c5bb" order="random" mutex="true" lrc-type="0"> </meting-js>')
+		}
+	},
 	getUmami: function(){
 		let count_online = new CountUp('umami_value_onlineuser', 0,0,0,2,{useEasing: true, useGrouping: false});
+		let count_online2 = new CountUp('umami_value_onlineuser2', 0,0,0,2,{useEasing: true, useGrouping: false});
 		let count_studytimes = new CountUp('umami_value_studytimes', 0,0,0,2,{useEasing: true, useGrouping: false});
 		let count_visitor = new CountUp('umami_value_visitors', 0,0,0,2,{useEasing: true, useGrouping: false});
 
@@ -97,6 +175,7 @@ var util = {
 				headers: headers,
 				success: function(data){
 					count_online.update(data[0]['x']);
+					count_online2.update(data[0]['x']);
 					setTimeout(OnlineUser,10000)
 				},
 				error: function(){
@@ -109,7 +188,7 @@ var util = {
 		}
 		
 		async function GetEvents(){
-			end_time=new Date().getTime()
+			end_time=new Date().getTime();
 			$.get({
 				url: apiurl+'metrics'+'?startAt='+start_time+'&endAt='+end_time+'&type=event',
 				headers: headers,
@@ -134,7 +213,7 @@ var util = {
 		}
 		
 		async function GetVV(){
-			end_time=new Date().getTime()
+			end_time=new Date().getTime();
 			$.get({
 				url: apiurl+'stats'+'?startAt='+start_time+'&endAt='+end_time,
 				headers: headers,
@@ -485,4 +564,4 @@ var util = {
 		return !!(document.webkitFullscreenElement || document.mozFullScreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.fullscreenElement)
 	}
 }, hour = minutes = seconds = recorded = sumhour = summinutes = sumseconds = tipstype = rolltimeout = worldtimein = worldtimeout = studytimein = studytimeout = hitokotoin = hitokotoout = attentionout = tipsrollnow = 0;
-console.log("\n %c Study With Miku V1.0.3 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
+console.log("\n %c Study With Miku V1.0.4 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")

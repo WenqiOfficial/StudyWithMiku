@@ -17,11 +17,11 @@
     src: url("https://cdn.jsdelivr.net/gh/WenqiOfficial/StudyWithMiku/assets/css/fonts/sjsq.woff2") format('woff2');
 } */
 
-#about_cover,#menu_cover,#rest_cover,#view,#view canvas,body,html{
+#about_cover,#menu_cover,#top_cover,#rest_cover,#view,#view canvas,body,html{
     height:100%;
     width:100%
 }
-#about,#menu,#about_cover,#menu_cover,#rest_cover,#bt_fs,#ng{
+#about,#music,#menu,#about_cover,#top_cover,#menu_cover,#rest_cover,#bt_fs,#ng{
     display:none
 }
 #about a,#rest a,#bt_about a,#bt_feedback a,#bt_top a{
@@ -40,10 +40,16 @@ body,html{
     font-family:Quicksand,"SJsuqian Regular","Microsoft YaHei","游ゴシック","Yu Gothic","游ゴシック体",YuGothic,"Yu Gothic UI","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","Meiryo UI","メイリオ",Meiryo,sans-serif
 
 }
-#about_cover,#menu_cover,#rest_cover,#view{
+#about_cover,#top_cover,#menu_cover,#rest_cover,#view{
     position:fixed;
     top:0;
     z-index:1
+}
+#top_cover{
+    z-index: 1002 !important;
+}
+#music{
+    z-index: 1003 !important;
 }
 #bt_rest,#bt_fs{
     position:absolute;
@@ -62,7 +68,7 @@ body,html{
 #scene_learning,#scene_top{
     width:100%
 }
-#about,#menu,#rest,#scene_top{
+#about,#menu,#music,#rest,#scene_top{
     position:absolute;
     top:50%;
     left:50%;
@@ -109,13 +115,13 @@ body,html{
     margin-top:20px;
     pointer-events:auto
 }
-#about_cover,#menu_cover,#rest_cover{
+#about_cover,#menu_cover,#rest_cover,#top_cover{
     z-index:900;
     /* background:#fff; */
     background: #000;
     opacity:.5
 }
-#about,#menu,#rest{
+#about,#menu,#rest,#music{
     z-index:1000;
     color:#fff;
     /* background:#8cc; */
@@ -125,7 +131,7 @@ body,html{
     line-height:1.2;
     width:100%
 }
-#about_in,#menu_in,#rest_in{
+#about_in,#menu_in,#rest_in,#music_in{
     padding:40px
 }
 .btt_switcher{
@@ -134,23 +140,23 @@ body,html{
     color:#fff !important;
     text-decoration: unset !important;
 }
-#bt_aboutclose,#bt_menuclose,#bt_restclose{
+#bt_aboutclose,#bt_menuclose,#bt_restclose,#bt_musicclose{
     font-size:2rem;
     cursor:pointer
 }
-#about .close,#menu .close,#rest .close{
+#about .close,#menu .close,#rest .close,#music .close{
     margin-bottom:30px
 }
-#about .con,#menu .con,#rest .con{
+#about .con,#menu .con,#rest .con,#music .con{
     line-height:1.7;
     margin-bottom:20px
 }
-#about .link,#menu .link,#rest .link{
+#about .link,#menu .link,#rest .link,#music .link{
     margin-top:30px;
     margin-bottom:10px;
     line-height:1.5
 }
-#bt_rest:hover,#bt_aboutclose:hover,#bt_menuclose:hover,#bt_restclose:hover,#bt_feedback:hover,#bt_fs:hover,#scene_top .sns:hover,a:hover{
+#bt_rest:hover,#bt_aboutclose:hover,#bt_menuclose:hover,#bt_restclose:hover,#bt_musicclose:hover,#bt_feedback:hover,#bt_fs:hover,#scene_top .sns:hover,a:hover{
     animation:animover .2s linear;
     -webkit-animation:animover .2s linear
 }
@@ -205,22 +211,22 @@ body,html{
     #bt_feedback{
         font-size:.7rem
     }
-    #about_in,#menu_in,#rest_in{
+    #about_in,#menu_in,#rest_in,#music_in{
         padding:30px
     }
-    #bt_aboutclose,#bt_menuclose,#bt_restclose{
+    #bt_aboutclose,#bt_menuclose,#bt_restclose,#bt_musicclose{
         font-size:1.8rem;
         cursor:pointer
     }
-    #about,#menu,#rest{
+    #about,#menu,#rest,#music{
         letter-spacing:.1rem
     }
-    #about a,#menu a,#rest a{
+    #about a,#menu a,#rest a,#music a{
         color:#fff;
         text-decoration:none;
         border-bottom:dashed 1px #fff
     }
-    #about .con,#about .link,#menu .con,#rest .con,#menu .link,#rest .link{
+    #about .con,#about .link,#menu .con,#music .con,#rest .con,#menu .link,#rest .link{
         font-size:.9rem
     }
 }
@@ -256,4 +262,24 @@ source{
 
 .tips {
     padding: 10px;
+}
+
+input {
+    ime-mode:Disabled;
+    background: inherit;
+    padding: 4px 18px;
+    border: groove 2px;
+    color: #fff !important;
+    text-decoration: unset !important;
+    text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
 }
