@@ -29,12 +29,14 @@
   <link charset="utf-8" href="assets/css/shared/sp/css/common.css" rel="stylesheet">
   <link charset="utf-8" href="assets/css/main.css" rel="stylesheet"> 
   <link href="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+  <script async src="https://umami.wenqi.icu/script.js" data-website-id="b91d816b-91e7-4974-ba3d-ccb61dbecfd6" data-domains="studymiku.wenqi.icu,studymiku.dev.wenqi.icu,studymiku.cloudflare.wenqi.icu"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/meting/2.0.1/Meting.min.js"></script>
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <!-- <script charset="utf-8" src="assets/js/mikuplayer.min.js" type="text/javascript"></script> -->
-  <script charset="utf-8" src="assets/js/mikuplayer.js" type="text/javascript"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
+  <!-- <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+  <script charset="utf-8" src="assets/js/mikuplayer.min.js" type="text/javascript"></script>
+  <!-- <script charset="utf-8" src="assets/js/mikuplayer.js" type="text/javascript"></script> -->
 </head>
 
 <body>
@@ -44,8 +46,8 @@
       <p class="atten">肥肠抱歉...<br>您的浏览器并不支持本页面需要的特性(JavaScript、本地存储)</p>
     </div>
     <div class="ok">
-      <p id="bt_start"><a id="btt_start" href="#">! STUDY !</a></p>
-      <p id="bt_start"><a id="btt_setting" href="#">* 设置 *</a></p>
+      <p id="bt_top"><a id="btt_start" href="#">! STUDY !</a></p>
+      <p id="bt_top"><a id="btt_setting" href="#">* 设置 *</a></p>
     </div>
     <p id="bt_about"><a id="btt_about" href="#">* 关于 *</a></p>
     <div class="ok">
@@ -73,7 +75,8 @@
       <p class="con"> 素材来源 <a href="https://www.bilibili.com/video/BV1hA411y7UC/" target="_blank">STUDY WITH MIKU</a> </p>
       <p class="con"> 作者 <a href="https://github.com/WenqiOfficial/" target="_blank">WenqiOfficial</a> (<a href="https://space.bilibili.com/168567806" target="_blank">bilibili</a>) <a href="https://github.com/WenqiOfficial/StudyWithMiku/issues/new/choose" target="_blank">向我反馈</a> </p>
       <p class="link"> 感谢以下优秀项目！<br><a href="https://aplayer.js.org/" target="_blank">APlayer</a> & <a href="https://github.com/metowolf/MetingJS" target="_blank">MetingJS</a><br><a href="https://aidn.jp/mikutap/" target="_blank">MikuTap</a> By <a href="https://aidn.jp/" target="_blank">daniwellP</a> </p>
-      <p class="con"> <span id="busuanzi_container_site_uv">已经有<span id="busuanzi_value_site_uv">0</span>位朋友</span><span id="busuanzi_container_site_pv">与MIKU一起学习<span id="busuanzi_value_site_pv">0</span>次啦</span> </p>
+      <!-- <p class="con"> <span id="busuanzi_container_site_uv">已经有<span id="busuanzi_value_site_uv">0</span>位朋友</span><span id="busuanzi_container_site_pv">与MIKU一起学习<span id="busuanzi_value_site_pv">0</span>次啦</span> </p> -->
+      <p class="con"> 已经有<span id="umami_value_visitors">0</span>位朋友与Miku学习<span id="umami_value_studytimes">0</span>次啦 <br> 现在有<span id="umami_value_onlineuser">0</span>位朋友正在与MIKU一起学习! <br> *数据同步有延时... </p>
     </div>
   </div>
   <div id="menu_cover"></div>
@@ -81,11 +84,28 @@
     <div id="menu_in">
       <p class="close"><span id="bt_menuclose">×</span></p>
       <p class="con"> TIPS显示设定 </p>
-      <p class="con" id="bt_frame" title="study time switcher"><a href="#"  class="btt_switcher" id="btt_mode_hitokoto"> 一 言: <text id="hitokoto_mode">轮换</text></a></p>
-      <p class="con" id="bt_frame" title="study time switcher"><a href="#"  class="btt_switcher" id="btt_mode_worldtime">世界时间: <text id="worldtime_mode">轮换</text></a></p>
-      <p class="con" id="bt_frame" title="study time switcher"><a href="#"  class="btt_switcher" id="btt_mode_studytime">学习时长: <text id="studytime_mode">轮换</text></a></p>
+      <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_mode_hitokoto"> 一 言: <text id="hitokoto_mode">轮换</text></a></p>
+      <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_mode_worldtime">世界时间: <text id="worldtime_mode">轮换</text></a></p>
+      <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_mode_studytime">学习时长: <text id="studytime_mode">轮换</text></a></p>
       <p class="con"> 计时逻辑设定 </p>
-      <p class="con" id="bt_frame" title="strict mode switcher"><a href="#"  class="btt_switcher" id="btt_strict">严格模式(离开页面自动停止): 关</a></p>
+      <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_strict">严格模式(离开页面自动停止): 关</a></p>
+      <p class="con"> 更多设定 </p>
+      <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_menu_music">歌单设定</a></p>
+    </div>
+  </div>
+  <div id="top_cover"></div>
+  <div id="music">
+    <div id="music_in">
+      <p class="close"><span id="bt_musicclose">×</span></p>
+      <p class="con"> 音乐平台 </p>
+      <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_platform_netease"> 网易 </a></p>
+      <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_platform_tencent"> Q Q </a></p>
+      <!-- <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_platform_kugou"> 酷狗 </a></p> -->
+      <p class="con"> 歌单ID </p>
+      <p class="con"> <input type="text" autocomplete="off" minlength="1" maxlength="16" value="" onkeyup="value=value.replace(/[^\d]/g,'')"> </p>
+      <p class="con" id="musicconf"> 将应用的音乐平台: <text id="nowplatform"></text> 歌单ID: <text id="nowid"></text> </p>
+      <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_music_submit"> 应用 </a></p>
+      <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_music_reset"> 恢复默认 </a></p>
     </div>
   </div>
   <div id="rest_cover"></div>
@@ -96,21 +116,13 @@
       <p class="con"> 已经学习<text id="time">0分钟</text> </p>
       <p class="con">----------------------</p>
       <p class="con"> 音乐已经自动暂停 <a href="#" id="bt_musicswitch">点我来切换</a> </p>
+      <p class="con"> 现在还有<span id="umami_value_onlineuser2">0</span>位朋友正在和你一样努力着呢...加油吧! <br> *数据同步有延时...</p>
       <p class="link"> <a id="bt_stop" href="#">结 束</a> </p>
     </div>
   </div>
   <div id="bt_rest">＜休息</div>
   <div id="bt_fs">∷全屏</div>
-  <meting-js
-	server="netease"
-	type="playlist"
-	id="8611769328"
-  fixed="true"
-  theme="#39c5bb"
-  order="random"
-  mutex="true"
-  lrc-type="0">
-  </meting-js>
+  <meting-js> </meting-js>
   <script charset="utf-8" src="assets/js/miku.js" type="text/javascript"></script>
 </body>
 </html>
