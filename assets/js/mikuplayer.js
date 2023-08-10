@@ -2,7 +2,7 @@
     CORE FUNCTION
    V1.0.3 2023.08.07 */
 
-   $(function() {
+$(function() {
 	if (window.localStorage) {
 		util.init();
 	} else {
@@ -24,7 +24,8 @@ var util = {
 		util.initClickEvent();
 		util.initStrictMode();
 		util.initWorldTimer();
-		util.readstoragetime()
+		util.readstoragetime();
+		util.getUmami()
 	},
 	initClickEvent: function() {
 		$("#bt_fs").on('click', function() {
@@ -37,6 +38,7 @@ var util = {
 			if (util.checkStrictMode()) {
 				util.addVisibilityListener();
 			}
+			umami.track('Study');
 			util.study()
 		});
 		$("#btt_setting").on('click', function() {
@@ -70,6 +72,83 @@ var util = {
 			$("#" + e).fadeOut(300, "linear");
 			$("#" + e + "_cover").fadeOut(300, "linear")
 		})
+	},
+	getUmami: function(){
+		let count_online = new CountUp('umami_value_onlineuser', 0,0,0,2,{useEasing: true, useGrouping: false});
+		let count_studytimes = new CountUp('umami_value_studytimes', 0,0,0,2,{useEasing: true, useGrouping: false});
+		let count_visitor = new CountUp('umami_value_visitors', 0,0,0,2,{useEasing: true, useGrouping: false});
+
+		const 	webid="b91d816b-91e7-4974-ba3d-ccb61dbecfd6",
+				apiurl="https://umami.wenqi.icu/api/websites/"+webid+"/",
+				start_time=1691596800000,
+				headers={
+					'Authorization': 'Bearer BwbQio3AW3kFmxVsYJfRq+DWTa2sGFJRBtSmfFArnUfClLJJeZVAUStGt0VDaBu0c6vpHHARMDJfvfxifJaqhkZ/5GZvVo5mbkQfzHA/YcS4EukqUeOH7ARnTYtoQwz13r+fTAIVviRtmfqfzGXtHgcQVqDrHPgVLmqW79gFsUBMA66RRPDDoUidgfmEgsSVMAWbKTmRUufFv3itqzza/S2NUPwwRwHgXCTlay5FBUfC42FIhXdr9MYyzpdhYbhXaMXsq/IkbfN6ppUY4T+G9cAf04GrZ8Bm8QYuqfeDasx/VfuoV+fRqB7DmAqfTnWVmwNGG6HrnxURpPSb8pqN/33+aRsDIyAdJQ==',
+					'Access-Control-Allow-Origin': '*'
+				};
+		let end_time=new Date().getTime();
+		OnlineUser();
+		GetEvents();
+		GetVV();
+
+		async function OnlineUser(){
+			$.get({
+				url: apiurl+'active',
+				headers: headers,
+				success: function(data){
+					count_online.update(data[0]['x']);
+					setTimeout(OnlineUser,10000)
+				},
+				error: function(){
+					OnlineUser()
+				},
+				timeout: function(){
+					OnlineUser()
+				}
+			})
+		}
+		
+		async function GetEvents(){
+			end_time=new Date().getTime()
+			$.get({
+				url: apiurl+'metrics'+'?startAt='+start_time+'&endAt='+end_time+'&type=event',
+				headers: headers,
+				success: function(data){
+					s=0;
+					while(data[s]['x']!="Study"){
+						if(data[s+1]==null){
+							break;
+						}
+						s++;
+					}
+					count_studytimes.update(data[s]['y']);
+					setTimeout(GetEvents,120000)
+				},
+				error: function(){
+					OnlineUser()
+				},
+				timeout: function(){
+					OnlineUser()
+				}
+			})
+		}
+		
+		async function GetVV(){
+			end_time=new Date().getTime()
+			$.get({
+				url: apiurl+'stats'+'?startAt='+start_time+'&endAt='+end_time,
+				headers: headers,
+				success: function(data){
+					count_visitor.update(data['uniques']['value']);
+					setTimeout(GetVV,60000)
+				},
+				error: function(){
+					OnlineUser()
+				},
+				timeout: function(){
+					OnlineUser()
+				}
+			})
+		}
 	},
 	study: function() {
 		$('.aplayer-play').trigger('click');

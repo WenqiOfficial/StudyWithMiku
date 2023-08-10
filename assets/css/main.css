@@ -24,7 +24,7 @@
 #about,#menu,#about_cover,#menu_cover,#rest_cover,#bt_fs,#ng{
     display:none
 }
-#about a,#rest a,#bt_about a,#bt_feedback a,#bt_start a{
+#about a,#rest a,#bt_about a,#bt_feedback a,#bt_top a{
     color:#fff;
     text-decoration:none;
     border-bottom:dashed 1px #fff
@@ -76,7 +76,7 @@ body,html{
     font-size:1.5rem;
     margin-bottom:25px
 }
-#bt_start{
+#bt_top{
     margin-bottom:15px
 }
 #scene_top .topattention{
@@ -175,10 +175,10 @@ body,html{
         font-size:1.2rem;
         margin-bottom:18px
     }
-    #bt_start,#scene_top .tit{
+    #bt_top,#scene_top .tit{
         margin-bottom:10px
     }
-    #bt_about a,#bt_start a{
+    #bt_about a,#bt_top a{
         font-size:.9rem
     }
     #scene_top .topattention{
