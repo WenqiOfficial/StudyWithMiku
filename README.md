@@ -28,6 +28,20 @@ STUDY WITH MIKU web version cover
 
 - [x] Tips显示设置
 
+## 部署TIPS
+
+### Umami
+
+自行部署的话建议将 `<head>` 中的 Umami 统计代码更改为自行部署的统计器
+
+```
+<!-- Umami START -->
+  <!-- 更改为你自己部署的Umami统计器 -->
+<!-- Umami END -->
+```
+
+也别忘了去修改`mikuplayer`中的**Token**、**URL**值
+
 ---
 
 [![Cover](https://raw.githubusercontent.com/WenqiOfficial/wenqicdn/master/img/banner/studymiku.jpg)](https://www.bilibili.com/video/BV1rV41157DR)
