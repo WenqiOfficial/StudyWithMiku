@@ -1,6 +1,6 @@
 /* STUDY WITH MIKU
     CORE FUNCTION
-   V1.0.4 2023.08.10 */
+   V1.0.5 2023.08.15 */
 
 $(function() {
 	if (window.localStorage) {
@@ -35,9 +35,11 @@ var util = {
 		});
 		$("#btt_start").on('click', function() {
 			if (util.checkStrictMode()) {
-				util.addVisibilityListener();
+				util.addVisibilityListener()
 			}
-			umami.track('Study');
+			if (jQuery.isFunction(umami.track)) {
+				umami.track('Study')
+			}
 			util.study()
 		});
 		$("#btt_setting").on('click', function() {
@@ -147,7 +149,11 @@ var util = {
 		apply: function() {
 			util.musicset.load();
 			$('meting-js').remove();
-			$('#bt_fs').after('<meting-js server="'+util.readMusicconf('platform')+'" type="playlist" id='+util.readMusicconf('id')+' fixed="true" theme="#39c5bb" order="random" mutex="true" lrc-type="0"> </meting-js>')
+			if(util.readMusicconf('id')=='8611769328'){
+				$('#bt_fs').after('<meting-js server="'+util.readMusicconf('platform')+'" type="playlist" id='+util.readMusicconf('id')+' fixed="true" theme="#39c5bb" order="random" mutex="true" lrc-type="0"> </meting-js>')
+			}else{
+				$('#bt_fs').after('<meting-js server="'+util.readMusicconf('platform')+'" type="playlist" id='+util.readMusicconf('id')+' fixed="true" theme="#39c5bb" order="random" mutex="true"> </meting-js>')
+			}
 		}
 	},
 	getUmami: function(){
@@ -564,4 +570,4 @@ var util = {
 		return !!(document.webkitFullscreenElement || document.mozFullScreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.fullscreenElement)
 	}
 }, hour = minutes = seconds = recorded = sumhour = summinutes = sumseconds = tipstype = rolltimeout = worldtimein = worldtimeout = studytimein = studytimeout = hitokotoin = hitokotoout = attentionout = tipsrollnow = 0;
-console.log("\n %c Study With Miku V1.0.4 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
+console.log("\n %c Study With Miku V1.0.5 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
