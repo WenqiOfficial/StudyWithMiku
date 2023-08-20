@@ -182,7 +182,7 @@ var util = {
 				success: function(data){
 					count_online.update(data[0]['x']);
 					count_online2.update(data[0]['x']);
-					setTimeout(OnlineUser,10000)
+					setTimeout(OnlineUser,15000)
 				},
 				error: function(){
 					OnlineUser()
