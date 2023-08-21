@@ -163,7 +163,7 @@ var util = {
 		let count_visitor = new CountUp('umami_value_visitors', 0,0,0,2,{useEasing: true, useGrouping: false});
 
 		const 	webid="b91d816b-91e7-4974-ba3d-ccb61dbecfd6",
-				apiurl="https://umami.wenqi.icu/api/websites/"+webid+"/",
+				apiurl="https://umamibaka.wenqi.icu/api/websites/"+webid+"/",
 				start_time=1691596800000,
 				//ViewOnly Token
 				headers={
@@ -182,7 +182,7 @@ var util = {
 				success: function(data){
 					count_online.update(data[0]['x']);
 					count_online2.update(data[0]['x']);
-					setTimeout(OnlineUser,15000)
+					// setTimeout(OnlineUser,15000)
 				},
 				error: function(){
 					OnlineUser()
