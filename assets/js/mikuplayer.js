@@ -1,6 +1,6 @@
 /* STUDY WITH MIKU
     CORE FUNCTION
-   V1.0.5 2023.08.15 */
+   V1.0.6 2023.08.23 */
 
 $(function() {
 	if (window.localStorage) {
@@ -54,10 +54,12 @@ var util = {
 		$("#bt_rest").on('click', function() {
 			util.timerecord.pause();
 			util.menuopen("rest");
+			getstat=0;
 			$('.aplayer-pause').trigger('click');
 			$('#bt_restclose').on('click', function() {
 				$('.aplayer-play').trigger('click');
-				util.timerecord.start()
+				util.timerecord.start();
+				getstat=1;
 			});
 			$("#bt_musicswitch").on('click', function() {
 				$(".aplayer-button").trigger("click")
@@ -110,13 +112,8 @@ var util = {
 			$('#btt_music_submit').on('click',function(){util.musicset.apply()});
 			$('input').on('input', function() { 
 				var value=$(this).val().replace(/[^\d]/g,'');
-				if(value-'0'>0){
-					localStorage.setItem("conf_music_id", value);
-					util.musicset.load()
-				}else{
-					localStorage.setItem("conf_music_id", "39393939");
-					util.musicset.load()
-				}
+				localStorage.setItem("conf_music_id", value);
+				util.musicset.load()
 			})
 		},
 		load: function() {
@@ -171,9 +168,17 @@ var util = {
 					'Access-Control-Allow-Origin': '*'
 				};
 		let end_time=new Date().getTime();
-		OnlineUser();
-		GetEvents();
-		GetVV();
+
+		getData();
+		
+		async function getData(){
+			if(!getstat){
+				OnlineUser();
+				GetEvents();
+				GetVV()
+			}
+			setTimeout(getData,15000)
+		}
 
 		async function OnlineUser(){
 			$.get({
@@ -181,8 +186,7 @@ var util = {
 				headers: headers,
 				success: function(data){
 					count_online.update(data[0]['x']);
-					count_online2.update(data[0]['x']);
-					// setTimeout(OnlineUser,15000)
+					count_online2.update(data[0]['x'])
 				},
 				error: function(){
 					OnlineUser()
@@ -206,8 +210,7 @@ var util = {
 						}
 						s++;
 					}
-					count_studytimes.update(data[s]['y']);
-					setTimeout(GetEvents,120000)
+					count_studytimes.update(data[s]['y'])
 				},
 				error: function(){
 					OnlineUser()
@@ -224,8 +227,7 @@ var util = {
 				url: apiurl+'stats'+'?startAt='+start_time+'&endAt='+end_time,
 				headers: headers,
 				success: function(data){
-					count_visitor.update(data['uniques']['value']);
-					setTimeout(GetVV,60000)
+					count_visitor.update(data['uniques']['value'])
 				},
 				error: function(){
 					OnlineUser()
@@ -245,6 +247,7 @@ var util = {
 		util.videoresize();
 		util.Tips.init();
 		util.timerecord.start();
+		getstat=1;
 		$("#bt_stop").on('click', function() {
 			util.timerecord.stop();
 			util.Tips.stop();
@@ -253,7 +256,8 @@ var util = {
 			$("#scene_learning").fadeOut(300, "linear");
 			$("#bt_rest").fadeOut(300, "linear");
 			$("#rest").fadeOut(300, "linear");
-			$("#rest_cover").fadeOut(300, "linear")
+			$("#rest_cover").fadeOut(300, "linear");
+			getstat=0;
 		})
 	},
 	//Timer BEGIN
@@ -569,5 +573,5 @@ var util = {
 	checkFullscreen: function() {
 		return !!(document.webkitFullscreenElement || document.mozFullScreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.fullscreenElement)
 	}
-}, hour = minutes = seconds = recorded = sumhour = summinutes = sumseconds = tipstype = rolltimeout = worldtimein = worldtimeout = studytimein = studytimeout = hitokotoin = hitokotoout = attentionout = tipsrollnow = 0;
-console.log("\n %c Study With Miku V1.0.5 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
+}, hour = minutes = seconds = recorded = sumhour = summinutes = sumseconds = tipstype = rolltimeout = worldtimein = worldtimeout = studytimein = studytimeout = hitokotoin = hitokotoout = attentionout = tipsrollnow = getstat = 0;
+console.log("\n %c Study With Miku V1.0.6 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")

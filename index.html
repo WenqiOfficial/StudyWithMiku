@@ -55,6 +55,9 @@
     <div class="ok">
       <p class="topattention">* 调节好音量，和MIKU一起学习吧! </p>
     </div>
+    <!-- <div id="loading">
+      <p class="topattention loading">资源加载中...</p>
+    </div> -->
   </div>
   <div id="scene_learning">
     <div class="tips">
@@ -65,7 +68,7 @@
     </div>
     <video id="v1" autoplay loop muted playsinline="true" webkit-playsinline="true">
       <source src="https://bj.bcebos.com/v1/ai-studio-online/085c5a3aaef342a0b0725de7cd328f11ae9e2a2ce0c44492858548c2e60ec705" type="video/mp4" />
-      <!-- <source src="assets/video/oneloop.mp4"  type="video/mp4"  /> -->
+      <source src="assets/video/oneloop.mp4"  type="video/mp4"  />
     </video>
   </div>
   <div id="about_cover"></div>
@@ -104,7 +107,7 @@
       <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_platform_tencent"> Q Q </a></p>
       <!-- <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_platform_kugou"> 酷狗 </a></p> -->
       <p class="con"> 歌单ID </p>
-      <p class="con"> <input type="text" autocomplete="off" minlength="1" maxlength="16" value="" onkeyup="value=value.replace(/[^\d]/g,'')"> </p>
+      <p class="con"> <input type="text" autocomplete="off" minlength="1" maxlength="18" value="" onkeyup="value=value.replace(/[^\d]/g,'')"> </p>
       <p class="con" id="musicconf"> 将应用的音乐平台: <text id="nowplatform"></text> 歌单ID: <text id="nowid"></text> </p>
       <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_music_submit"> 应用 </a></p>
       <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_music_reset"> 恢复默认 </a></p>
