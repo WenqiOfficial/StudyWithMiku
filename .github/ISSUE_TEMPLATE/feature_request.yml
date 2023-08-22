@@ -1,5 +1,5 @@
 name: Feature Request or Enhancement
-description: 建议
+description: 新功能/改进建议
 title: "[Feature] "
 labels: ["feature"]
 body:
@@ -7,14 +7,15 @@ body:
   - type: textarea
     id: feature
     attributes:
-      label: 新功能/改进建议
+      label: 简述
+      description: 简述一下这个新功能/改进吧
     validations:
       required: true
 
   - type: textarea
     id: detail
     attributes:
-      label: 详细描述
-      description: 详细描述一下你认为这个功能/改进应该如何去实现
+      label: 细节
+      description: 详细描述一下具体细节
     validations:
       required: true

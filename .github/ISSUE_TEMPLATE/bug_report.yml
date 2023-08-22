@@ -8,7 +8,7 @@ body:
     id: bug
     attributes:
       label: Bug简述
-      description: 请简短、直白地描述一下这个bug吧！
+      description: 简短、直白地描述一下这个bug吧！
     validations:
       required: true
 
@@ -16,7 +16,7 @@ body:
     id: step
     attributes:
       label: Bug复现
-      description: 一步一步的去叙述该如何复现这个bug.
+      description: 该如何去复现这个bug呢？
     validations:
       required: true
 
@@ -24,7 +24,7 @@ body:
     id: behavior
     attributes:
       label: 预期行为
-      description: 描述一下这个功能/模块的预期行为.
+      description: 正常情况下应该是怎样的呢？
 
   - type: textarea
     id: screenshot
