@@ -2,20 +2,10 @@
     font-family: "SJsuqian Regular";
     font-style: normal;
     font-weight: 400;
-    src: url("https://bj.bcebos.com/v1/ai-studio-online/6de26a48eb0e4b0aa4f42bd5338968b034dc7b5e621748c2bbd9635ba27d2c05") format('woff2');
+    src: url("https://bj.bcebos.com/v1/ai-studio-online/6de26a48eb0e4b0aa4f42bd5338968b034dc7b5e621748c2bbd9635ba27d2c05") format('woff2'),
+        url("https://cdn.jsdelivr.net/gh/WenqiOfficial/StudyWithMiku/assets/css/fonts/sjsq.woff2") format('woff2'),
+        url("fonts/sjsq.woff2") format('woff2');
 }
-/* @font-face {
-    font-family: "SJsuqian Regular";
-    font-style: normal;
-    font-weight: 400;
-    src: url("fonts/sjsq.woff2") format('woff2');
-}
-@font-face {
-    font-family: "SJsuqian Regular";
-    font-style: normal;
-    font-weight: 400;
-    src: url("https://cdn.jsdelivr.net/gh/WenqiOfficial/StudyWithMiku/assets/css/fonts/sjsq.woff2") format('woff2');
-} */
 
 #about_cover,#menu_cover,#top_cover,#rest_cover,#view,#view canvas,body,html{
     height:100%;
@@ -159,6 +149,16 @@ body,html{
 #bt_rest:hover,#bt_aboutclose:hover,#bt_menuclose:hover,#bt_restclose:hover,#bt_musicclose:hover,#bt_feedback:hover,#bt_fs:hover,#scene_top .sns:hover,a:hover{
     animation:animover .2s linear;
     -webkit-animation:animover .2s linear
+}
+.loading{
+    padding: 10px;
+    animation:animover .2s linear infinite;
+    -webkit-animation:animover .2s linear infinite;
+    text-align: center;
+    width: 100%;
+    display: block;
+    position: absolute;
+    z-index: 3;
 }
 @keyframes animover{
     0.00%{

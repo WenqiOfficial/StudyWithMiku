@@ -30,7 +30,7 @@
   <link charset="utf-8" href="assets/css/main.css" rel="stylesheet"> 
   <link href="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
   <!-- Umami START -->
-  <script async src="https://umamibaka.wenqi.icu/script.js" data-website-id="b91d816b-91e7-4974-ba3d-ccb61dbecfd6" data-domains="studymiku.wenqi.icu,studymiku.dev.wenqi.icu,studymiku.cloudflare.wenqi.icu"></script>
+  <!-- <script async src="https://umami.wenqi.icu/script.js" data-website-id="b91d816b-91e7-4974-ba3d-ccb61dbecfd6" data-domains="studymiku.wenqi.icu,studymiku.dev.wenqi.icu,studymiku.cloudflare.wenqi.icu"></script> -->
   <!-- Umami END -->
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
@@ -48,7 +48,7 @@
       <p class="atten">肥肠抱歉...<br>您的浏览器并不支持本页面需要的特性(JavaScript、本地存储)</p>
     </div>
     <div class="ok">
-      <p id="bt_top"><a id="btt_start" href="#">! STUDY !</a></p>
+      <p id="bt_top"><a id="btt_start" onclick="umami.track('Study')" href="#">! STUDY !</a></p>
       <p id="bt_top"><a id="btt_setting" href="#">* 设置 *</a></p>
     </div>
     <p id="bt_about"><a id="btt_about" href="#">* 关于 *</a></p>
@@ -56,6 +56,9 @@
       <p class="topattention">* 调节好音量，和MIKU一起学习吧! </p>
       <a style="color:#F08080; text-decoration:none;" href="https://icp.gov.moe/?keyword=20232860" target="_blank">萌ICP备20232860号</a>|<a style="text-decoration:none;color:#51c4d3;" href="https://travel.moe/go.html" title="异次元之旅-跃迁-我们一起去萌站成员的星球旅行吧！" target="_blank">异次元之旅</a>
     </div>
+    <!-- <div id="loading">
+      <p class="topattention loading">资源加载中...</p>
+    </div> -->
   </div>
   <div id="scene_learning">
     <div class="tips">
@@ -66,7 +69,7 @@
     </div>
     <video id="v1" autoplay loop muted playsinline="true" webkit-playsinline="true">
       <source src="https://bj.bcebos.com/v1/ai-studio-online/085c5a3aaef342a0b0725de7cd328f11ae9e2a2ce0c44492858548c2e60ec705" type="video/mp4" />
-      <!-- <source src="assets/video/oneloop.mp4"  type="video/mp4"  /> -->
+      <source src="assets/video/oneloop.mp4"  type="video/mp4"  />
     </video>
   </div>
   <div id="about_cover"></div>
@@ -105,7 +108,7 @@
       <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_platform_tencent"> Q Q </a></p>
       <!-- <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_platform_kugou"> 酷狗 </a></p> -->
       <p class="con"> 歌单ID </p>
-      <p class="con"> <input type="text" autocomplete="off" minlength="1" maxlength="16" value="" onkeyup="value=value.replace(/[^\d]/g,'')"> </p>
+      <p class="con"> <input type="text" autocomplete="off" minlength="1" maxlength="18" value="" onkeyup="value=value.replace(/[^\d]/g,'')"> </p>
       <p class="con" id="musicconf"> 将应用的音乐平台: <text id="nowplatform"></text> 歌单ID: <text id="nowid"></text> </p>
       <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_music_submit"> 应用 </a></p>
       <p class="con" id="bt_frame"><a href="#" class="btt_switcher" id="btt_music_reset"> 恢复默认 </a></p>

@@ -1,0 +1,63 @@
+name: Bug Report
+description: Bug反馈
+title: "[Bug] "
+labels: ["bug"]
+body:
+
+  - type: textarea
+    id: bug
+    attributes:
+      label: Bug简述
+      description: 简短、直白地描述一下这个bug吧！
+    validations:
+      required: true
+
+  - type: textarea
+    id: step
+    attributes:
+      label: Bug复现
+      description: 该如何去复现这个bug呢？
+    validations:
+      required: true
+
+  - type: textarea
+    id: behavior
+    attributes:
+      label: 预期行为
+      description: 正常情况下应该是怎样的呢？
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: 截图
+      description: 如果可以的话附上一些相关的截图或许能加快解决的速度噢！
+
+  - type: input
+    id: device
+    attributes:
+      label: 设备与系统环境
+      placeholder: "eg. ASUS UX4100EG; Windows 11 64bit 22621.2134"
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: 使用的浏览器
+      placeholder: "eg. Edge 115.0.1901.203"
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: 系统环境
+      placeholder: "eg. Windows 11 64bit 22621.2134"
+    validations:
+      required: true
+  
+  - type: textarea
+    id: context
+    attributes:
+      label: 附加描述
+      description: 还有什么需要补充的就写在这里吧！
