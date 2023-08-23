@@ -30,7 +30,7 @@
   <link charset="utf-8" href="assets/css/main.css" rel="stylesheet"> 
   <link href="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
   <!-- Umami START -->
-  <script async src="https://umamibaka.wenqi.icu/script.js" data-website-id="b91d816b-91e7-4974-ba3d-ccb61dbecfd6" data-domains="studymiku.wenqi.icu,studymiku.dev.wenqi.icu,studymiku.cloudflare.wenqi.icu"></script>
+  <!-- <script async src="https://umami.wenqi.icu/script.js" data-website-id="b91d816b-91e7-4974-ba3d-ccb61dbecfd6" data-domains="studymiku.wenqi.icu,studymiku.dev.wenqi.icu,studymiku.cloudflare.wenqi.icu"></script> -->
   <!-- Umami END -->
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
@@ -48,7 +48,7 @@
       <p class="atten">肥肠抱歉...<br>您的浏览器并不支持本页面需要的特性(JavaScript、本地存储)</p>
     </div>
     <div class="ok">
-      <p id="bt_top"><a id="btt_start" href="#">! STUDY !</a></p>
+      <p id="bt_top"><a id="btt_start" onclick="umami.track('Study')" href="#">! STUDY !</a></p>
       <p id="bt_top"><a id="btt_setting" href="#">* 设置 *</a></p>
     </div>
     <p id="bt_about"><a id="btt_about" href="#">* 关于 *</a></p>
