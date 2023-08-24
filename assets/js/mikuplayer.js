@@ -319,9 +319,10 @@ var util = {
 				s = '0' + myDate.getSeconds()
 			}
 			$("#worldtime").text(h + "时" + m + "分" + s + "秒");
-			if($('video').readyState==2){
-				$("video").trigger("play")
+			if(document.querySelector('video').readyState==2){
+				document.querySelector('video').load()
 			}
+			$("video").trigger("play")
 		}, 1000);
 	},
 	timer: function() {
