@@ -1,6 +1,6 @@
 /* STUDY WITH MIKU
     CORE FUNCTION
-   V1.0.6 2023.08.23 */
+   V1.0.7 2023.08.25 */
 
 $(function() {
 	if (window.localStorage) {
@@ -210,7 +210,7 @@ var util = {
 							}
 							s++;
 						}
-						count_studytimes.update(data[s]['y'])
+						count_studytimes.update(data[s]['y']);
 						setTimeout(GetEvents,15000)
 					},
 					error: function(){
@@ -320,7 +320,7 @@ var util = {
 			}
 			$("#worldtime").text(h + "时" + m + "分" + s + "秒");
 			if(document.querySelector('video').readyState==2){
-				document.querySelector('video').load()
+				$("video").trigger("load")
 			}
 			$("video").trigger("play")
 		}, 1000);
@@ -586,4 +586,4 @@ var util = {
 		return !!(document.webkitFullscreenElement || document.mozFullScreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.fullscreenElement)
 	}
 }, hour = minutes = seconds = recorded = sumhour = summinutes = sumseconds = tipstype = rolltimeout = worldtimein = worldtimeout = studytimein = studytimeout = hitokotoin = hitokotoout = attentionout = tipsrollnow = getstat = 0;
-console.log("\n %c Study With Miku V1.0.6 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
+console.log("\n %c Study With Miku V1.0.7 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
