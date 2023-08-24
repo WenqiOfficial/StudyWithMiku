@@ -166,73 +166,81 @@ var util = {
 				};
 		let end_time=new Date().getTime();
 
-		getData();
-		
-		async function getData(){
-			if(!getstat){
-				OnlineUser();
-				GetEvents();
-				GetVV()
-			}
-			setTimeout(getData,10000)
-		}
+		OnlineUser();
+		GetEvents();
+		GetVV();
 
-		async function OnlineUser(){
-			$.get({
-				url: apiurl+'active',
-				headers: headers,
-				success: function(data){
-					count_online.update(data[0]['x']);
-					count_online2.update(data[0]['x'])
-				},
-				error: function(){
-					OnlineUser()
-				},
-				timeout: function(){
-					OnlineUser()
-				}
-			})
+		async function OnlineUser(){	
+			if(!getstat){
+				$.get({
+					url: apiurl+'active',
+					headers: headers,
+					success: function(data){
+						count_online.update(data[0]['x']);
+						count_online2.update(data[0]['x']);
+						setTimeout(OnlineUser,10000)
+					},
+					error: function(){
+						setTimeout(OnlineUser,5000)
+					},
+					timeout: function(){
+						setTimeout(OnlineUser,5000)
+					}
+				})
+			}else{
+				setTimeout(OnlineUser,1000)
+			}
 		}
 		
 		async function GetEvents(){
 			end_time=new Date().getTime();
-			$.get({
-				url: apiurl+'metrics'+'?startAt='+start_time+'&endAt='+end_time+'&type=event',
-				headers: headers,
-				success: function(data){
-					s=0;
-					while(data[s]['x']!="Study"){
-						if(data[s+1]==null){
-							break;
+			if(!getstat){
+				$.get({
+					url: apiurl+'metrics'+'?startAt='+start_time+'&endAt='+end_time+'&type=event',
+					headers: headers,
+					success: function(data){
+						s=0;
+						while(data[s]['x']!="Study"){
+							if(data[s+1]==null){
+								break;
+							}
+							s++;
 						}
-						s++;
+						count_studytimes.update(data[s]['y'])
+						setTimeout(GetEvents,15000)
+					},
+					error: function(){
+						setTimeout(GetEvents,10000)
+					},
+					timeout: function(){
+						setTimeout(GetEvents,10000)
 					}
-					count_studytimes.update(data[s]['y'])
-				},
-				error: function(){
-					OnlineUser()
-				},
-				timeout: function(){
-					OnlineUser()
-				}
-			})
+				})
+			}else{
+				setTimeout(GetEvents,1000)
+			}
 		}
 		
 		async function GetVV(){
 			end_time=new Date().getTime();
-			$.get({
-				url: apiurl+'stats'+'?startAt='+start_time+'&endAt='+end_time,
-				headers: headers,
-				success: function(data){
-					count_visitor.update(data['uniques']['value'])
-				},
-				error: function(){
-					OnlineUser()
-				},
-				timeout: function(){
-					OnlineUser()
-				}
-			})
+			if(!getstat){
+				$.get({
+					url: apiurl+'stats'+'?startAt='+start_time+'&endAt='+end_time,
+					headers: headers,
+					success: function(data){
+						count_visitor.update(data['uniques']['value']);
+						setTimeout(GetVV,15000)
+					},
+					error: function(){
+						setTimeout(GetVV,10000)
+					},
+					timeout: function(){
+						setTimeout(GetVV,10000)
+					}
+				})
+			}else{
+				setTimeout(GetVV,1000)
+			}
 		}
 	},
 	study: function() {
@@ -307,7 +315,9 @@ var util = {
 				s = '0' + myDate.getSeconds()
 			}
 			$("#worldtime").text(h + "时" + m + "分" + s + "秒");
-			$("video").trigger("play")
+			if($('video').readyState==2){
+				$("video").trigger("play")
+			}
 		}, 1000);
 	},
 	timer: function() {
