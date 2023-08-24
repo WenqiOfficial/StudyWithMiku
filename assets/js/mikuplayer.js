@@ -24,7 +24,7 @@ var util = {
 		util.initStrictMode();
 		util.initWorldTimer();
 		util.readstoragetime();
-		// util.getUmami()
+		util.getUmami()
 	},
 	initClickEvent: function() {
 		$("#bt_fs").on('click', function() {
@@ -150,14 +150,14 @@ var util = {
 			}
 		}
 	},
-	getUmami: function(){
+	getUmami: async function(){
 		let count_online = new CountUp('umami_value_onlineuser', 0,0,0,2,{useEasing: true, useGrouping: false});
 		let count_online2 = new CountUp('umami_value_onlineuser2', 0,0,0,2,{useEasing: true, useGrouping: false});
 		let count_studytimes = new CountUp('umami_value_studytimes', 0,0,0,2,{useEasing: true, useGrouping: false});
 		let count_visitor = new CountUp('umami_value_visitors', 0,0,0,2,{useEasing: true, useGrouping: false});
 
 		const 	webid="b91d816b-91e7-4974-ba3d-ccb61dbecfd6",
-				apiurl="https://umami.wenqi.icu/api/websites/"+webid+"/",
+				apiurl="https://umami.wen7.link/api/websites/"+webid+"/",
 				start_time=1691596800000,
 				//ViewOnly Token
 				headers={
