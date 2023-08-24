@@ -160,9 +160,13 @@ var util = {
 				apiurl="https://umami.wen7.link/api/websites/"+webid+"/",
 				start_time=1691596800000,
 				//ViewOnly Token
+				// headers={
+				// 	'Authorization': 'Bearer BwbQio3AW3kFmxVsYJfRq+DWTa2sGFJRBtSmfFArnUfClLJJeZVAUStGt0VDaBu0c6vpHHARMDJfvfxifJaqhkZ/5GZvVo5mbkQfzHA/YcS4EukqUeOH7ARnTYtoQwz13r+fTAIVviRtmfqfzGXtHgcQVqDrHPgVLmqW79gFsUBMA66RRPDDoUidgfmEgsSVMAWbKTmRUufFv3itqzza/S2NUPwwRwHgXCTlay5FBUfC42FIhXdr9MYyzpdhYbhXaMXsq/IkbfN6ppUY4T+G9cAf04GrZ8Bm8QYuqfeDasx/VfuoV+fRqB7DmAqfTnWVmwNGG6HrnxURpPSb8pqN/33+aRsDIyAdJQ==',
+				// 	'Access-Control-Allow-Origin': '*'
+				// };
 				headers={
-					'Authorization': 'Bearer BwbQio3AW3kFmxVsYJfRq+DWTa2sGFJRBtSmfFArnUfClLJJeZVAUStGt0VDaBu0c6vpHHARMDJfvfxifJaqhkZ/5GZvVo5mbkQfzHA/YcS4EukqUeOH7ARnTYtoQwz13r+fTAIVviRtmfqfzGXtHgcQVqDrHPgVLmqW79gFsUBMA66RRPDDoUidgfmEgsSVMAWbKTmRUufFv3itqzza/S2NUPwwRwHgXCTlay5FBUfC42FIhXdr9MYyzpdhYbhXaMXsq/IkbfN6ppUY4T+G9cAf04GrZ8Bm8QYuqfeDasx/VfuoV+fRqB7DmAqfTnWVmwNGG6HrnxURpPSb8pqN/33+aRsDIyAdJQ==',
-					'Access-Control-Allow-Origin': '*'
+						'Authorization': 'Bearer p9hXv1YT7T2Us4oCLLhRqHp0oJTCNTKWnR4xvDnBTBSFjSMZ5M6DJzjGhr03aludrXjZJ2rxua6JavbMjW7CL7TrEQcd5b0RH7idL8xP0N6ViUyxI3dlsvvNk34W/AQgSzYW4OcRYO13Gc2elFr1xhTnbrSljr6p66FzhQhD+AnA8NI6Qj6Y/LVBC/dsWhK9Ike5cnuCQPuTRlB3LUzuno8GFp3TxJJHkHDsX0aKZAPzeTUs2eHLQSJSRiqWki+HlaiGOCDpUqix3mkGT53DScHj0gZwPy28gHZRPKc215by71LzU49WajMc+1v21UmNoh8kdvMTwgTkSElYi981VKOoVUAVxZFItw==',
+						'Access-Control-Allow-Origin': '*'
 				};
 		let end_time=new Date().getTime();
 
