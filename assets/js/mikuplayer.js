@@ -1,6 +1,6 @@
 /* STUDY WITH MIKU
     CORE FUNCTION
-   V1.0.6 2023.08.23 */
+   V1.0.7 2023.08.25 */
 
 $(function() {
 	if (window.localStorage) {
@@ -160,79 +160,91 @@ var util = {
 				apiurl="https://umami.wen7.link/api/websites/"+webid+"/",
 				start_time=1691596800000,
 				//ViewOnly Token
+				// headers={
+				// 	'Authorization': 'Bearer BwbQio3AW3kFmxVsYJfRq+DWTa2sGFJRBtSmfFArnUfClLJJeZVAUStGt0VDaBu0c6vpHHARMDJfvfxifJaqhkZ/5GZvVo5mbkQfzHA/YcS4EukqUeOH7ARnTYtoQwz13r+fTAIVviRtmfqfzGXtHgcQVqDrHPgVLmqW79gFsUBMA66RRPDDoUidgfmEgsSVMAWbKTmRUufFv3itqzza/S2NUPwwRwHgXCTlay5FBUfC42FIhXdr9MYyzpdhYbhXaMXsq/IkbfN6ppUY4T+G9cAf04GrZ8Bm8QYuqfeDasx/VfuoV+fRqB7DmAqfTnWVmwNGG6HrnxURpPSb8pqN/33+aRsDIyAdJQ==',
+				// 	'Access-Control-Allow-Origin': '*'
+				// };
 				headers={
-					'Authorization': 'Bearer BwbQio3AW3kFmxVsYJfRq+DWTa2sGFJRBtSmfFArnUfClLJJeZVAUStGt0VDaBu0c6vpHHARMDJfvfxifJaqhkZ/5GZvVo5mbkQfzHA/YcS4EukqUeOH7ARnTYtoQwz13r+fTAIVviRtmfqfzGXtHgcQVqDrHPgVLmqW79gFsUBMA66RRPDDoUidgfmEgsSVMAWbKTmRUufFv3itqzza/S2NUPwwRwHgXCTlay5FBUfC42FIhXdr9MYyzpdhYbhXaMXsq/IkbfN6ppUY4T+G9cAf04GrZ8Bm8QYuqfeDasx/VfuoV+fRqB7DmAqfTnWVmwNGG6HrnxURpPSb8pqN/33+aRsDIyAdJQ==',
-					'Access-Control-Allow-Origin': '*'
+						'Authorization': 'Bearer p9hXv1YT7T2Us4oCLLhRqHp0oJTCNTKWnR4xvDnBTBSFjSMZ5M6DJzjGhr03aludrXjZJ2rxua6JavbMjW7CL7TrEQcd5b0RH7idL8xP0N6ViUyxI3dlsvvNk34W/AQgSzYW4OcRYO13Gc2elFr1xhTnbrSljr6p66FzhQhD+AnA8NI6Qj6Y/LVBC/dsWhK9Ike5cnuCQPuTRlB3LUzuno8GFp3TxJJHkHDsX0aKZAPzeTUs2eHLQSJSRiqWki+HlaiGOCDpUqix3mkGT53DScHj0gZwPy28gHZRPKc215by71LzU49WajMc+1v21UmNoh8kdvMTwgTkSElYi981VKOoVUAVxZFItw==',
+						'Access-Control-Allow-Origin': '*'
 				};
 		let end_time=new Date().getTime();
 
-		getData();
-		
-		async function getData(){
-			if(!getstat){
-				OnlineUser();
-				GetEvents();
-				GetVV()
-			}
-			setTimeout(getData,10000)
-		}
+		OnlineUser();
+		GetEvents();
+		GetVV();
 
-		async function OnlineUser(){
-			$.get({
-				url: apiurl+'active',
-				headers: headers,
-				success: function(data){
-					count_online.update(data[0]['x']);
-					count_online2.update(data[0]['x'])
-				},
-				error: function(){
-					OnlineUser()
-				},
-				timeout: function(){
-					OnlineUser()
-				}
-			})
+		async function OnlineUser(){	
+			if(!getstat){
+				$.get({
+					url: apiurl+'active',
+					headers: headers,
+					success: function(data){
+						count_online.update(data[0]['x']);
+						count_online2.update(data[0]['x']);
+						setTimeout(OnlineUser,10000)
+					},
+					error: function(){
+						setTimeout(OnlineUser,5000)
+					},
+					timeout: function(){
+						setTimeout(OnlineUser,5000)
+					}
+				})
+			}else{
+				setTimeout(OnlineUser,1000)
+			}
 		}
 		
 		async function GetEvents(){
 			end_time=new Date().getTime();
-			$.get({
-				url: apiurl+'metrics'+'?startAt='+start_time+'&endAt='+end_time+'&type=event',
-				headers: headers,
-				success: function(data){
-					s=0;
-					while(data[s]['x']!="Study"){
-						if(data[s+1]==null){
-							break;
+			if(!getstat){
+				$.get({
+					url: apiurl+'metrics'+'?startAt='+start_time+'&endAt='+end_time+'&type=event',
+					headers: headers,
+					success: function(data){
+						s=0;
+						while(data[s]['x']!="Study"){
+							if(data[s+1]==null){
+								break;
+							}
+							s++;
 						}
-						s++;
+						count_studytimes.update(data[s]['y']);
+						setTimeout(GetEvents,15000)
+					},
+					error: function(){
+						setTimeout(GetEvents,10000)
+					},
+					timeout: function(){
+						setTimeout(GetEvents,10000)
 					}
-					count_studytimes.update(data[s]['y'])
-				},
-				error: function(){
-					OnlineUser()
-				},
-				timeout: function(){
-					OnlineUser()
-				}
-			})
+				})
+			}else{
+				setTimeout(GetEvents,1000)
+			}
 		}
 		
 		async function GetVV(){
 			end_time=new Date().getTime();
-			$.get({
-				url: apiurl+'stats'+'?startAt='+start_time+'&endAt='+end_time,
-				headers: headers,
-				success: function(data){
-					count_visitor.update(data['uniques']['value'])
-				},
-				error: function(){
-					OnlineUser()
-				},
-				timeout: function(){
-					OnlineUser()
-				}
-			})
+			if(!getstat){
+				$.get({
+					url: apiurl+'stats'+'?startAt='+start_time+'&endAt='+end_time,
+					headers: headers,
+					success: function(data){
+						count_visitor.update(data['uniques']['value']);
+						setTimeout(GetVV,15000)
+					},
+					error: function(){
+						setTimeout(GetVV,10000)
+					},
+					timeout: function(){
+						setTimeout(GetVV,10000)
+					}
+				})
+			}else{
+				setTimeout(GetVV,1000)
+			}
 		}
 	},
 	study: function() {
@@ -307,6 +319,9 @@ var util = {
 				s = '0' + myDate.getSeconds()
 			}
 			$("#worldtime").text(h + "时" + m + "分" + s + "秒");
+			if(document.querySelector('video').readyState==2){
+				$("video").trigger("load")
+			}
 			$("video").trigger("play")
 		}, 1000);
 	},
@@ -571,4 +586,4 @@ var util = {
 		return !!(document.webkitFullscreenElement || document.mozFullScreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.fullscreenElement)
 	}
 }, hour = minutes = seconds = recorded = sumhour = summinutes = sumseconds = tipstype = rolltimeout = worldtimein = worldtimeout = studytimein = studytimeout = hitokotoin = hitokotoout = attentionout = tipsrollnow = getstat = 0;
-console.log("\n %c Study With Miku V1.0.6 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
+console.log("\n %c Study With Miku V1.0.7 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
