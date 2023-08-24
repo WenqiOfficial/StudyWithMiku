@@ -174,7 +174,7 @@ var util = {
 				GetEvents();
 				GetVV()
 			}
-			setTimeout(getData,15000)
+			setTimeout(getData,10000)
 		}
 
 		async function OnlineUser(){
