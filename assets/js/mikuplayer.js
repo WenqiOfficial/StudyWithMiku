@@ -157,7 +157,7 @@ var util = {
 		let count_visitor = new CountUp('umami_value_visitors', 0,0,0,2,{useEasing: true, useGrouping: false});
 
 		const 	webid="b91d816b-91e7-4974-ba3d-ccb61dbecfd6",
-				apiurl="https://umami.wen7.link/api/websites/"+webid+"/",
+				apiurl="https://umami.cloudflare.wenqi.icu/api/websites/"+webid+"/",
 				start_time=1691596800000,
 				//ViewOnly Token
 				// headers={
