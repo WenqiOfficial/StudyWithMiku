@@ -138,7 +138,8 @@ var util = {
 		reset: function() {
 			localStorage.setItem("conf_music_platform", "netease");
 			localStorage.setItem("conf_music_id", "8611769328");
-			util.musicset.load()
+			util.musicset.load();
+			util.musicset.apply()
 		},
 		apply: function() {
 			util.musicset.load();
