@@ -24,6 +24,8 @@ STUDY WITH MIKU web version cover
 
 - [x] 本地学习总时长记录
 
+- [x] 单次学习共休息时长记录
+
 - [x] 摸鱼自动停止计时(窗口失焦)
 
 - [x] Tips显示设置
