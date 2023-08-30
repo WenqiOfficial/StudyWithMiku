@@ -1,12 +1,16 @@
 # StudyWithMiku
 
-STUDY WITH MIKU web version cover
+STUDY WITH MIKU Web Version Cover
+
+本分支由冷星维护
 
 突发奇想，将其变为现实
 
 [WEB](https://studymiku.wenqi.icu)
 
 [WEB(Cloudflare)](https://studymiku.cloudflare.wenqi.icu)
+
+[WEB(COSA Ver.)(CloudFlare)](https://miku.hanze.eu.org)
 
 ## 目前实现的功能
 
