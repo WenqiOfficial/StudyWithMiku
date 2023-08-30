@@ -4,7 +4,7 @@ STUDY WITH MIKU Web Version Cover
 
 本分支由冷星维护[版本代号(COSA Ver.)]
 
-本分支含有附加内容，并与WenqiOfficial主分支保持同步更新
+本分支含有附加内容，并与WenqiOfficial主分支保持同步更新，<del>虽然经常忘记</del>
 
 突发奇想，将其变为现实
 
@@ -40,7 +40,7 @@ STUDY WITH MIKU Web Version Cover
 
 - [x] 当前在线人数
 
-## 目前实现的功能
+## 附加内容
 
 - [x] 添加MikuTap
  
