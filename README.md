@@ -24,7 +24,7 @@ STUDY WITH MIKU Web Version Cover
 
 - [x] 一言Tips
 
-- [x] 丝滑的动画（
+- [x] 丝滑的动画
 
 - [x] 本地学习时长记录
 
