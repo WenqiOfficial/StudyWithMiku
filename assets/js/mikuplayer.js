@@ -273,11 +273,11 @@ var util = {
 	//Timer BEGIN
 	timerecord: {
 		start: function() {
-			clearInterval(resttime);
 			clearInterval(time);
+			clearInterval(resttime);
 			if (!recorded) {
 				hour = minutes = seconds = rhour = rminutes = rseconds = 0;
-				$('#time').text(rseconds + "秒钟了");
+				$('#time').text(seconds + "秒钟了");
 				$('#resttime').text(rseconds + "秒钟了");
 				recorded = 1
 			}
@@ -305,6 +305,7 @@ var util = {
 		},
 		pause: function() {
 			clearInterval(time);
+			clearInterval(resttime);
 			util.resttimer()
 		}
 	},
