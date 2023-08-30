@@ -1,6 +1,6 @@
 /* STUDY WITH MIKU
     CORE FUNCTION
-   V1.0.7 2023.08.25 */
+   V1.0.8 2023.08.27 */
 
 $(function() {
 	if (window.localStorage) {
@@ -138,7 +138,8 @@ var util = {
 		reset: function() {
 			localStorage.setItem("conf_music_platform", "netease");
 			localStorage.setItem("conf_music_id", "8611769328");
-			util.musicset.load()
+			util.musicset.load();
+			util.musicset.apply()
 		},
 		apply: function() {
 			util.musicset.load();
@@ -272,15 +273,19 @@ var util = {
 	//Timer BEGIN
 	timerecord: {
 		start: function() {
+			clearInterval(resttime);
 			clearInterval(time);
 			if (!recorded) {
-				hour = minutes = seconds = 0;
+				hour = minutes = seconds = rhour = rminutes = rseconds = 0;
+				$('#time').text(rseconds + "秒钟了");
+				$('#resttime').text(rseconds + "秒钟了");
 				recorded = 1
 			}
 			util.timer()
 		},
 		stop: function() {
 			clearInterval(time);
+			clearInterval(resttime);
 			if (recorded) {
 				var m = h = 0;
 				sumseconds = sumseconds + seconds;
@@ -299,7 +304,8 @@ var util = {
 			}
 		},
 		pause: function() {
-			clearInterval(time)
+			clearInterval(time);
+			util.resttimer()
 		}
 	},
 	initWorldTimer: function() {
@@ -357,6 +363,37 @@ var util = {
 				tipstime.text(hour + "小时" + minutes + "分钟" + seconds + "秒")
 			} else {
 				tipstime.text(minutes + "分钟" + seconds + "秒")
+			}
+			pastsDate = sDate;
+			pastmDate = mDate;
+			pasthDate = hDate;
+		}, 1000)
+	},
+	resttimer: function() {
+		var pastsDate = sDate = pastmDate = mDate = pasthDate = hDate = 0;
+		resttime = setInterval(function() {
+			var resttime = $("#resttime"),
+				myDate = new Date;
+			sDate = myDate.getSeconds();
+			mDate = myDate.getMinutes();
+			hDate = myDate.getHours();
+			if (sDate - pastsDate >= 1 || mDate - pastmDate >= 1 || hDate - pasthDate >= 1) {
+				rseconds++
+			}
+			if (rseconds == 60) {
+				rminutes++;
+				rseconds = 0
+			}
+			if (rminutes == 60) {
+				rhour++;
+				rminutes = 0
+			}
+			if (rminutes == '0' && rhour == '0') {
+				resttime.text(rseconds + "秒钟了")
+			} else if (rhour != '0') {
+				resttime.text(rhour + "小时" + rminutes + "分钟" + rseconds + "秒了")
+			} else {
+				resttime.text(rminutes + "分钟" + rseconds + "秒了")
 			}
 			pastsDate = sDate;
 			pastmDate = mDate;
@@ -585,5 +622,5 @@ var util = {
 	checkFullscreen: function() {
 		return !!(document.webkitFullscreenElement || document.mozFullScreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.fullscreenElement)
 	}
-}, hour = minutes = seconds = recorded = sumhour = summinutes = sumseconds = tipstype = rolltimeout = worldtimein = worldtimeout = studytimein = studytimeout = hitokotoin = hitokotoout = attentionout = tipsrollnow = getstat = 0;
-console.log("\n %c Study With Miku V1.0.7 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
+}, hour = minutes = seconds = rhour = rminutes = rseconds = recorded = sumhour = summinutes = sumseconds = tipstype = rolltimeout = worldtimein = worldtimeout = studytimein = studytimeout = hitokotoin = hitokotoout = attentionout = tipsrollnow = getstat = 0;
+console.log("\n %c Study With Miku V1.0.8 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
