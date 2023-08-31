@@ -2,13 +2,18 @@
   "name": "STUDY WITH MIKU",
   "icons": [
     {
-      "src": "./assets/icon/icon_768x768.png",
+      "src": "./assets/icon/icon_192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "./assets/icon/icon_768x768.png",
+      "src": "./assets/icon/icon_512x512.png",
       "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/icon/icon_768x768.png",
+      "sizes": "768x768",
       "type": "image/png"
     }
   ],
