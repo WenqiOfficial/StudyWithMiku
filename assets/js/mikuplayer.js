@@ -588,7 +588,7 @@ var util = {
 						hitokoto.innerText = "获取一言中...(*/ω＼*)";
 						const response = await fetch('https://v1.hitokoto.cn/?c=d&c=i&c=k&max_length=10');
 						const {
-							uuid, hitokoto: hitokotoText
+							hitokoto: hitokotoText
 						} = await response.json();
 						hitokoto.innerText = hitokotoText
 					}
