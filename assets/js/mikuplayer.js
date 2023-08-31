@@ -34,10 +34,12 @@ var util = {
 		if(util.getUrlParams("mode")=="study"){
 			lauched=1;
 			study();
+			ufunction.track('Study')
 		}else if(util.getUrlParams("mode")=="strict"){
 			lauched=2;
 			util.addVisibilityListener();
 			study();
+			ufunction.track('Study')
 		}
 		function study() {
 			util.study();
