@@ -1,6 +1,6 @@
 /* STUDY WITH MIKU
     CORE FUNCTION
-   V1.0.8b 2023.08.30 */
+   V1.0.9 2023.09.01 */
 
 $(function() {
 	if (window.localStorage) {
@@ -24,7 +24,30 @@ var util = {
 		util.initStrictMode();
 		util.initWorldTimer();
 		util.readstoragetime();
-		util.getUmami()
+		util.getUmami();
+		util.initParams()
+	},
+	initParams: function() {
+		if(util.getUrlParams("type")){
+			ufunction.track(util.getUrlParams("type"))
+		}
+		if(util.getUrlParams("mode")=="study"){
+			lauched=1;
+			study();
+			ufunction.track('Study')
+		}else if(util.getUrlParams("mode")=="strict"){
+			lauched=2;
+			util.addVisibilityListener();
+			study();
+			ufunction.track('Study')
+		}
+		function study() {
+			util.study();
+			setTimeout(function(){$('.aplayer-play').trigger('click');util.videoresize()},500);
+			setTimeout(function(){$('.aplayer-play').trigger('click');util.videoresize()},1000);
+			setTimeout(function(){$('.aplayer-play').trigger('click');util.videoresize()},1500);
+			setTimeout(function(){$('.aplayer-play').trigger('click');util.videoresize()},2000);
+		}
 	},
 	initClickEvent: function() {
 		$("#bt_fs").on('click', function() {
@@ -81,6 +104,21 @@ var util = {
 			$("#" + e + "_cover").fadeOut(300, "linear")
 		})
 	},
+	getUrlParams: function(key) {
+		var url = window.location.search.substr(1);
+		if (url == '') {
+			return false;
+		}
+		var paramsArr = url.split('&');
+		for (var i = 0; i < paramsArr.length; i++) {
+			var combina = paramsArr[i].split("=");
+			if (combina[0] == key) {
+				return combina[1];
+			}
+		}
+		return false;
+	},
+	//APlayer START
 	readMusicconf: function(n) {
 		let stat = localStorage.getItem("conf_music_" + n);
 		return stat
@@ -151,6 +189,8 @@ var util = {
 			}
 		}
 	},
+	//APlayer END
+	//Umami START
 	getUmami: async function(){
 		let count_online = new CountUp('umami_value_onlineuser', 0,0,0,2,{useEasing: true, useGrouping: false});
 		let count_online2 = new CountUp('umami_value_onlineuser2', 0,0,0,2,{useEasing: true, useGrouping: false});
@@ -248,6 +288,7 @@ var util = {
 			}
 		}
 	},
+	//Umami END
 	study: function() {
 		$('.aplayer-play').trigger('click');
 		$("#scene_top").fadeOut(300, "linear");
@@ -268,6 +309,7 @@ var util = {
 			$("#rest").fadeOut(300, "linear");
 			$("#rest_cover").fadeOut(300, "linear");
 			getstat=0;
+			lauched=0;
 		})
 	},
 	//Timer BEGIN
@@ -427,7 +469,7 @@ var util = {
 	addVisibilityListener: function() {
 		document.addEventListener('visibilitychange', function() {
 			//fix wrong event's action
-			if (util.checkStrictMode() && recorded) {
+			if (recorded&&((util.checkStrictMode()&&!lauched)||lauched==2)) {
 				if (document.visibilityState === 'hidden') {
 					$('#bt_rest').trigger('click');
 					document.title = '摸鱼中...'
@@ -546,7 +588,7 @@ var util = {
 						hitokoto.innerText = "获取一言中...(*/ω＼*)";
 						const response = await fetch('https://v1.hitokoto.cn/?c=d&c=i&c=k&max_length=10');
 						const {
-							uuid, hitokoto: hitokotoText
+							hitokoto: hitokotoText
 						} = await response.json();
 						hitokoto.innerText = hitokotoText
 					}
@@ -623,5 +665,5 @@ var util = {
 	checkFullscreen: function() {
 		return !!(document.webkitFullscreenElement || document.mozFullScreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.fullscreenElement)
 	}
-}, hour = minutes = seconds = rhour = rminutes = rseconds = recorded = sumhour = summinutes = sumseconds = tipstype = rolltimeout = worldtimein = worldtimeout = studytimein = studytimeout = hitokotoin = hitokotoout = attentionout = tipsrollnow = getstat = 0;
-console.log("\n %c Study With Miku V1.0.8b %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
+}, hour = minutes = seconds = rhour = rminutes = rseconds = recorded = sumhour = summinutes = sumseconds = tipstype = rolltimeout = worldtimein = worldtimeout = studytimein = studytimeout = hitokotoin = hitokotoout = attentionout = tipsrollnow = getstat = lauched = 0;
+console.log("\n %c Study With Miku V1.0.9 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
