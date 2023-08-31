@@ -1,0 +1,19 @@
+{
+  "name": "STUDY WITH MIKU",
+  "icons": [
+    {
+      "src": "assets/icon/icon_768x768.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon/icon_768x768.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "fullscreen",
+  "background_color": "#448a91",
+  "theme_color": "#448a91"
+}
