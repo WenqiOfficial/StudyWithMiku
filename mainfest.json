@@ -18,7 +18,7 @@
     }
   ],
   "start_url": "./?type=PWA",
-  "display": "fullscreen",
+  "display": "standalone",
   "background_color": "#448a91",
   "theme_color": "#448a91",
   "description": "STUDY WITH MIKU 是一个为了与Miku一起学习而建立的网站! 与Miku一起学习吧！",
