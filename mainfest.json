@@ -1,0 +1,47 @@
+{
+  "name": "STUDY WITH MIKU",
+  "icons": [
+    {
+      "src": "./assets/icon/icon_192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/icon/icon_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/icon/icon_768x768.png",
+      "sizes": "768x768",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./?type=PWA",
+  "display": "standalone",
+  "background_color": "#448a91",
+  "theme_color": "#448a91",
+  "description": "STUDY WITH MIKU 是一个为了与Miku一起学习而建立的网站! 与Miku一起学习吧！",
+  "screenshots": [
+    {
+      "src": "./assets/cover.png",
+      "type": "image/png",
+      "sizes": "1542x867",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "STUDY!",
+      "description": "开始学习吧!",
+      "url": "./?type=pwa&mode=study",
+      "icons": [{ "src": "./assets/icon/icon_192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "STUDY! (严格模式) ",
+      "description": "开始学习吧（严格模式）!",
+      "url": "./?type=pwa&mode=strict",
+      "icons": [{ "src": "./assets/icon/icon_192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}

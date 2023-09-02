@@ -25,16 +25,18 @@
   <!-- SEO END -->
   <title>STUDY WITH MIKU</title>
   <link rel="apple-touch-icon" href="icon.png">
+  <link rel="manifest" href="mainfest.json">
   <link href="https://fonts.googlefonts.cn/css?family=Quicksand:400" rel="stylesheet">
   <link charset="utf-8" href="assets/css/shared/sp/css/common.css" rel="stylesheet">
   <link charset="utf-8" href="assets/css/main.css" rel="stylesheet"> 
   <link href="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
   <!-- Umami START -->
-  <script async src="assets/js/umami.js" data-host-url="https://umami.wen7.link" data-website-id="b91d816b-91e7-4974-ba3d-ccb61dbecfd6" data-domains="studymiku.wenqi.icu,studymiku.dev.wenqi.icu,studymiku.cloudflare.wenqi.icu"></script>
+  <script src="assets/js/umami.js" data-host-url="https://umami.wen7.link" data-website-id="b91d816b-91e7-4974-ba3d-ccb61dbecfd6" data-domains="studymiku.wenqi.icu,studymiku.dev.wenqi.icu,studymiku.cloudflare.wenqi.icu"></script>
+  <script src="assets/js/ufunction.js"></script>
   <!-- Umami END -->
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
-  <script>var meting_api='https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r'</script>
+  <script>var meting_api='https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r';</script>
   <script src="https://cdn.bootcdn.net/ajax/libs/meting/2.0.1/Meting.min.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
   <!-- <script src="https://cdn.bootcdn.net/ajax/libs/radialIndicator/1.4.0/radialIndicator.min.js"></script> -->
@@ -50,7 +52,7 @@
       <p class="atten">肥肠抱歉...<br>您的浏览器并不支持本页面需要的特性(JavaScript、本地存储)</p>
     </div>
     <div class="ok">
-      <p id="bt_top"><a id="btt_start" onclick="umami.track('Study')" href="#">! STUDY !</a></p>
+      <p id="bt_top"><a id="btt_start" onclick="ufunction.track('Study')" href="#">! STUDY !</a></p>
       <p id="bt_top"><a id="btt_setting" href="#">* 设置 *</a></p>
     </div>
     <p id="bt_top"><a id="btt_about" href="#">* 关于 *</a></p>
@@ -86,6 +88,7 @@
       <p class="link"> 感谢以下优秀项目！<br><a href="https://aplayer.js.org/" target="_blank">APlayer</a> & <a href="https://github.com/metowolf/MetingJS" target="_blank">MetingJS</a><br><a href="/mikutap" target="_blank">MikuTap</a> By <a href="https://aidn.jp/" target="_blank">daniwellP</a> </p>
       <!-- <p class="con"> <span id="busuanzi_container_site_uv">已经有<span id="busuanzi_value_site_uv">0</span>位朋友</span><span id="busuanzi_container_site_pv">与MIKU一起学习<span id="busuanzi_value_site_pv">0</span>次啦</span> </p> -->
       <p class="con"> 共有<span id="umami_value_visitors">0</span>位朋友与Miku一起学习<span id="umami_value_studytimes">0</span>次啦 <br> 此刻<span id="umami_value_onlineuser">0</span>位朋友正在与MIKU一起学习! <br> *数据同步有延时... </p>
+      <p class="link" style="display: none;" id="birthday"> <a href="https://space.bilibili.com/399918500/dynamic" target="_blank">Miku,生日快乐!</a> </p>
     </div>
   </div>
   <div id="menu_cover"></div>
@@ -135,5 +138,6 @@
   <div id="bt_tomato"></div>
   <meting-js> </meting-js>
   <script charset="utf-8" src="assets/js/miku.js" type="text/javascript"></script>
+  <!-- <script src="sw.load.js" type="text/javascript"></script> -->
 </body>
 </html>
