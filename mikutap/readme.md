@@ -9,22 +9,10 @@ A Mainland China friendly and independent version extracted from https://aidn.jp
 
 如果你用于了推广、广告等用途，请参见下方许可证要求联系原作者，谢谢。
 
-# 为什么要做这个  
-因为很有趣，觉得应该分享给大家，降低国内用户访问的成本  
-Related: https://www.v2ex.com/t/403054#reply0    
-
-# 修改说明  
-- 完全集成所需字体及脚本
-- 进行了汉化
-- 移除了社交分享按钮
-- 移除了原作者的Google Analysis
-- 移除了页面上部分属性
-- 增加了作品来源说明
-- 更新了依赖
-- 少量兼容性修复
-
-# @TODO
-- ~~使用JSDelivr分发，并minify~~（由于投毒事件计划取消，详细请见 https://www.v2ex.com/t/403110 ）
+# 作者
+[作者:@daniwell](https://aidn.jp/)
+[汉化:Github@HFIProgramming](https://github.com/HFIProgramming)
+[改编:@冷星COSA](https://cosa.eu.org)
 
 # 版权说明  
 遵循原作者的说明，作品仅用于非盈利的公共使用用途，无需告知  
@@ -36,9 +24,8 @@ daniwell@aidn.jp
 ※ エグジットチューンズ管理楽曲（「Nyan Cat」や「ねこみみスイッチ」など）の商用利用につきましては、下記お問い合わせ窓口よりご連絡ください。
 http://exittunes.com/license/
 ```
-由于违规使用本repo带来的后果HFIProgramming不承担结果  
+由于违规使用本repo带来的后果@HFIProgramming /@冷星COSA 不承担任何责任
 
 # DEMO  
 
-https://hfiprogramming.github.io/mikutap/
-
+https://miku.hanze.eu.org/mikutap
