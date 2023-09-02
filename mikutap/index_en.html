@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="クリック/タッチすることで、モーショングラフィックスと共に音を奏でるインタラクティブコンテンツの初音ミク版。">
+  <title>Mikutap</title>
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="shoucut icon" href="icon.png">
+  <link href="css/css.css" rel="stylesheet">
+  <link charset="UTF-8" href="shared/sp/css/common.css" rel="stylesheet">
+  <link charset="utf-8" href="css/mikutap.css" rel="stylesheet">
+  <script charset="utf-8" src="js/jquery.min.js" type="text/javascript"></script>
+  <script charset="utf-8" src="js/pixi.min.js" type="text/javascript"></script>
+  <script charset="utf-8" src="js/gsap.min.js" type="text/javascript"></script>
+  <script charset="UTF-8" src="shared/js/common-2.min.js" type="text/javascript"></script>
+  <script charset="utf-8" src="js/mikutap.js" type="text/javascript"></script>
+</head>
+
+<body>
+  <div id="view"></div>
+  <div id="scene_top">
+    <h1>Mikutap</h1>
+    <div id="ng">
+      <p class="atten">申し訳ございません、<br>お使いの端末又はブラウザには対応しておりません。</p>
+    </div>
+    <div class="ok">
+      <p id="bt_start"><a href="#">START</a></p>
+    </div>
+    <div class="ok">
+    <p id="bt_about"><a href="#">ABOUT</a></p>
+    </div>
+    <div class="ok">
+      <p class="attention">※サウンドをオンにしてお楽しみください。</p>
+    </div>
+    <div class="ok">
+      <a style="text-decoration:none;color:#FFFFFF;" href="../" title="STUDY WITH MIKU" target="_blank">--------!STUDY WITH MIKU!--------</a>
+    </div>
+  </div>
+  <div id="scene_loading">
+    <hr size="1" color="#fff"> </div>
+  <div id="scene_main">
+    <div class="set">
+      <p class="attention">CLICK &amp; DRAG or PRESS ANY KEY!</p>
+      <p id="bt_feedback"><a href="#">FEEDBACK: ON</a></p>
+      <p id="bt_backtrack"><a href="#">BACKTRACK: ON</a></p>
+    </div>
+  </div>
+  <div id="about_cover"></div>
+  <div id="about">
+    <div id="about_in">
+      <p class="close"><span id="bt_close">×</span></p>
+      <p class="con"> Voiced by <a href="https://ec.crypton.co.jp/pages/prod/vocaloid/mikuv4x" target="_blank">Hatsune Miku</a> </p>
+      <p class="con"> Created by <a href="https://aidn.jp/mikutap" target="_blank">daniwell</a> (<a href="https://twitter.com/daniwell_aidn" target="_blank">twitter</a>) </p>
+      <p class="con"> (zh-CHS)中国化 <a href="https://gdhfi.com/article/view-12-397.html" target="_blank">HFIProgramming</a> (<a href="https://github.com/HFIProgramming" target="_blank">Github</a>) </p>
+      <p class="con"> (COSA Ver.)へんかん/(zh-CHT)中国化 <a href="https://cosa.eu.org" target="_blank">冷星COSA</a> (<a href="mailto:mail@cosa.eu.org" target="_blank">E-Mail</a>) </p>
+      <p class="link"> Inspired by <a href="http://patatap.com/" target="_blank">Patatap</a><br>(Wonderful website!)</p>
+      <p class="con"><a href="lang" target="_blank">---!修改语言!---</a></p>
+    </div>
+  </div>
+  <div id="bt_back">＜</div>
+  <div id="bt_fs">∷</div>
+</body>
+
+</html>
