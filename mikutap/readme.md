@@ -11,7 +11,9 @@ A Mainland China friendly and independent version extracted from https://aidn.jp
 
 # 作者
 [作者:@daniwell](https://aidn.jp/)
+
 [汉化:Github@HFIProgramming](https://github.com/HFIProgramming)
+
 [改编:@冷星COSA](https://cosa.eu.org)
 
 # 版权说明  
