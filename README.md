@@ -46,6 +46,12 @@ STUDY WITH MIKU web version cover
 
 也别忘了去修改`mikuplayer`中的**Token**、**URL**值
 
+## 贡献者
+
+<a href="https://github.com/WenqiOfficial/StudyWithMiku/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=WenqiOfficial/StudyWithMiku" />
+</a>
+
 ---
 
 [![Cover](https://raw.githubusercontent.com/WenqiOfficial/wenqicdn/master/img/banner/studymiku.jpg)](https://www.bilibili.com/video/BV1rV41157DR)
