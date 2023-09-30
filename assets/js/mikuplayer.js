@@ -586,7 +586,7 @@ var util = {
 					async function fetchHitokoto() {
 						const hitokoto = document.querySelector('#hitokoto');
 						hitokoto.innerText = "获取一言中...(*/ω＼*)";
-						const response = await fetch('https://v1.hitokoto.cn/?c=d&c=i&c=k&max_length=10');
+						const response = await fetch('https://v1.hitokoto.cn/?c=i&c=k&max_length=10');
 						const {
 							hitokoto: hitokotoText
 						} = await response.json();
