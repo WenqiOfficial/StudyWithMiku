@@ -7,11 +7,11 @@
         url("fonts/sjsq.woff2") format('woff2');
 }
 
-#about_cover,#menu_cover,#top_cover,#rest_cover,#view,#view canvas,body,html{
+#player_back,#about_cover,#menu_cover,#top_cover,#rest_cover,#view,#view canvas,body,html{
     height:100%;
     width:100%
 }
-#about,#music,#menu,#about_cover,#top_cover,#menu_cover,#rest_cover,#bt_fs,#ng{
+#player_back,#about,#music,#menu,#about_cover,#top_cover,#menu_cover,#rest_cover,#bt_fs,#ng{
     display:none
 }
 #about a,#rest a,#bt_about a,#bt_feedback a,#bt_top a{
@@ -30,7 +30,7 @@ body,html{
     font-family:Quicksand,"SJsuqian Regular","Microsoft YaHei","游ゴシック","Yu Gothic","游ゴシック体",YuGothic,"Yu Gothic UI","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","Meiryo UI","メイリオ",Meiryo,sans-serif
 
 }
-#about_cover,#top_cover,#menu_cover,#rest_cover,#view{
+#player_back,#about_cover,#top_cover,#menu_cover,#rest_cover,#view{
     position:fixed;
     top:0;
     z-index:1
@@ -38,13 +38,19 @@ body,html{
 #top_cover{
     z-index: 1002 !important;
 }
+#player_back{
+    z-index: 98 !important;
+}
+#player_back.show{
+    display: block;
+}
 #music{
     z-index: 1003 !important;
 }
 #bt_rest,#bt_fs{
     position:absolute;
     display: none;
-    z-index:100;
+    z-index:98;
     padding:10px;
     left:0;
     font-size:1rem;
@@ -65,7 +71,7 @@ body,html{
     -webkit-transform:translate(-50%,-50%);
     -ms-transform:translate(-50%,-50%);
     transform:translate(-50%,-50%);
-    z-index:100;
+    z-index:98;
     display:none
 }
 #scene_top h1{

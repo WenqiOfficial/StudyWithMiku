@@ -1,6 +1,6 @@
 /* STUDY WITH MIKU
     CORE FUNCTION
-   V1.0.9 2023.09.01 */
+   V1.0.10 2024.01.21 */
 
 $(function() {
 	if (window.localStorage) {
@@ -187,7 +187,26 @@ var util = {
 			}else{
 				$('#bt_fs').after('<meting-js server="'+util.readMusicconf('platform')+'" type="playlist" id='+util.readMusicconf('id')+' fixed="true" theme="#39c5bb" order="random" mutex="true"> </meting-js>')
 			}
+			util.AplayerInteraction();
 		}
+	},
+	AplayerInteraction: async function(){ 
+		if (!$(".aplayer").length){setTimeout(util.AplayerInteraction,500);return}
+		$('.aplayer-miniswitcher button').on('click',function(){
+			$('.aplayer-list').addClass('aplayer-list-hide');
+			if($('.aplayer').hasClass('aplayer-narrow')){
+				$('#player_back').addClass('show');
+			}else{
+				$('#player_back').removeClass('show');
+			}
+		});
+		$("#player_back").on('click',function(){
+			if(!$('.aplayer-list').hasClass('aplayer-list-hide')){
+				$('.aplayer-list').addClass('aplayer-list-hide');
+			}else if(!$('.aplayer').hasClass('aplayer-narrow')){
+				$('.aplayer-miniswitcher button').click();
+			}
+		}); 
 	},
 	//APlayer END
 	//Umami START
@@ -666,4 +685,4 @@ var util = {
 		return !!(document.webkitFullscreenElement || document.mozFullScreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.fullscreenElement)
 	}
 }, hour = minutes = seconds = rhour = rminutes = rseconds = recorded = sumhour = summinutes = sumseconds = tipstype = rolltimeout = worldtimein = worldtimeout = studytimein = studytimeout = hitokotoin = hitokotoout = attentionout = tipsrollnow = getstat = lauched = 0;
-console.log("\n %c Study With Miku V1.0.9 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
+console.log("\n %c Study With Miku V1.0.10 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
