@@ -187,7 +187,30 @@ var util = {
 			}else{
 				$('#bt_fs').after('<meting-js server="'+util.readMusicconf('platform')+'" type="playlist" id='+util.readMusicconf('id')+' fixed="true" theme="#39c5bb" order="random" mutex="true"> </meting-js>')
 			}
+			util.AplayerInteraction();
 		}
+	},
+	AplayerInteraction: async function(){ 
+		if (!$(".aplayer").length){setTimeout(util.AplayerInteraction,500);return}
+		$('.aplayer-miniswitcher button').on('click',function(){
+			$('.aplayer-list').addClass('aplayer-list-hide');
+			if($('.aplayer').hasClass('aplayer-narrow')){
+				console.log("add");
+				$('#player_back').addClass('show');
+			}else{
+				console.log("remove");
+				$('#player_back').removeClass('show');
+			}
+		});
+		$("#player_back").on('click',function(){
+			console.log('playerback click');
+			if(!$('.aplayer-list').hasClass('aplayer-list-hide'))
+			{
+				
+			}else if(!$('.aplayer').hasClass('aplayer-narrow')){
+
+			}
+		}); 
 	},
 	//APlayer END
 	//Umami START
