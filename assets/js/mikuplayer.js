@@ -1,6 +1,6 @@
 /* STUDY WITH MIKU
     CORE FUNCTION
-   V1.0.9 2023.09.01 */
+   V1.0.10 2024.01.21 */
 
 $(function() {
 	if (window.localStorage) {
@@ -195,20 +195,16 @@ var util = {
 		$('.aplayer-miniswitcher button').on('click',function(){
 			$('.aplayer-list').addClass('aplayer-list-hide');
 			if($('.aplayer').hasClass('aplayer-narrow')){
-				console.log("add");
 				$('#player_back').addClass('show');
 			}else{
-				console.log("remove");
 				$('#player_back').removeClass('show');
 			}
 		});
 		$("#player_back").on('click',function(){
-			console.log('playerback click');
-			if(!$('.aplayer-list').hasClass('aplayer-list-hide'))
-			{
-				
+			if(!$('.aplayer-list').hasClass('aplayer-list-hide')){
+				$('.aplayer-list').addClass('aplayer-list-hide');
 			}else if(!$('.aplayer').hasClass('aplayer-narrow')){
-
+				$('.aplayer-miniswitcher button').click();
 			}
 		}); 
 	},
@@ -221,7 +217,7 @@ var util = {
 		let count_visitor = new CountUp('umami_value_visitors', 0,0,0,2,{useEasing: true, useGrouping: false});
 
 		const 	webid="b91d816b-91e7-4974-ba3d-ccb61dbecfd6",
-				apiurl="https://umami.wen7.link/api/websites/"+webid+"/",
+				apiurl="https://r.umami.wenqi.icu/api/websites/"+webid+"/",
 				start_time=1691596800000,
 				//ViewOnly Token
 				// headers={
@@ -689,4 +685,4 @@ var util = {
 		return !!(document.webkitFullscreenElement || document.mozFullScreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.fullscreenElement)
 	}
 }, hour = minutes = seconds = rhour = rminutes = rseconds = recorded = sumhour = summinutes = sumseconds = tipstype = rolltimeout = worldtimein = worldtimeout = studytimein = studytimeout = hitokotoin = hitokotoout = attentionout = tipsrollnow = getstat = lauched = 0;
-console.log("\n %c Study With Miku V1.0.9 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
+console.log("\n %c Study With Miku V1.0.10 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000")
