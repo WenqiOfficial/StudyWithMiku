@@ -224,8 +224,12 @@ var util = {
 				// 	'Authorization': 'Bearer BwbQio3AW3kFmxVsYJfRq+DWTa2sGFJRBtSmfFArnUfClLJJeZVAUStGt0VDaBu0c6vpHHARMDJfvfxifJaqhkZ/5GZvVo5mbkQfzHA/YcS4EukqUeOH7ARnTYtoQwz13r+fTAIVviRtmfqfzGXtHgcQVqDrHPgVLmqW79gFsUBMA66RRPDDoUidgfmEgsSVMAWbKTmRUufFv3itqzza/S2NUPwwRwHgXCTlay5FBUfC42FIhXdr9MYyzpdhYbhXaMXsq/IkbfN6ppUY4T+G9cAf04GrZ8Bm8QYuqfeDasx/VfuoV+fRqB7DmAqfTnWVmwNGG6HrnxURpPSb8pqN/33+aRsDIyAdJQ==',
 				// 	'Access-Control-Allow-Origin': '*'
 				// };
+				// headers={
+				// 		'Authorization': 'Bearer p9hXv1YT7T2Us4oCLLhRqHp0oJTCNTKWnR4xvDnBTBSFjSMZ5M6DJzjGhr03aludrXjZJ2rxua6JavbMjW7CL7TrEQcd5b0RH7idL8xP0N6ViUyxI3dlsvvNk34W/AQgSzYW4OcRYO13Gc2elFr1xhTnbrSljr6p66FzhQhD+AnA8NI6Qj6Y/LVBC/dsWhK9Ike5cnuCQPuTRlB3LUzuno8GFp3TxJJHkHDsX0aKZAPzeTUs2eHLQSJSRiqWki+HlaiGOCDpUqix3mkGT53DScHj0gZwPy28gHZRPKc215by71LzU49WajMc+1v21UmNoh8kdvMTwgTkSElYi981VKOoVUAVxZFItw==',
+				// 		'Access-Control-Allow-Origin': '*'
+				// };
 				headers={
-						'Authorization': 'Bearer p9hXv1YT7T2Us4oCLLhRqHp0oJTCNTKWnR4xvDnBTBSFjSMZ5M6DJzjGhr03aludrXjZJ2rxua6JavbMjW7CL7TrEQcd5b0RH7idL8xP0N6ViUyxI3dlsvvNk34W/AQgSzYW4OcRYO13Gc2elFr1xhTnbrSljr6p66FzhQhD+AnA8NI6Qj6Y/LVBC/dsWhK9Ike5cnuCQPuTRlB3LUzuno8GFp3TxJJHkHDsX0aKZAPzeTUs2eHLQSJSRiqWki+HlaiGOCDpUqix3mkGT53DScHj0gZwPy28gHZRPKc215by71LzU49WajMc+1v21UmNoh8kdvMTwgTkSElYi981VKOoVUAVxZFItw==',
+						'Authorization': 'Bearer EJfpKblh2tLICYqBUDDs2eA/vd41CeoMtZpsZhrM5W6YkUyCJH/Dg64XEZp83nCVlIqgr8E2+oEeHL8HRSOf0lMsnHTdvsBsn/3rCSPXDI3kDmMBkG1m38JNIArp6Q1gaX6oZWDTph5H6KESaW4tKIhvwo7uaoFrU7OYDgZUG+YA8x41DZq+8HtAkdhJazAGIvyf2HYFRxZEHNb2tCkm2fwxDekKxnp91PYzZvpY0FoRtjKzq6znHmryoE4J42t8OFHv3g6oz/fFNN6RIXsPn9Nvlvr05qNlCNg5k3Iet+b3AkQPrxSpc2oTsvQPkpgctg1C/fYDs53+S8wMB+B4FtPmxn8vtQZnMw==',
 						'Access-Control-Allow-Origin': '*'
 				};
 		let end_time=new Date().getTime();
@@ -240,8 +244,8 @@ var util = {
 					url: apiurl+'active',
 					headers: headers,
 					success: function(data){
-						count_online.update(data[0]['x']);
-						count_online2.update(data[0]['x']);
+						count_online.update(data['x']);
+						count_online2.update(data['x']);
 						setTimeout(OnlineUser,10000)
 					},
 					error: function(){
@@ -292,7 +296,7 @@ var util = {
 					url: apiurl+'stats'+'?startAt='+start_time+'&endAt='+end_time,
 					headers: headers,
 					success: function(data){
-						count_visitor.update(data['uniques']['value']);
+						count_visitor.update(data['visitors']['value']);
 						setTimeout(GetVV,15000)
 					},
 					error: function(){
