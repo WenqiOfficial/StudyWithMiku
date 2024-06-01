@@ -2,7 +2,8 @@
     font-family: "SJsuqian Regular";
     font-style: normal;
     font-weight: 400;
-    src: url("https://bj.bcebos.com/v1/ai-studio-online/6de26a48eb0e4b0aa4f42bd5338968b034dc7b5e621748c2bbd9635ba27d2c05?responseContentDisposition=attachment%3B%20filename%3Dsjsq.woff2") format('woff2'),
+    src: 
+        /* url("https://bj.bcebos.com/v1/ai-studio-online/6de26a48eb0e4b0aa4f42bd5338968b034dc7b5e621748c2bbd9635ba27d2c05?responseContentDisposition=attachment%3B%20filename%3Dsjsq.woff2") format('woff2'), */
         url("https://cdn.jsdelivr.net/gh/WenqiOfficial/StudyWithMiku/assets/css/fonts/sjsq.woff2") format('woff2'),
         url("fonts/sjsq.woff2") format('woff2');
 }
