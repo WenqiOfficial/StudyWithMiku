@@ -1,6 +1,6 @@
 /* STUDY WITH MIKU
     CORE FUNCTION
-   V1.0.10 2024.01.21 */
+   V1.0.11 2024.06.27 */
 
 $(function() {
 	if (window.localStorage) {
@@ -76,15 +76,15 @@ var util = {
 			util.menuopen("rest");
 			getstat=0;
 			$('.aplayer-pause').trigger('click');
-			$('#bt_restclose').on('click', function() {
-				$('.aplayer-play').trigger('click');
-				util.timerecord.start();
-				getstat=1;
-			});
-			$("#bt_musicswitch").on('click', function() {
-				$(".aplayer-button").trigger("click")
-			})
 		});
+		$('#bt_restclose').on('click', function() {
+			$('.aplayer-play').trigger('click');
+			util.timerecord.start();
+			getstat=1;
+		});
+		$("#bt_musicswitch").on('click', function() {
+			$(".aplayer-button").trigger("click")
+		})
 		$("#about_cover").on('click', function() {
 			$("#about").fadeOut(300, "linear");
 			$("#about_cover").fadeOut(300, "linear");
