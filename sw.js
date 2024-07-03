@@ -33,19 +33,19 @@ this.addEventListener('fetch', function (event) {
         return fetch(fetchRequest).then(
           function (response) {
             // 检测返回数据是否有效
-            if (response && response.status === 200 && (response.type === 'basic' || event.request.headers.get('accept').indexOf("video/mp4"))) {
-              // 复制返回数据，因为它也是流。因为我们想要浏览器和缓存一样使用返回数据，所以必须复制它。这样就有两个流
-              var responseToCache = response.clone();
-
-              caches.open(CACHE_VER)
-                .then(function (cache) {
-                  // 把请求添加到缓存中以备之后的查询用
-                  cache.put(event.request, responseToCache);
-                });
-              return response;
-            } else {
+            if (!response || response.status !== 200 || response.type !== 'basic' || response.type !== 'cors') {
               return response;
             }
+
+            // 复制返回数据，因为它也是流。因为我们想要浏览器和缓存一样使用返回数据，所以必须复制它。这样就有两个流
+            var responseToCache = response.clone();
+
+            caches.open(CACHE_VER)
+              .then(function (cache) {
+                // 把请求添加到缓存中以备之后的查询用
+                cache.put(event.request, responseToCache);
+              });
+            return response;
           }
         );
       })
