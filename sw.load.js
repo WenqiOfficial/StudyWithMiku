@@ -5,11 +5,11 @@ const registerServiceWorker = async () => {
           scope: "/",
     });
     if (registration.installing) {
-      console.log("正在安装 Service worker");
+      console.log("正在安装 SW");
     } else if (registration.waiting) {
-      console.log("已安装 Service worker");
+      console.log("已安装 SW");
     } else if (registration.active) {
-      console.log("激活 Service worker");
+      console.log("激活 SW");
     }
     } catch (error) {
       console.error(`注册失败：${error}`);
