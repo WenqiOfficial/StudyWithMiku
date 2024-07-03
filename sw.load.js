@@ -7,7 +7,7 @@ const registerServiceWorker = async () => {
     if (registration.installing) {
       console.log("正在安装 Service worker");
     } else if (registration.waiting) {
-      console.log("已安装 Service worker installed");
+      console.log("已安装 Service worker");
     } else if (registration.active) {
       console.log("激活 Service worker");
     }
