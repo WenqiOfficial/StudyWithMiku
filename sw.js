@@ -32,7 +32,7 @@ const cacheMatch = async (request) => {
   const responseFromNet = await fetch(request);
   const requestUrl = request.url;
   // console.log("request: " + requestUrl);
-  if (requestUrl.includes('loop.mp4') || !requestUrl.includes('api')) {
+  if (requestUrl.includes('loop.mp4') || !requestUrl.includes('api') || !requestUrl.includes('hitokoto')) {
     // console.log("Matched! URL: "+ requestUrl);
     putInCache(request, responseFromNet.clone());
   }
