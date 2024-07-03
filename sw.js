@@ -1,4 +1,4 @@
-const CACHE_VER = 'v2';
+const CACHE_VER = 'v1';
 
 const deleteCache = async (key) => {
   await caches.delete(key);
@@ -43,7 +43,7 @@ this.addEventListener('fetch', function (event) {
         return fetch(fetchRequest).then(
           function (response) {
             // 检测返回数据是否有效
-            if (!response || response.status !== 200 || response.type !== 'basic') {
+            if (!response || response.status !== 200 || response.type !== 'basic' || event.request.headers.get("accept").indexOf("video/mp4") == -1) {
               return response;
             }
 
