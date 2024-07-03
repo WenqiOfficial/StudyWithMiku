@@ -4,8 +4,6 @@ this.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_VER).then(function(cache){
       return cache.addAll([
-        './',
-        './index.html',
         './assets/css/fonts/sjsq.woff2',
         './assets/video/oneloop.mp4'
       ]);
