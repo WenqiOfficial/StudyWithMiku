@@ -29,11 +29,8 @@ const cacheMatch = async (request) => {
     return responseFromCache;
   }
   const responseFromNet = await fetch(request);
-  console.log("request: "+ request);
-  if (request.includes("oneloop.mp4")) {
-    console.log("caching: "+ request);
-    putInCache(request, responseFromNet.clone());
-  }
+  console.log("request: "+ request.url);
+  putInCache(request, responseFromNet.clone());
   return responseFromNet;
 };
 
