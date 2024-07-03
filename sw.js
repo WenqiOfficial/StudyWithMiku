@@ -14,7 +14,7 @@ this.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_VER).then(function (cache) {
       return cache.addAll([
-        './assets/css/fonts/sjsq.woff2'
+        // './assets/css/fonts/sjsq.woff2'
       ]);
     })
   );
@@ -43,9 +43,7 @@ this.addEventListener('fetch', function (event) {
         return fetch(fetchRequest).then(
           function (response) {
             // 检测返回数据是否有效
-            console.log("eeee: "+fetchRequest.headers.get('accept'))
-            console.log("res: "+response.headers.get('Content-Type'))
-            if (!response || response.status !== 200 || response.type !== 'basic' || fetchRequest.headers.get("accept").indexOf("video/mp4") !== -1) {
+            if (!response || response.status !== 200 || response.type !== 'basic' || response.headers.get('Content-Type').indexOf("video/mp4") !== -1) {
               return response;
             }
 
