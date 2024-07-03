@@ -32,8 +32,8 @@ const cacheMatch = async (request) => {
   const responseFromNet = await fetch(request);
   const requestUrl = request.url;
   // console.log("request: " + requestUrl);
-  if (requestUrl.includes('loop.mp4') || (!requestUrl.includes('api') && !requestUrl.includes('hitokoto'))) {
-    console.log("Matched! URL: "+ requestUrl);
+  if (!requestUrl.includes('api') && !requestUrl.includes('hitokoto')) {
+    console.log("Matched! URL: " + requestUrl);
     putInCache(request, responseFromNet.clone());
   }
   return responseFromNet;
@@ -48,4 +48,23 @@ this.addEventListener('activate', function (event) {
 });
 this.addEventListener('fetch', function (event) {
   event.respondWith(cacheMatch(event.request));
+  if (event.request.url.includes('loop.mp4')) {
+    console.log("Matched Video! URL: " + requestUrl);
+    var pos = Number(/^bytes\=(\d+)\-$/g.exec(event.request.headers.get('range'))[1]);
+    caches.open(CACHE_VER)
+      .then(function (cache) { return cache.match(event.request.url); })
+      .then(function (res) { return res.arrayBuffer(); })
+      .then(function (ab) {
+        return new Response(
+          ab.slice(pos),
+          {
+            status: 206,
+            statusText: "Partial Content",
+            headers: [
+              ['Content-Type', 'video/mp4'],
+              ['Content-Range', 'bytes ' + pos + '-' + (ab.byteLength - 1) + '/' + ab.byteLength]]
+          });
+      });
+  }
+
 });
