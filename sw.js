@@ -25,6 +25,11 @@ const putInCache = async (request, response) => {
 
 const cacheMatch = async (request) => {
   const requestUrl = request.url;
+  const responseFromCache = await caches.match(request);
+  if (responseFromCache) {
+    console.log("Find Cache! Return! URL: "+requestUrl);
+    return responseFromCache;
+  }
   if (requestUrl.includes("assets/video/loop.mp4")) {
     console.log("Video URL!");
     caches.open(CACHE_VER).then(function (cache) {
@@ -32,26 +37,14 @@ const cacheMatch = async (request) => {
         './assets/video/loop.mp4'
       ]);
     });
-    const responseFromCache = await caches.match(request);
-    if (responseFromCache) {
-      console.log("Find Video Cache! Return!");
-      return responseFromCache;
-    }
-  } else {
-    const responseFromCache = await caches.match(request);
-    if (responseFromCache) {
-      console.log("Find Cache! Return!");
-      return responseFromCache;
-    }
-    const responseFromNet = await fetch(request);
-    // console.log("request: " + requestUrl);
-    if (!requestUrl.includes('assets/video/loop.mp4') && !requestUrl.includes('api') && !requestUrl.includes('hitokoto')) {
-      console.log("Matched! URL: " + requestUrl);
-      putInCache(request, responseFromNet.clone());
-    }
-    return responseFromNet;
   }
-
+  const responseFromNet = await fetch(request);
+  // console.log("request: " + requestUrl);
+  if (!requestUrl.includes('assets/video/loop.mp4') && !requestUrl.includes('api') && !requestUrl.includes('hitokoto')) {
+    console.log("Matched! URL: " + requestUrl);
+    putInCache(request, responseFromNet.clone());
+  }
+  return responseFromNet;
 };
 
 
