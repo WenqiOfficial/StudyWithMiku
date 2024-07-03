@@ -67,9 +67,9 @@ self.addEventListener('install', (event) => {
     addResourcesToCache([
       './',
       './index.html',
-      './fonts/sjsq.woff2',
+      './assets/css/fonts/sjsq.woff2',
       './assets/video/oneloop.mp4',
-      'oneloop.mp4'
+      'https://cloud.wenqi.icu:5221/api/v3/file/get/15697/loop.mp4?sign=AGipVwKXsc1i3Bj4Q8cXgQMM07FBxilO5SKyoDVy5zw%3D%3A0'
     ])
   );
 });
