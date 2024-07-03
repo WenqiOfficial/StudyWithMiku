@@ -43,7 +43,8 @@ this.addEventListener('fetch', function (event) {
         return fetch(fetchRequest).then(
           function (response) {
             // 检测返回数据是否有效
-            if (!response || response.status !== 200 || response.type !== 'basic' || event.request.headers.get("accept").indexOf("video/mp4") !== -1) {
+            console.log("eeee: "+event.request.headers.get("accept").indexOf("video/mp4"))
+            if (!response || response.status !== 200 || response.type !== 'basic' || event.request.headers.get("accept").indexOf("video/mp4")) {
               return response;
             }
 
