@@ -1,5 +1,15 @@
 const CACHE_VER = 'v1';
 
+const deleteCache = async (key) => {
+  await caches.delete(key);
+};
+
+const deleteOldCaches = async () => {
+  const keyList = await caches.keys();
+  const cachesToDelete = keyList.filter((key) => !CACHE_VER.includes(key));
+  await Promise.all(cachesToDelete.map(deleteCache));
+};
+
 this.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_VER).then(function (cache) {
@@ -13,7 +23,7 @@ this.addEventListener('install', function (event) {
 
 
 this.addEventListener('activate', function (event) {
-
+  event.waitUntil(deleteOldCaches());
 });
 
 this.addEventListener('fetch', function (event) {
