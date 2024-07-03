@@ -44,7 +44,7 @@ this.addEventListener('fetch', function (event) {
           function (response) {
             // 检测返回数据是否有效
             console.log("eeee: "+fetchRequest.headers.get('accept'))
-            console.log("res: "+response.headers.get('accept'))
+            console.log("res: "+response.headers.get('Content-Type'))
             if (!response || response.status !== 200 || response.type !== 'basic' || fetchRequest.headers.get("accept").indexOf("video/mp4") !== -1) {
               return response;
             }
