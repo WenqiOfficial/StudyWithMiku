@@ -24,6 +24,7 @@ const putInCache = async (request, response) => {
 };
 
 const cacheMatch = async (request) => {
+  const requestUrl = request.url;
   if (requestUrl.includes("assets/video/loop.mp4")) {
     console.log("Video URL!");
     caches.open(CACHE_VER).then(function (cache) {
@@ -43,7 +44,6 @@ const cacheMatch = async (request) => {
     return responseFromCache;
   }
   const responseFromNet = await fetch(request);
-  const requestUrl = request.url;
   // console.log("request: " + requestUrl);
   if (!requestUrl.includes('api') && !requestUrl.includes('hitokoto')) {
     console.log("Matched! URL: " + requestUrl);
