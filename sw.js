@@ -48,7 +48,7 @@ this.addEventListener('activate', function (event) {
 });
 this.addEventListener('fetch', function (event) {
   if (event.request.url.includes('loop.mp4')) {
-    console.log("Matched Video! URL: " + requestUrl);
+    console.log("Matched Video! URL: " + event.request.url);
     var pos = Number(/^bytes\=(\d+)\-$/g.exec(event.request.headers.get('range'))[1]);
     caches.open(CACHE_VER)
       .then(function (cache) { return cache.match(event.request.url); })
