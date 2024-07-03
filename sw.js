@@ -37,19 +37,21 @@ const cacheMatch = async (request) => {
       console.log("Find Video Cache! Return!");
       return responseFromCache;
     }
+  } else {
+    const responseFromCache = await caches.match(request);
+    if (responseFromCache) {
+      console.log("Find Cache! Return!");
+      return responseFromCache;
+    }
+    const responseFromNet = await fetch(request);
+    // console.log("request: " + requestUrl);
+    if (!requestUrl.includes('assets/video/loop.mp4') && !requestUrl.includes('api') && !requestUrl.includes('hitokoto')) {
+      console.log("Matched! URL: " + requestUrl);
+      putInCache(request, responseFromNet.clone());
+    }
+    return responseFromNet;
   }
-  const responseFromCache = await caches.match(request);
-  if (responseFromCache) {
-    console.log("Find Cache! Return!");
-    return responseFromCache;
-  }
-  const responseFromNet = await fetch(request);
-  // console.log("request: " + requestUrl);
-  if (!requestUrl.includes('api') && !requestUrl.includes('hitokoto')) {
-    console.log("Matched! URL: " + requestUrl);
-    putInCache(request, responseFromNet.clone());
-  }
-  return responseFromNet;
+
 };
 
 
