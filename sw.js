@@ -30,16 +30,15 @@ const cacheMatch = async (request) => {
     console.log("Find Cache! Return! URL: "+requestUrl);
     return responseFromCache;
   }
-  if (requestUrl.includes("assets/video/loop.mp4")) {
+  if (requestUrl.includes("assets/video/loop.mp4") && await caches.match(request)) {
     console.log("Video URL!");
-    caches.open(CACHE_VER).then(function (cache) {
+    await caches.open(CACHE_VER).then(function (cache) {
       return cache.addAll([
         './assets/video/loop.mp4'
       ]);
     });
   }
   const responseFromNet = await fetch(request);
-  // console.log("request: " + requestUrl);
   if (!requestUrl.includes('assets/video/loop.mp4') && !requestUrl.includes('api') && !requestUrl.includes('hitokoto')) {
     console.log("Matched! URL: " + requestUrl);
     putInCache(request, responseFromNet.clone());
