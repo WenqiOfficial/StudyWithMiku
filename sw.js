@@ -16,17 +16,6 @@ this.addEventListener('activate', function (event) {
 
 });
 
-// this.addEventListener('fetch', function(event){
-//   event.respondWith(
-//     caches.open(CACHE_VER).then(function(cache){
-//       return cache.match(event.request.url);
-//     })
-//   );
-// });
-
-
-// 在 promise 成功完成之前，活跃的 worker 不会被视作已激活。
-
 this.addEventListener('fetch', function (event) {
   event.respondWith(
     // 该方法查询请求然后返回 Service Worker 创建的任何缓存数据。
@@ -44,7 +33,7 @@ this.addEventListener('fetch', function (event) {
         return fetch(fetchRequest).then(
           function (response) {
             // 检测返回数据是否有效
-            if (response && response.status === 200 && response.type === 'basic' || event.request.headers.get('accept').indexOf("video/mp4")) {
+            if (response && response.status === 200 && (response.type === 'basic' || event.request.headers.get('accept').indexOf("video/mp4"))) {
               // 复制返回数据，因为它也是流。因为我们想要浏览器和缓存一样使用返回数据，所以必须复制它。这样就有两个流
               var responseToCache = response.clone();
 
