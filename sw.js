@@ -47,7 +47,6 @@ this.addEventListener('activate', function (event) {
   event.waitUntil(deleteOldCaches());
 });
 this.addEventListener('fetch', function (event) {
-  event.respondWith(cacheMatch(event.request));
   if (event.request.url.includes('loop.mp4')) {
     console.log("Matched Video! URL: " + requestUrl);
     var pos = Number(/^bytes\=(\d+)\-$/g.exec(event.request.headers.get('range'))[1]);
@@ -65,6 +64,8 @@ this.addEventListener('fetch', function (event) {
               ['Content-Range', 'bytes ' + pos + '-' + (ab.byteLength - 1) + '/' + ab.byteLength]]
           });
       });
+  } else {
+    event.respondWith(cacheMatch(event.request));
   }
 
 });
