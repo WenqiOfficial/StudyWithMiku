@@ -31,9 +31,9 @@ const cacheMatch = async (request) => {
   const responseFromNet = await fetch(request);
   const requestUrl = request.url;
   console.log("request: " + requestUrl);
-  console.log("match: "+requestUrl.includes('oneloop.mp4'))
-  console.log("matchv2: "+requestUrl.indexOf('oneloop.mp4'))
-  if (requestUrl.includes('oneloop.mp4')) {
+  console.log("match: "+requestUrl.includes('loop.mp4'))
+  console.log("matchv2: "+requestUrl.indexOf('loop.mp4'))
+  if (requestUrl.includes('loop.mp4')) {
     console.log("Matched! URL: "+ requestUrl);
     putInCache(request, responseFromNet.clone());
   }
