@@ -32,14 +32,12 @@ const cacheMatch = async (request) => {
   const responseFromNet = await fetch(request);
   const requestUrl = request.url;
   console.log("request: " + requestUrl);
-  if (requestUrl.includes('loop.mp4') || !request.includes('api')) {
+  if (requestUrl.includes('loop.mp4') || !requestUrl.includes('api')) {
     console.log("Matched! URL: "+ requestUrl);
     putInCache(request, responseFromNet.clone());
   }
   return responseFromNet;
 };
-
-
 
 
 this.addEventListener('install', function (event) {
