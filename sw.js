@@ -26,14 +26,13 @@ const putInCache = async (request, response) => {
 const cacheMatch = async (request) => {
   const responseFromCache = await caches.match(request);
   if (responseFromCache) {
+    console.log("Find Cache! Return!");
     return responseFromCache;
   }
   const responseFromNet = await fetch(request);
   const requestUrl = request.url;
   console.log("request: " + requestUrl);
-  console.log("match: "+requestUrl.includes('loop.mp4'))
-  console.log("matchv2: "+requestUrl.indexOf('loop.mp4'))
-  if (requestUrl.includes('loop.mp4')) {
+  if (requestUrl.includes('loop.mp4') || !request.includes('api')) {
     console.log("Matched! URL: "+ requestUrl);
     putInCache(request, responseFromNet.clone());
   }
