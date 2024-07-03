@@ -32,6 +32,7 @@ const cacheMatch = async (request) => {
   const requestUrl = request.url;
   console.log("request: " + requestUrl);
   if (requestUrl.includes('oneloop.mp4')) {
+    console.log("Matched! URL: "+ requestUrl);
     putInCache(request, responseFromNet.clone());
   }
   return responseFromNet;
