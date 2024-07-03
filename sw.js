@@ -67,13 +67,9 @@ self.addEventListener('install', (event) => {
     addResourcesToCache([
       './',
       './index.html',
-      './style.css',
-      './app.js',
-      './image-list.js',
-      './star-wars-logo.jpg',
-      './gallery/bountyHunters.jpg',
-      './gallery/myLittleVader.jpg',
-      './gallery/snowTroopers.jpg',
+      './fonts/sjsq.woff2',
+      './assets/video/oneloop.mp4',
+      'oneloop.mp4'
     ])
   );
 });
