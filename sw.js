@@ -3,7 +3,12 @@ const CACHE_VER = 'v0';
 const cacheInit = async () => {
   caches.open(CACHE_VER).then(function (cache) {
     return cache.addAll([
-      // './assets/css/fonts/sjsq.woff2'
+      './assets/css/shared/sp/css/common.css',
+      'assets/css/main.css',
+      'assets/js/umami.js',
+      'assets/js/ufunction.js',
+      'assets/js/mikuplayer.min.js',
+      'assets/js/miku.js'
     ]);
   });
 };
