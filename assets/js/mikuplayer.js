@@ -1,6 +1,6 @@
 /* STUDY WITH MIKU
     CORE FUNCTION
-   V1.0.11 2024.06.27 */
+   V1.0.12 2024.07.10 */
 
 $(function() {
 	if (window.localStorage) {
@@ -391,10 +391,13 @@ var util = {
 				s = '0' + myDate.getSeconds()
 			}
 			$("#worldtime").text(h + "时" + m + "分" + s + "秒");
-			if(document.querySelector('video').readyState==2){
+			if(!document.querySelector('video').readyState){
 				$("video").trigger("load")
 			}
-			$("video").trigger("play")
+			if(document.querySelector('video').paused){
+				$("video").trigger("play")
+			}
+			
 		}, 1000);
 	},
 	timer: function() {
