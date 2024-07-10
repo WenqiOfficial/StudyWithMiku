@@ -391,7 +391,7 @@ var util = {
 				s = '0' + myDate.getSeconds()
 			}
 			$("#worldtime").text(h + "时" + m + "分" + s + "秒");
-			if(!document.querySelector('video').readyState){
+			if(document.querySelector('video').readyState==2){
 				$("video").trigger("load")
 			}
 			if(document.querySelector('video').paused){
