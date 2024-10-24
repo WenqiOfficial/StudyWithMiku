@@ -24,6 +24,7 @@ body,html{
     position:absolute;
     overflow:hidden;
     text-align:center;
+    user-select: none;
     /* background:#8cc; */
     background: #448a91;
     color:#fff;
@@ -133,9 +134,10 @@ body,html{
 }
 .btt_switcher{
     padding: 4px 18px;
+    margin: 4px 16px;
     border: dotted 2px;
     color:#fff !important;
-    text-decoration: unset !important;
+    text-decoration: none !important;
 }
 #bt_aboutclose,#bt_menuclose,#bt_restclose,#bt_musicclose{
     font-size:2rem;
@@ -277,7 +279,7 @@ input {
     padding: 4px 18px;
     border: groove 2px;
     color: #fff !important;
-    text-decoration: unset !important;
+    text-decoration: none !important;
     text-align: center;
 }
 
