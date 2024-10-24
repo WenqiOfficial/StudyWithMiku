@@ -217,7 +217,7 @@ var util = {
 	//Umami START
 	getUmami: {
 		OnlineUser: async function () {
-			console.log("Get OnlineUser");
+			// console.log("Get OnlineUser");
 			$.get({
 				url: store.Umami.apiurl + 'active',
 				headers: store.Umami.headers,
@@ -234,7 +234,7 @@ var util = {
 			});
 		},
 		GetEvents: async function () {
-			console.log("Get Events");
+			// console.log("Get Events");
 			let end_time = new Date().getTime();
 			$.get({
 				url: store.Umami.apiurl + 'metrics' + '?startAt=1691596800000&endAt=' + end_time + '&type=event',
@@ -258,7 +258,7 @@ var util = {
 			});
 		},
 		GetVV: async function () {
-			console.log("Get VV");
+			// console.log("Get VV");
 			let end_time = new Date().getTime();
 			$.get({
 				url: store.Umami.apiurl + 'stats' + '?startAt=1691596800000&endAt=' + end_time,
@@ -282,13 +282,12 @@ var util = {
 	},
 	initUmami: async function () {
 		const options = {
-			useEasing: true,
 			useGrouping: false,
 		};
-		let count_online = new countUp.CountUp('umami_value_onlineuser', 0, 0, 0, 2, options);
-		let count_online2 = new countUp.CountUp('umami_value_onlineuser2', 0, 0, 0, 2, options);
-		let count_studytimes = new countUp.CountUp('umami_value_studytimes', 0, 0, 0, 2, options);
-		let count_visitor = new countUp.CountUp('umami_value_visitors', 0, 0, 0, 2, options);
+		let count_online = new countUp.CountUp('umami_value_onlineuser', 0, options);
+		let count_online2 = new countUp.CountUp('umami_value_onlineuser2', 0, options);
+		let count_studytimes = new countUp.CountUp('umami_value_studytimes', 0, options);
+		let count_visitor = new countUp.CountUp('umami_value_visitors', 0, options);
 		const webid = "b91d816b-91e7-4974-ba3d-ccb61dbecfd6",
 			apiurl = "https://umami.wenqi.icu/api/websites/" + webid + "/",
 			headers = {
@@ -501,7 +500,6 @@ var util = {
 	//StrictMode BEGIN
 	addVisibilityListener: function () {
 		document.addEventListener('visibilitychange', function () {
-			//fix wrong event's action
 			if (recorded && ((util.checkStrictMode() && !lauched) || lauched == 2)) {
 				if (document.visibilityState === 'hidden') {
 					$('#bt_rest').trigger('click');
@@ -515,7 +513,6 @@ var util = {
 	},
 	checkStrictMode: function () {
 		let stat = localStorage.getItem("conf_strict") - '0';
-		//useful!
 		return stat;
 	},
 	initStrictMode: function () {
@@ -539,14 +536,18 @@ var util = {
 
 	//1:roll display 2:always display 3:no display 
 	initTips: function (n) {
-		if (util.readTipsconf(n) == 2) {
-			localStorage.setItem("conf_tips_" + n, 2);
-			$("#" + n + "_mode").text("常驻");
-		} else if (util.readTipsconf(n) == 3) {
-			localStorage.setItem("conf_tips_" + n, 0);
-			$("#" + n + "_mode").text("隐藏");
-		} else {
-			localStorage.setItem("conf_tips_" + n, 1);
+		switch (util.readTipsconf(n)) {
+			case 1:
+				localStorage.setItem("conf_tips_" + n, 1);
+				break;
+			case 2:
+				localStorage.setItem("conf_tips_" + n, 2);
+				$("#" + n + "_mode").text("常驻");
+				break;
+			case 3:
+				localStorage.setItem("conf_tips_" + n, 0);
+				$("#" + n + "_mode").text("隐藏");
+				break;
 		}
 		$("#btt_mode_" + n).on('click', function () {
 			util.switchTipsconf(n);
@@ -694,6 +695,7 @@ var util = {
 	},
 	fullscreen: function (e) {
 		util.checkFullscreen() ? document.webkitCancelFullScreen ? document.webkitCancelFullScreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.msExitFullscreen ? document.msExitFullscreen() : document.cancelFullScreen ? document.cancelFullScreen() : document.exitFullscreen && document.exitFullscreen() : (e ? "string" == typeof e && (e = document.getElementById(e)) : e = document.body, e.webkitRequestFullscreen ? e.webkitRequestFullscreen() : e.mozRequestFullScreen ? e.mozRequestFullScreen() : e.msRequestFullscreen ? e.msRequestFullscreen() : e.requestFullscreen && e.requestFullscreen());
+		util.checkFullscreen() ? $("#bt_fs").text("∷全屏") : $("#bt_fs").text("∷退出全屏");
 	},
 	checkFullscreen: function () {
 		return !!(document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.fullscreenElement);
