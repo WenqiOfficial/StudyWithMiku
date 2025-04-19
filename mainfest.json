@@ -26,8 +26,7 @@
     {
       "src": "./assets/cover.png",
       "type": "image/png",
-      "sizes": "1542x867",
-      "form_factor": "narrow"
+      "sizes": "1542x867"
     }
   ],
   "shortcuts": [
@@ -39,7 +38,7 @@
     },
     {
       "name": "STUDY! (严格模式) ",
-      "description": "开始学习吧（严格模式）!",
+      "description": "开始学习吧!（严格模式）",
       "url": "./?type=pwa&mode=strict",
       "icons": [{ "src": "./assets/icon/icon_192x192.png", "sizes": "192x192" }]
     }

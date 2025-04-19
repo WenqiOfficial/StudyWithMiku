@@ -1,4 +1,4 @@
-const CACHE_VER = 'v2';
+const CACHE_VER = 'v3';
 
 const cacheInit = async () => {
   caches.open(CACHE_VER).then(function (cache) {
@@ -8,7 +8,8 @@ const cacheInit = async () => {
       './assets/js/umami.js',
       './assets/js/ufunction.js',
       './assets/js/mikuplayer.min.js',
-      './assets/js/miku.js'
+      './assets/js/miku.js',
+      './assets/video/loop.mp4'
     ]);
   });
 };
@@ -35,13 +36,11 @@ const cacheMatch = async (request) => {
     // console.log("Find Cache! Return! URL: "+requestUrl);
     return responseFromCache;
   }
-  if (requestUrl.includes("assets/video/loop.mp4") && await caches.match(request)) {
-    // console.log("Video URL!");
-    await caches.open(CACHE_VER).then(function (cache) {
-      return cache.addAll([
-        './assets/video/loop.mp4'
-      ]);
-    });
+  if (requestUrl.includes("loop.mp4")) {
+    const cachedResponse = await caches.match('./assets/video/loop.mp4');
+    if (cachedResponse) {
+      return cachedResponse;
+    }
   }
   const responseFromNet = await fetch(request);
   if (!requestUrl.includes('assets/video/loop.mp4') && !requestUrl.includes('api') && !requestUrl.includes('hitokoto')) {
