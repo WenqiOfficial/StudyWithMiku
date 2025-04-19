@@ -39,7 +39,7 @@
     },
     {
       "name": "STUDY! (严格模式) ",
-      "description": "开始学习吧（严格模式）!",
+      "description": "开始学习吧!（严格模式）",
       "url": "./?type=pwa&mode=strict",
       "icons": [{ "src": "./assets/icon/icon_192x192.png", "sizes": "192x192" }]
     }
