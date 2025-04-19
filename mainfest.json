@@ -26,8 +26,7 @@
     {
       "src": "./assets/cover.png",
       "type": "image/png",
-      "sizes": "1542x867",
-      "form_factor": "narrow"
+      "sizes": "1542x867"
     }
   ],
   "shortcuts": [
