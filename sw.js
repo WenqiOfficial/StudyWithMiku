@@ -1,4 +1,4 @@
-const CACHE_VER = 'v3';
+const CACHE_VER = 'v1014';
 
 const cacheInit = async () => {
   caches.open(CACHE_VER).then(function (cache) {
@@ -15,6 +15,7 @@ const cacheInit = async () => {
 };
 
 const deleteCache = async (key) => {
+  console.log("Delete Cache! URL: "+key);
   await caches.delete(key);
 };
 
@@ -52,11 +53,14 @@ const cacheMatch = async (request) => {
 
 
 this.addEventListener('install', function (event) {
+  console.log('Service Worker: Install');
   event.waitUntil(cacheInit());
 });
 this.addEventListener('activate', function (event) {
+  console.log('Service Worker: Activate');
   event.waitUntil(deleteOldCaches());
 });
 this.addEventListener('fetch', function (event) {
+  console.log('Service Worker: Fetch');
   event.respondWith(cacheMatch(event.request));
 });

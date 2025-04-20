@@ -1,6 +1,8 @@
 /* STUDY WITH MIKU
 	CORE FUNCTION
-   V1.0.13 2024.10.24 */
+   V1.0.14 2025.04.20 */
+
+var version = "V1.0.14";
 
 $(function () {
 	if (window.localStorage) {
@@ -49,10 +51,10 @@ var util = {
 		}
 		function study() {
 			util.study();
-			setTimeout(function () { $('.aplayer-play').trigger('click'); util.videoresize(); }, 500);
-			setTimeout(function () { $('.aplayer-play').trigger('click'); util.videoresize(); }, 1000);
-			setTimeout(function () { $('.aplayer-play').trigger('click'); util.videoresize(); }, 1500);
-			setTimeout(function () { $('.aplayer-play').trigger('click'); util.videoresize(); }, 2000);
+			// setTimeout(function () { $('.aplayer-play').trigger('click'); util.videoresize(); }, 500);
+			// setTimeout(function () { $('.aplayer-play').trigger('click'); util.videoresize(); }, 1000);
+			// setTimeout(function () { $('.aplayer-play').trigger('click'); util.videoresize(); }, 1500);
+			// setTimeout(function () { $('.aplayer-play').trigger('click'); util.videoresize(); }, 2000);
 		}
 	},
 	initClickEvent: function () {
@@ -701,4 +703,4 @@ var util = {
 		return !!(document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.fullscreenElement);
 	}
 }, hour = minutes = seconds = rhour = rminutes = rseconds = recorded = sumhour = summinutes = sumseconds = tipstype = rolltimeout = worldtimein = worldtimeout = studytimein = studytimeout = hitokotoin = hitokotoout = attentionout = tipsrollnow = lauched = 0;
-console.log("\n %c Study With Miku V1.0.10 %c 在干什么呢(・∀・(・∀・(・∀・*) \n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0; color: #000");
+console.log(`\n %c Study With Miku ${version} %c 在干什么呢(・∀・(・∀・(・∀・*) \n`, `color: #fadfa3; background: #030307; padding:5px 0;`, `background: #fadfa3; padding:5px 0; color: #000`);
