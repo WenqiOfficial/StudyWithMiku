@@ -1,8 +1,8 @@
 /* STUDY WITH MIKU
 	CORE FUNCTION
-   V1.0.14 2025.04.20 */
+   V1.0.15 2025.05.03 */
 
-var version = "V1.0.14";
+var version = "V1.0.15";
 
 $(function () {
 	if (window.localStorage) {
@@ -28,6 +28,7 @@ var util = {
 		util.initTips("studytime");
 		util.initTips("worldtime");
 		util.musicset.init();
+		util.scene.init();
 		util.initClickEvent();
 		util.initStrictMode();
 		util.initWorldTimer();
@@ -103,6 +104,9 @@ var util = {
 			$("#menu_cover").fadeOut(300, "linear");
 			$("#scene_top").fadeIn(300, "linear");
 		});
+		$("#btt_scene").on('click', function () {
+			util.scene.swap();
+		});
 	},
 	menuopen: function (e) {
 		$("#" + e).fadeIn(300, "linear");
@@ -152,10 +156,14 @@ var util = {
 			});
 			$('#btt_music_reset').on('click', function () { util.musicset.reset(); });
 			$('#btt_music_submit').on('click', function () { util.musicset.apply(); });
-			$('input').on('input', function () {
+			$('#songlist_id').on('input', function () {
 				var value = $(this).val().replace(/[^\d]/g, '');
-				localStorage.setItem("conf_music_id", value);
-				util.musicset.load();
+				songlistid = value;
+				$('#musicconf').fadeOut(50, 'linear');
+				$('#nowid').text(songlistid);
+				$('#songlist_id').attr('value', songlistid);
+				$('#songlist_id').val(songlistid);
+				$('#musicconf').fadeIn(50, 'linear');
 			});
 		},
 		load: function () {
@@ -171,9 +179,10 @@ var util = {
 					$('#nowplatform').text('酷狗音乐');
 					break;
 			}
-			$('#nowid').text(util.readMusicconf('id'));
-			$('input').attr('value', util.readMusicconf('id'));
-			$('input').val(util.readMusicconf('id'));
+			songlistid = util.readMusicconf('id');
+			$('#nowid').text(songlistid);
+			$('#songlist_id').attr('value', songlistid);
+			$('#songlist_id').val(songlistid);
 			$('#musicconf').fadeIn(50, 'linear');
 		},
 		open: function () {
@@ -191,10 +200,15 @@ var util = {
 			util.musicset.apply();
 		},
 		apply: function () {
-			util.musicset.load();
-			$('meting-js').remove();
-			$('#bt_fs').after('<meting-js server="' + util.readMusicconf('platform') + '" type="playlist" id=' + util.readMusicconf('id') + ' fixed="true" theme="#39c5bb" order="random" mutex="true" lrc-type="0"> </meting-js>');
-			util.AplayerInteraction();
+			if (util.readMusicconf('platform') == null || util.readMusicconf('id') == null) {
+				util.musicset.reset();
+			} else {
+				localStorage.setItem("conf_music_platform", songlistid);
+				util.musicset.load();
+				$('meting-js').remove();
+				$('#bt_fs').after('<meting-js server="' + util.readMusicconf('platform') + '" type="playlist" id=' + util.readMusicconf('id') + ' fixed="true" theme="#39c5bb" order="random" mutex="true" lrc-type="0"> </meting-js>');
+				util.AplayerInteraction();
+			}
 		}
 	},
 	AplayerInteraction: async function () {
@@ -399,10 +413,10 @@ var util = {
 				s = '0' + myDate.getSeconds();
 			}
 			$("#worldtime").text(h + "时" + m + "分" + s + "秒");
-			if (document.querySelector('video').readyState == 2) {
+			if ($('video')[0].readyState == 2) {
 				$("video").trigger("load");
 			}
-			if (document.querySelector('video').paused) {
+			if ($('video')[0].paused) {
 				$("video").trigger("play");
 			}
 
@@ -433,8 +447,13 @@ var util = {
 			} else if (hour != '0') {
 				studytime.text(hour + "小时" + minutes + "分钟" + seconds + "秒啦！好厉害！！！");
 			} else {
-				studytime.text(minutes + "分钟" + seconds + "秒啦！超棒！");
-			} if (minutes == '0' && hour == '0') {
+				if (minutes <= 5) {
+					studytime.text(minutes + "分钟" + seconds + "秒啦！继续加油吧！");
+				} else {
+					studytime.text(minutes + "分钟" + seconds + "秒啦！超棒！");
+				}
+			}
+			if (minutes == '0' && hour == '0') {
 				tipstime.text(seconds + "秒钟");
 			} else if (hour != '0') {
 				tipstime.text(hour + "小时" + minutes + "分钟" + seconds + "秒");
@@ -466,11 +485,11 @@ var util = {
 				rminutes = 0;
 			}
 			if (rminutes == '0' && rhour == '0') {
-				resttime.text(rseconds + "秒钟了");
+				resttime.text(rseconds + "秒钟");
 			} else if (rhour != '0') {
-				resttime.text(rhour + "小时" + rminutes + "分钟" + rseconds + "秒了");
+				resttime.text(rhour + "小时" + rminutes + "分钟" + rseconds + "秒");
 			} else {
-				resttime.text(rminutes + "分钟" + rseconds + "秒了");
+				resttime.text(rminutes + "分钟" + rseconds + "秒");
 			}
 			pastsDate = sDate;
 			pastmDate = mDate;
@@ -541,15 +560,19 @@ var util = {
 		switch (util.readTipsconf(n)) {
 			case 1:
 				localStorage.setItem("conf_tips_" + n, 1);
+				$("#" + n + "_mode").text("轮换");
 				break;
 			case 2:
 				localStorage.setItem("conf_tips_" + n, 2);
 				$("#" + n + "_mode").text("常驻");
 				break;
 			case 3:
-				localStorage.setItem("conf_tips_" + n, 0);
+				localStorage.setItem("conf_tips_" + n, 3);
 				$("#" + n + "_mode").text("隐藏");
 				break;
+			default:
+				localStorage.setItem("conf_tips_" + n, 1);
+				$("#" + n + "_mode").text("轮换");
 		}
 		$("#btt_mode_" + n).on('click', function () {
 			util.switchTipsconf(n);
@@ -576,19 +599,19 @@ var util = {
 		init: function () {
 			$(".tips").html('').prepend('<p class="attention">开始认真学习/工作吧！</p>').append('<p class="hitokoto" style="display: none;">"<hitokoto id="hitokoto">获取一言中...(*/ω＼*)</hitokoto>"</p>');
 			if (util.readTipsconf("worldtime") == 2) {
-				$(".attention").after('<p class="worldtime" style="display: none;">现在时间是:<text id="worldtime">0分钟</text>...</p>');
+				$(".attention").after('<p class="worldtime" style="display: none;">现在时间是:<text id="worldtime">0分钟</text></p>');
 				if (util.readTipsconf("studytime") == 2) {
-					$(".worldtime").after('<p class="studytime" style="display: none;">已经学习<text id="studytime">0分钟</text>了呢...</p>');
+					$(".worldtime").after('<p class="studytime" style="display: none;">已经学习<text id="studytime">0分钟</text>了</p>');
 				} else {
-					$(".tips").append('<p class="studytime" style="display: none;">已经学习<text id="studytime">0分钟</text>了呢...</p>');
+					$(".tips").append('<p class="studytime" style="display: none;">已经学习<text id="studytime">0分钟</text>了</p>');
 				}
 			} else {
 				if (util.readTipsconf("studytime") == 2) {
-					$(".attention").after('<p class="studytime" style="display: none;">已经学习<text id="studytime">0分钟</text>了呢...</p>');
+					$(".attention").after('<p class="studytime" style="display: none;">已经学习<text id="studytime">0分钟</text>了</p>');
 				} else {
-					$(".tips").append('<p class="studytime" style="display: none;">已经学习<text id="studytime">0分钟</text>了呢...</p>');
+					$(".tips").append('<p class="studytime" style="display: none;">已经学习<text id="studytime">0分钟</text>了</p>');
 				}
-				$(".tips").append('<p class="worldtime" style="display: none;">现在时间是:<text id="worldtime">0分钟</text>...</p>');
+				$(".tips").append('<p class="worldtime" style="display: none;">现在时间是:<text id="worldtime">0分钟</text></p>');
 			}
 			util.Tips.start();
 		},
@@ -620,7 +643,7 @@ var util = {
 						tipsrollnow = "studytime";
 					}
 					async function fetchHitokoto() {
-						const hitokoto = document.querySelector('#hitokoto');
+						const hitokoto = $("#hitokoto")[0];
 						hitokoto.innerText = "获取一言中...(*/ω＼*)";
 						const response = await fetch('https://v1.hitokoto.cn/?c=i&c=k&max_length=10');
 						const {
@@ -684,6 +707,39 @@ var util = {
 	},
 
 	//Tips END
+	//Video BEGIN
+	scene: {
+		init: function () {
+			switch (localStorage.getItem("conf_scene")) {
+				case "normal":
+					$("#btt_scene")[0].innerText = '经典';
+					break;
+				case "sekai":
+					$("#btt_scene")[0].innerText = 'SEKAI';
+					$("video").attr("src", "assets/video/loop_sekai.mp4");
+					$("video").trigger("load");
+					$("video").trigger("play");
+					break;
+				default:
+					localStorage.setItem("conf_scene", "normal");
+					$("#btt_scene")[0].innerText = '经典';
+			}
+		},
+		swap: function () {
+			const scene = localStorage.getItem("conf_scene");
+			if (scene == "normal") {
+				localStorage.setItem("conf_scene", "sekai");
+				$("#btt_scene")[0].innerText = 'SEKAI';
+				$("video").attr("src", "assets/video/loop_sekai.mp4");
+			} else {
+				localStorage.setItem("conf_scene", "normal");
+				$("#btt_scene")[0].innerText = '经典';
+				$("video").attr("src", "assets/video/loop.mp4");
+			}
+			$("video").trigger("load");
+			$("video").trigger("play");
+		}
+	},
 	videoresize: function () {
 		var ww = $(window).width(),
 			wh = $(window).height(),
@@ -695,6 +751,7 @@ var util = {
 			$("video").css("height", wh).css("width", "auto").css("left", ww / 2 - $("video").width() / 2).css("top", "0");
 		}
 	},
+	//Video END
 	fullscreen: function (e) {
 		util.checkFullscreen() ? document.webkitCancelFullScreen ? document.webkitCancelFullScreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.msExitFullscreen ? document.msExitFullscreen() : document.cancelFullScreen ? document.cancelFullScreen() : document.exitFullscreen && document.exitFullscreen() : (e ? "string" == typeof e && (e = document.getElementById(e)) : e = document.body, e.webkitRequestFullscreen ? e.webkitRequestFullscreen() : e.mozRequestFullScreen ? e.mozRequestFullScreen() : e.msRequestFullscreen ? e.msRequestFullscreen() : e.requestFullscreen && e.requestFullscreen());
 		util.checkFullscreen() ? $("#bt_fs").text("∷全屏") : $("#bt_fs").text("∷退出全屏");
@@ -702,5 +759,5 @@ var util = {
 	checkFullscreen: function () {
 		return !!(document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.fullscreenElement);
 	}
-}, hour = minutes = seconds = rhour = rminutes = rseconds = recorded = sumhour = summinutes = sumseconds = tipstype = rolltimeout = worldtimein = worldtimeout = studytimein = studytimeout = hitokotoin = hitokotoout = attentionout = tipsrollnow = lauched = 0;
+}, hour = minutes = seconds = rhour = rminutes = rseconds = recorded = sumhour = summinutes = sumseconds = tipstype = rolltimeout = worldtimein = worldtimeout = studytimein = studytimeout = hitokotoin = hitokotoout = attentionout = tipsrollnow = lauched = songlistid = 0;
 console.log(`\n %c Study With Miku ${version} %c 在干什么呢(・∀・(・∀・(・∀・*) \n`, `color: #fadfa3; background: #030307; padding:5px 0;`, `background: #fadfa3; padding:5px 0; color: #000`);

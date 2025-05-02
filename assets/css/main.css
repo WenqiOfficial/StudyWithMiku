@@ -2,241 +2,383 @@
     font-family: "SJsuqian Regular";
     font-style: normal;
     font-weight: 400;
-    src: 
+    src:
         /* url("https://bj.bcebos.com/v1/ai-studio-online/6de26a48eb0e4b0aa4f42bd5338968b034dc7b5e621748c2bbd9635ba27d2c05?responseContentDisposition=attachment%3B%20filename%3Dsjsq.woff2") format('woff2'), */
         url("fonts/sjsq.woff2") format('woff2'),
         url("https://cdn.jsdelivr.net/gh/WenqiOfficial/StudyWithMiku/assets/css/fonts/sjsq.woff2") format('woff2');
 }
 
-#player_back,#about_cover,#menu_cover,#top_cover,#rest_cover,#view,#view canvas,body,html{
-    height:100%;
-    width:100%
+#player_back,
+#about_cover,
+#menu_cover,
+#top_cover,
+#rest_cover,
+#view,
+#view canvas,
+body,
+html {
+    height: 100%;
+    width: 100%
 }
-#player_back,#about,#music,#menu,#about_cover,#top_cover,#menu_cover,#rest_cover,#bt_fs,#ng{
-    display:none
+
+#player_back,
+#about,
+#music,
+#menu,
+#about_cover,
+#top_cover,
+#menu_cover,
+#rest_cover,
+#bt_fs,
+#ng {
+    display: none
 }
-#about a,#rest a,#bt_about a,#bt_feedback a,#bt_top a{
-    color:#fff;
-    text-decoration:none;
-    border-bottom:dashed 1px #fff
+
+#about a,
+#rest a,
+#bt_about a,
+#bt_feedback a,
+#bt_top a {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: dashed 1px #fff
 }
-body,html{
-    position:absolute;
-    overflow:hidden;
-    text-align:center;
+
+body,
+html {
+    position: absolute;
+    overflow: hidden;
+    text-align: center;
+    -webkit-user-select: none;
     user-select: none;
     /* background:#8cc; */
     background: #448a91;
-    color:#fff;
+    color: #fff;
     /* font-family:Quicksand,pmzdxxt,"游ゴシック","Yu Gothic","游ゴシック体",YuGothic,"Yu Gothic UI","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","Meiryo UI","メイリオ",Meiryo,sans-serif */
-    font-family:Quicksand,"SJsuqian Regular","Microsoft YaHei","游ゴシック","Yu Gothic","游ゴシック体",YuGothic,"Yu Gothic UI","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","Meiryo UI","メイリオ",Meiryo,sans-serif
+    font-family: Quicksand, "SJsuqian Regular", "Microsoft YaHei", "游ゴシック", "Yu Gothic", "游ゴシック体", YuGothic, "Yu Gothic UI", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Meiryo UI", "メイリオ", Meiryo, sans-serif
+}
 
+/* hidden utils */
+.worldtime,
+.studytime,
+.hitokoto,
+.birthday {
+    display: none;
 }
-#player_back,#about_cover,#top_cover,#menu_cover,#rest_cover,#view{
-    position:fixed;
-    top:0;
-    z-index:1
+
+#player_back,
+#about_cover,
+#top_cover,
+#menu_cover,
+#rest_cover,
+#view {
+    position: fixed;
+    top: 0;
+    z-index: 1
 }
-#top_cover{
+
+#top_cover {
     z-index: 1002 !important;
 }
-#player_back{
+
+#player_back {
     z-index: 98 !important;
 }
-#player_back.show{
+
+#player_back.show {
     display: block;
 }
-#music{
+
+#music {
     z-index: 1003 !important;
 }
-#bt_rest,#bt_fs{
-    position:absolute;
+
+#bt_rest,
+#bt_fs {
+    position: absolute;
     display: none;
-    z-index:98;
-    padding:10px;
-    left:0;
-    font-size:1rem;
-    cursor:pointer;
-    transition:.2s ease
+    z-index: 98;
+    padding: 10px;
+    left: 0;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: .2s ease
 }
-#bt_fs{
-    left:auto;
-    right:0
+
+#bt_fs {
+    left: auto;
+    right: 0
 }
-#scene_learning,#scene_top{
-    width:100%
+
+#scene_learning,
+#scene_top {
+    width: 100%
 }
-#about,#menu,#music,#rest,#scene_top{
-    position:absolute;
-    top:50%;
-    left:50%;
-    -webkit-transform:translate(-50%,-50%);
-    -ms-transform:translate(-50%,-50%);
-    transform:translate(-50%,-50%);
-    z-index:98;
-    display:none
+
+#about,
+#menu,
+#music,
+#rest,
+#scene_top {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 98;
+    display: none
 }
-#scene_top h1{
-    font-size:1.5rem;
-    margin-bottom:25px
+
+#scene_top h1 {
+    font-size: 1.5rem;
+    margin-bottom: 25px
 }
-#bt_top{
-    margin-bottom:15px
+
+#bt_top {
+    margin-bottom: 15px
 }
-#scene_top .topattention{
-    font-size:.9rem;
-    margin-top:25px
+
+#scene_top .topattention {
+    font-size: .9rem;
+    margin-top: 25px
 }
-#scene_top .tit{
-    margin-top:20px;
-    margin-bottom:10px
+
+#scene_top .tit {
+    margin-top: 20px;
+    margin-bottom: 10px
 }
-#scene_top .con{
-    letter-spacing:-.5rem
+
+#scene_top .con {
+    letter-spacing: -.5rem
 }
-#scene_top .sns{
-    margin:0 8px;
-    cursor:pointer
+
+#scene_top .sns {
+    margin: 0 8px;
+    cursor: pointer
 }
-#scene_top .sns img{
-    width:40px
+
+#scene_top .sns img {
+    width: 40px
 }
-#ng .atten{
-    font-size:.9rem;
-    margin-bottom:20px
+
+#ng .atten {
+    font-size: .9rem;
+    margin-bottom: 20px
 }
-#scene_learning,#scene_learning .attention{
-    pointer-events:none
+
+#scene_learning,
+#scene_learning .attention {
+    pointer-events: none
 }
-#bt_feedback{
-    font-size:.9rem;
-    margin-top:20px;
-    pointer-events:auto
+
+#bt_feedback {
+    font-size: .9rem;
+    margin-top: 20px;
+    pointer-events: auto
 }
-#about_cover,#menu_cover,#rest_cover,#top_cover{
-    z-index:900;
+
+#about_cover,
+#menu_cover,
+#rest_cover,
+#top_cover {
+    z-index: 900;
     /* background:#fff; */
     background: #000;
-    opacity:.5
+    opacity: .5
 }
-#about,#menu,#rest,#music{
-    z-index:1000;
-    color:#fff;
+
+#about,
+#menu,
+#rest,
+#music {
+    z-index: 1000;
+    color: #fff;
     /* background:#8cc; */
     background: #448a91;
-    max-width:640px;
-    letter-spacing:.2rem;
-    line-height:1.2;
-    width:100%
+    max-width: 640px;
+    letter-spacing: .2rem;
+    line-height: 1.2;
+    width: 100%
 }
-#about_in,#menu_in,#rest_in,#music_in{
-    padding:40px
+
+#about_in,
+#menu_in,
+#rest_in,
+#music_in {
+    padding: 40px
 }
-.btt_switcher{
+
+.btt_switcher {
     padding: 4px 18px;
     margin: 4px 16px;
     border: dotted 2px;
-    color:#fff !important;
+    color: #fff !important;
     text-decoration: none !important;
 }
-#bt_aboutclose,#bt_menuclose,#bt_restclose,#bt_musicclose{
-    font-size:2rem;
-    cursor:pointer
+
+#bt_aboutclose,
+#bt_menuclose,
+#bt_restclose,
+#bt_musicclose {
+    font-size: 2rem;
+    cursor: pointer
 }
-#about .close,#menu .close,#rest .close,#music .close{
-    margin-bottom:30px
+
+#about .close,
+#menu .close,
+#rest .close,
+#music .close {
+    margin-bottom: 30px
 }
-#about .con,#menu .con,#rest .con,#music .con{
-    line-height:1.7;
-    margin-bottom:20px
+
+#about .con,
+#menu .con,
+#rest .con,
+#music .con {
+    line-height: 1.7;
+    margin-bottom: 20px
 }
-#about .link,#menu .link,#rest .link,#music .link{
-    margin-top:30px;
-    margin-bottom:10px;
-    line-height:1.5
+
+#about .link,
+#menu .link,
+#rest .link,
+#music .link {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    line-height: 1.5
 }
-#bt_rest:hover,#bt_aboutclose:hover,#bt_menuclose:hover,#bt_restclose:hover,#bt_musicclose:hover,#bt_feedback:hover,#bt_fs:hover,#scene_top .sns:hover,a:hover{
-    animation:animover .2s linear;
-    -webkit-animation:animover .2s linear
+
+#bt_rest:hover,
+#bt_aboutclose:hover,
+#bt_menuclose:hover,
+#bt_restclose:hover,
+#bt_musicclose:hover,
+#bt_feedback:hover,
+#bt_fs:hover,
+#scene_top .sns:hover,
+a:hover {
+    -webkit-animation: animover .2s linear;
+    animation: animover .2s linear;
 }
-.loading{
+
+.loading {
     padding: 10px;
-    animation:animover .2s linear infinite;
-    -webkit-animation:animover .2s linear infinite;
+    -webkit-animation: animover .2s linear infinite;
+    animation: animover .2s linear infinite;
     text-align: center;
     width: 100%;
     display: block;
     position: absolute;
     z-index: 3;
 }
-@keyframes animover{
-    0.00%{
-        opacity:0
+
+@keyframes animover {
+    0.00% {
+        opacity: 0
     }
-    100%{
-        opacity:1
-    }
-}
-@-webkit-keyframes animover{
-    0.00%{
-        opacity:0
-    }
-    100%{
-        opacity:1
+
+    100% {
+        opacity: 1
     }
 }
-@media (max-width:640px){
-    #scene_top h1{
-        font-size:1.2rem;
-        margin-bottom:18px
+
+@-webkit-keyframes animover {
+    0.00% {
+        opacity: 0
     }
-    #bt_top,#scene_top .tit{
-        margin-bottom:10px
+
+    100% {
+        opacity: 1
     }
-    #bt_about a,#bt_top a{
-        font-size:.9rem
+}
+
+@media (max-width:640px) {
+    #scene_top h1 {
+        font-size: 1.2rem;
+        margin-bottom: 18px
     }
-    #scene_top .topattention{
-        font-size:.6rem;
-        margin-top:18px
+
+    #bt_top,
+    #scene_top .tit {
+        margin-bottom: 10px
     }
-    #scene_top .tit{
-        font-size:.9rem;
-        margin-top:20px
+
+    #bt_about a,
+    #bt_top a {
+        font-size: .9rem
     }
-    #scene_top .con{
-        letter-spacing:-.5rem
+
+    #scene_top .topattention {
+        font-size: .6rem;
+        margin-top: 18px
     }
-    #scene_top .sns{
-        margin:0 8px
+
+    #scene_top .tit {
+        font-size: .9rem;
+        margin-top: 20px
     }
-    #scene_top .sns img{
-        width:30px
+
+    #scene_top .con {
+        letter-spacing: -.5rem
     }
-    #ng .atten{
-        font-size:.6rem;
-        margin-bottom:15px
+
+    #scene_top .sns {
+        margin: 0 8px
     }
-    #bt_feedback{
-        font-size:.7rem
+
+    #scene_top .sns img {
+        width: 30px
     }
-    #about_in,#menu_in,#rest_in,#music_in{
-        padding:30px
+
+    #ng .atten {
+        font-size: .6rem;
+        margin-bottom: 15px
     }
-    #bt_aboutclose,#bt_menuclose,#bt_restclose,#bt_musicclose{
-        font-size:1.8rem;
-        cursor:pointer
+
+    #bt_feedback {
+        font-size: .7rem
     }
-    #about,#menu,#rest,#music{
-        letter-spacing:.1rem
+
+    #about_in,
+    #menu_in,
+    #rest_in,
+    #music_in {
+        padding: 30px
     }
-    #about a,#menu a,#rest a,#music a{
-        color:#fff;
-        text-decoration:none;
-        border-bottom:dashed 1px #fff
+
+    #bt_aboutclose,
+    #bt_menuclose,
+    #bt_restclose,
+    #bt_musicclose {
+        font-size: 1.8rem;
+        cursor: pointer
     }
-    #about .con,#about .link,#menu .con,#music .con,#rest .con,#menu .link,#rest .link{
-        font-size:.9rem
+
+    #about,
+    #menu,
+    #rest,
+    #music {
+        letter-spacing: .1rem
+    }
+
+    #about a,
+    #menu a,
+    #rest a,
+    #music a {
+        color: #fff;
+        text-decoration: none;
+        border-bottom: dashed 1px #fff
+    }
+
+    #about .con,
+    #about .link,
+    #menu .con,
+    #music .con,
+    #rest .con,
+    #menu .link,
+    #rest .link {
+        font-size: .9rem
     }
 }
 
@@ -244,24 +386,26 @@ body,html{
     color: black;
     text-align: left;
 }
-video{  
-    position: absolute;  
-    left: 0px;  
-    top: 0px;  
-    height: auto;  
-    width: auto;  
+
+video {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: auto;
+    width: auto;
     /*filter: blur(15px); //背景模糊设置 */
-    /*-webkit-filter: grayscale(100%);*/  
-    /*filter:grayscale(100%); //背景灰度设置*/  
-    z-index:-11;
+    /*-webkit-filter: grayscale(100%);*/
+    /*filter:grayscale(100%); //背景灰度设置*/
+    z-index: -11;
     object-fit: cover;
-}  
-source{  
-    min-width: 100%;  
-    min-height: 100%;  
-    height: auto;  
-    width: auto;  
-} 
+}
+
+source {
+    min-width: 100%;
+    min-height: 100%;
+    height: auto;
+    width: auto;
+}
 
 #scene_learning {
     position: absolute;
@@ -274,7 +418,6 @@ source{
 }
 
 input {
-    ime-mode:Disabled;
     background: inherit;
     padding: 4px 18px;
     border: groove 2px;
@@ -289,6 +432,6 @@ input::-webkit-inner-spin-button {
 }
 
 input[type="number"] {
-    appearance: textfield;
     -moz-appearance: textfield;
+    appearance: textfield;
 }

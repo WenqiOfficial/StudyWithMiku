@@ -1,4 +1,4 @@
-const CACHE_VER = 'v1014';
+const CACHE_VER = 'v1015';
 
 const cacheInit = async () => {
   caches.open(CACHE_VER).then(function (cache) {
@@ -9,7 +9,8 @@ const cacheInit = async () => {
       './assets/js/ufunction.js',
       './assets/js/mikuplayer.min.js',
       './assets/js/miku.js',
-      './assets/video/loop.mp4'
+      './assets/video/loop.mp4',
+      './assets/video/loop_sekai.mp4'
     ]);
   });
 };
