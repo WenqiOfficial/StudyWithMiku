@@ -62,7 +62,7 @@ html {
 .worldtime,
 .studytime,
 .hitokoto,
-.birthday {
+#birthday {
     display: none;
 }
 
