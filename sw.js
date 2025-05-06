@@ -1,4 +1,4 @@
-const CACHE_VER = 'v1015';
+const CACHE_VER = 'v10151';
 
 const cacheInit = async () => {
   caches.open(CACHE_VER).then(function (cache) {
