@@ -1,8 +1,8 @@
 /* STUDY WITH MIKU
 	CORE FUNCTION
-   V1.0.15 2025.05.03 */
+   V1.0.16 2025.05.11 */
 
-var version = "V1.0.15";
+const version = "V1.0.16";
 
 $(function () {
 	if (window.localStorage) {
@@ -12,13 +12,46 @@ $(function () {
 		$("#ng").fadeIn(300, "linear");
 	}
 });
-class valueStore {
+class confStore {
 	constructor() {
 		this.Umami = {};
+		this.player = {
+			platform: "netease",
+			id: "8611769328"
+		};
 	}
 };
-const store = new valueStore();
-var util = {
+class valStore {
+	constructor() {
+		this.Timer = {
+			hour: 0,
+			minutes: 0,
+			seconds: 0,
+			rhour: 0,
+			rminutes: 0,
+			rseconds: 0,
+			running: false,
+			sumhour: 0,
+			summinutes: 0,
+			sumseconds: 0,
+		};
+		this.tipsTimers = {
+			rolltimeout: 0,
+			hitokotoin: 0,
+			hitokotoout: 0,
+			worldtimein: 0,
+			worldtimeout: 0,
+			studytimein: 0,
+			studytimeout: 0,
+			attentionout: 0,
+		};
+
+	}
+};
+const conf = new confStore();
+const val = new valStore();
+var tipstyp = attentionout = tipsrollnow = lauched = 0;
+const util = {
 	init: function () {
 		$(window).resize(util.videoresize);
 		$("#bt_fs").fadeIn(300, "linear");
@@ -52,10 +85,6 @@ var util = {
 		}
 		function study() {
 			util.study();
-			// setTimeout(function () { $('.aplayer-play').trigger('click'); util.videoresize(); }, 500);
-			// setTimeout(function () { $('.aplayer-play').trigger('click'); util.videoresize(); }, 1000);
-			// setTimeout(function () { $('.aplayer-play').trigger('click'); util.videoresize(); }, 1500);
-			// setTimeout(function () { $('.aplayer-play').trigger('click'); util.videoresize(); }, 2000);
 		}
 	},
 	initClickEvent: function () {
@@ -75,7 +104,7 @@ var util = {
 			util.menuopen("menu");
 		});
 		$("#btt_menu_music").on('click', function () {
-			util.musicset.open();
+			util.musicset.conf_page();
 		});
 		$("#btt_about").on('click', function () {
 			util.menuopen("about");
@@ -131,61 +160,79 @@ var util = {
 		return false;
 	},
 	//APlayer START
-	readMusicconf: function (n) {
-		let stat = localStorage.getItem("conf_music_" + n);
-		return stat;
+	readMusicconf: function (name, opration = 'get', val = null) {
+		switch (opration) {
+			case 'set':
+				return localStorage.setItem("conf_music_" + name, val);
+			case 'get':
+				return localStorage.getItem("conf_music_" + name);
+			default:
+				console.log("Error: Unknown opration in editMusicconf()");
+		}
 	},
 	musicset: {
 		init: function () {
+			// load config
 			if (util.readMusicconf('platform') == null || util.readMusicconf('id') == null) {
-				util.musicset.reset();
+				this.reset();
+			} else {
+				conf.player.platform = util.readMusicconf('platform');
+				conf.player.id = util.readMusicconf('id');
 			}
-			util.musicset.apply();
+			this.apply();
 
+			// set event
 			$('#btt_platform_netease').on('click', function () {
-				localStorage.setItem("conf_music_platform", "netease");
+				conf.player.platform = "netease";
 				util.musicset.load();
 			});
 			$('#btt_platform_tencent').on('click', function () {
-				localStorage.setItem("conf_music_platform", "tencent");
+				conf.player.platform = "tencent";
 				util.musicset.load();
 			});
 			$('#btt_platform_kugou').on('click', function () {
-				localStorage.setItem("conf_music_platform", "kugou");
+				conf.player.platform = "kugou";
 				util.musicset.load();
 			});
 			$('#btt_music_reset').on('click', function () { util.musicset.reset(); });
 			$('#btt_music_submit').on('click', function () { util.musicset.apply(); });
 			$('#songlist_id').on('input', function () {
-				var value = $(this).val().replace(/[^\d]/g, '');
-				songlistid = value;
-				$('#musicconf').fadeOut(50, 'linear');
-				$('#nowid').text(songlistid);
-				$('#songlist_id').attr('value', songlistid);
-				$('#songlist_id').val(songlistid);
-				$('#musicconf').fadeIn(50, 'linear');
+				conf.player.id = $(this).val().replace(/[^\d]/g, '');
+				util.musicset.load();
 			});
 		},
 		load: function () {
 			$('#musicconf').fadeOut(50, 'linear');
-			switch (util.readMusicconf('platform')) {
+			switch (conf.player.platform) {
 				case 'netease':
-					$('#nowplatform').text('网易云音乐');
+					$('#musicconf #platform').text('网易云音乐');
 					break;
 				case 'tencent':
-					$('#nowplatform').text('QQ音乐');
+					$('#musicconf #platform').text('QQ音乐');
 					break;
 				case 'kugou':
-					$('#nowplatform').text('酷狗音乐');
+					$('#musicconf #platform').text('酷狗音乐');
 					break;
+				default:
+					this.reset();
 			}
-			songlistid = util.readMusicconf('id');
-			$('#nowid').text(songlistid);
-			$('#songlist_id').attr('value', songlistid);
-			$('#songlist_id').val(songlistid);
+			$('#musicconf #id').text(conf.player.id);
+			$('#songlist_id').attr('value', conf.player.id);
+			$('#songlist_id').val(conf.player.id);
+			if(conf.player.platform !== util.readMusicconf('platform') || conf.player.id !== util.readMusicconf('id'))
+			{
+				$('#musicconf #conf_state').text('即将应用');
+			}else{
+				$('#musicconf #conf_state').text('已应用');
+			}
 			$('#musicconf').fadeIn(50, 'linear');
 		},
-		open: function () {
+		loadPlayer: function () {
+			$('meting-js').remove();
+			$('#bt_fs').after('<meting-js server="' + conf.player.platform + '" type="playlist" id=' + conf.player.id + ' fixed="true" theme="#39c5bb" order="random" mutex="true" lrc-type="0"> </meting-js>');
+			util.AplayerInteraction();
+		},
+		conf_page: function () {
 			$("#music").fadeIn(300, "linear");
 			$("#top_cover").fadeIn(300, "linear");
 			$("#bt_musicclose").on('click', function () {
@@ -194,20 +241,18 @@ var util = {
 			});
 		},
 		reset: function () {
-			localStorage.setItem("conf_music_platform", "netease");
-			localStorage.setItem("conf_music_id", "8611769328");
-			util.musicset.load();
-			util.musicset.apply();
+			conf.player.platform = "netease";
+			conf.player.id = "8611769328";
+			this.apply();
 		},
 		apply: function () {
-			if (util.readMusicconf('platform') == null || util.readMusicconf('id') == null) {
-				util.musicset.reset();
+			if (conf.player.platform == '' || conf.player.id == '') {
+				this.reset();
 			} else {
-				localStorage.setItem("conf_music_platform", songlistid);
-				util.musicset.load();
-				$('meting-js').remove();
-				$('#bt_fs').after('<meting-js server="' + util.readMusicconf('platform') + '" type="playlist" id=' + util.readMusicconf('id') + ' fixed="true" theme="#39c5bb" order="random" mutex="true" lrc-type="0"> </meting-js>');
-				util.AplayerInteraction();
+				util.readMusicconf('platform', 'set', conf.player.platform);
+				util.readMusicconf('id', 'set', conf.player.id);
+				this.load();
+				this.loadPlayer();
 			}
 		}
 	},
@@ -235,11 +280,11 @@ var util = {
 		OnlineUser: async function () {
 			// console.log("Get OnlineUser");
 			$.get({
-				url: store.Umami.apiurl + 'active',
-				headers: store.Umami.headers,
+				url: conf.Umami.apiurl + 'active',
+				headers: conf.Umami.headers,
 				success: function (data) {
-					store.Umami.count_online.update(data['x']);
-					store.Umami.count_online2.update(data['x']);
+					conf.Umami.count_online.update(data['x']);
+					conf.Umami.count_online2.update(data['x']);
 				},
 				error: function () {
 					setTimeout(util.getUmami.OnlineUser, 5000);
@@ -253,8 +298,8 @@ var util = {
 			// console.log("Get Events");
 			let end_time = new Date().getTime();
 			$.get({
-				url: store.Umami.apiurl + 'metrics' + '?startAt=1691596800000&endAt=' + end_time + '&type=event',
-				headers: store.Umami.headers,
+				url: conf.Umami.apiurl + 'metrics' + '?startAt=1691596800000&endAt=' + end_time + '&type=event',
+				headers: conf.Umami.headers,
 				success: function (data) {
 					s = 0;
 					while (data[s]['x'] != "Study") {
@@ -263,7 +308,7 @@ var util = {
 						}
 						s++;
 					}
-					store.Umami.count_studytimes.update(data[s]['y']);
+					conf.Umami.count_studytimes.update(data[s]['y']);
 				},
 				error: function () {
 					setTimeout(util.getUmami.GetEvents, 5000);
@@ -277,10 +322,10 @@ var util = {
 			// console.log("Get VV");
 			let end_time = new Date().getTime();
 			$.get({
-				url: store.Umami.apiurl + 'stats' + '?startAt=1691596800000&endAt=' + end_time,
-				headers: store.Umami.headers,
+				url: conf.Umami.apiurl + 'stats' + '?startAt=1691596800000&endAt=' + end_time,
+				headers: conf.Umami.headers,
 				success: function (data) {
-					store.Umami.count_visitor.update(data['visitors']['value']);
+					conf.Umami.count_visitor.update(data['visitors']['value']);
 				},
 				error: function () {
 					setTimeout(util.getUmami.GetVV, 5000);
@@ -311,7 +356,7 @@ var util = {
 				'Access-Control-Allow-Origin': '*'
 			};
 
-		Object.defineProperties(store.Umami, {
+		Object.defineProperties(conf.Umami, {
 			count_online: {
 				value: count_online
 			},
@@ -359,34 +404,42 @@ var util = {
 	},
 	//Timer BEGIN
 	timerecord: {
+		reset: function () {
+			val.Timer.hour = 0;
+			val.Timer.minutes = 0;
+			val.Timer.seconds = 0;
+			val.Timer.rhour = 0;
+			val.Timer.rminutes = 0;
+			val.Timer.rseconds = 0;
+		},
 		start: function () {
 			clearInterval(time);
 			clearInterval(resttime);
-			if (!recorded) {
-				hour = minutes = seconds = rhour = rminutes = rseconds = 0;
-				$('#time').text(seconds + "秒钟了");
-				$('#resttime').text(rseconds + "秒钟了");
-				recorded = 1;
+			if (!val.Timer.running) {
+				this.reset();
+				$('#time').text(val.Timer.seconds + "秒钟了");
+				$('#resttime').text(val.Timer.rseconds + "秒钟了");
+				val.Timer.running = true;
 			}
 			util.timer();
 		},
 		stop: function () {
 			clearInterval(time);
 			clearInterval(resttime);
-			if (recorded) {
-				var m = h = 0;
-				sumseconds = sumseconds + seconds;
-				while (sumseconds >= 60) {
+			if (val.Timer.running) {
+				let m = h = 0;
+				val.Timer.sumseconds = val.Timer.sumseconds + val.Timer.seconds;
+				while (val.Timer.sumseconds >= 60) {
 					m++;
-					sumseconds = sumseconds - 60;
+					val.Timer.sumseconds = val.Timer.sumseconds - 60;
 				}
-				summinutes = summinutes + minutes + m;
-				while (summinutes >= 60) {
+				val.Timer.summinutes = val.Timer.summinutes + val.Timer.minutes + m;
+				while (val.Timer.summinutes >= 60) {
 					h++;
-					summinutes = summinutes - 60;
+					val.Timer.summinutes = val.Timer.summinutes - 60;
 				}
-				sumhour = sumhour + hour + h;
-				recorded = 0;
+				val.Timer.sumhour = val.Timer.sumhour + val.Timer.hour + h;
+				val.Timer.running = false;
 				util.writestoragetime();
 			}
 		},
@@ -432,33 +485,33 @@ var util = {
 			mDate = myDate.getMinutes();
 			hDate = myDate.getHours();
 			if (sDate - pastsDate >= 1 || mDate - pastmDate >= 1 || hDate - pasthDate >= 1) {
-				seconds++;
+				val.Timer.seconds++;
 			}
-			if (seconds == 60) {
-				minutes++;
-				seconds = 0;
+			if (val.Timer.seconds == 60) {
+				val.Timer.minutes++;
+				val.Timer.seconds = 0;
 			}
-			if (minutes == 60) {
-				hour++;
-				minutes = 0;
+			if (val.Timer.minutes == 60) {
+				val.Timer.hour++;
+				val.Timer.minutes = 0;
 			}
-			if (minutes == '0' && hour == '0') {
-				studytime.text(seconds + "秒钟啦！继续加油吧！");
-			} else if (hour != '0') {
-				studytime.text(hour + "小时" + minutes + "分钟" + seconds + "秒啦！好厉害！！！");
+			if (val.Timer.minutes == '0' && val.Timer.hour == '0') {
+				studytime.text(val.Timer.seconds + "秒钟啦！继续加油吧！");
+			} else if (val.Timer.hour != '0') {
+				studytime.text(val.Timer.hour + "小时" + val.Timer.minutes + "分钟" + val.Timer.seconds + "秒啦！好厉害！！！");
 			} else {
-				if (minutes <= 5) {
-					studytime.text(minutes + "分钟" + seconds + "秒啦！继续加油吧！");
+				if (val.Timer.minutes <= 5) {
+					studytime.text(val.Timer.minutes + "分钟" + val.Timer.seconds + "秒啦！继续加油吧！");
 				} else {
-					studytime.text(minutes + "分钟" + seconds + "秒啦！超棒！");
+					studytime.text(val.Timer.minutes + "分钟" + val.Timer.seconds + "秒啦！超棒！");
 				}
 			}
-			if (minutes == '0' && hour == '0') {
-				tipstime.text(seconds + "秒钟");
-			} else if (hour != '0') {
-				tipstime.text(hour + "小时" + minutes + "分钟" + seconds + "秒");
+			if (val.Timer.minutes == '0' && val.Timer.hour == '0') {
+				tipstime.text(val.Timer.seconds + "秒钟");
+			} else if (val.Timer.hour != '0') {
+				tipstime.text(val.Timer.hour + "小时" + val.Timer.minutes + "分钟" + val.Timer.seconds + "秒");
 			} else {
-				tipstime.text(minutes + "分钟" + seconds + "秒");
+				tipstime.text(val.Timer.minutes + "分钟" + val.Timer.seconds + "秒");
 			}
 			pastsDate = sDate;
 			pastmDate = mDate;
@@ -474,22 +527,22 @@ var util = {
 			mDate = myDate.getMinutes();
 			hDate = myDate.getHours();
 			if (sDate - pastsDate >= 1 || mDate - pastmDate >= 1 || hDate - pasthDate >= 1) {
-				rseconds++;
+				val.Timer.rseconds++;
 			}
-			if (rseconds == 60) {
-				rminutes++;
-				rseconds = 0;
+			if (val.Timer.rseconds == 60) {
+				val.Timer.rminutes++;
+				val.Timer.rseconds = 0;
 			}
-			if (rminutes == 60) {
-				rhour++;
-				rminutes = 0;
+			if (val.Timer.rminutes == 60) {
+				val.Timer.rhour++;
+				val.Timer.rminutes = 0;
 			}
-			if (rminutes == '0' && rhour == '0') {
-				resttime.text(rseconds + "秒钟");
-			} else if (rhour != '0') {
-				resttime.text(rhour + "小时" + rminutes + "分钟" + rseconds + "秒");
+			if (val.Timer.rminutes == '0' && val.Timer.rhour == '0') {
+				resttime.text(val.Timer.rseconds + "秒钟");
+			} else if (val.Timer.rhour != '0') {
+				resttime.text(val.Timer.rhour + "小时" + val.Timer.rminutes + "分钟" + val.Timer.rseconds + "秒");
 			} else {
-				resttime.text(rminutes + "分钟" + rseconds + "秒");
+				resttime.text(val.Timer.rminutes + "分钟" + val.Timer.rseconds + "秒");
 			}
 			pastsDate = sDate;
 			pastmDate = mDate;
@@ -498,30 +551,30 @@ var util = {
 	},
 	readstoragetime: function () {
 		if (localStorage.getItem("study") == "GetDAZE") {
-			sumhour = parseInt("0x" + localStorage.getItem("studyh"));
-			summinutes = parseInt("0x" + localStorage.getItem("studym"));
-			sumseconds = parseInt("0x" + localStorage.getItem("studys"));
-			if (summinutes == '0' && sumhour == '0') {
-				$("#sumtime").text(sumseconds + "秒钟了");
-			} else if (sumhour != '0') {
-				$("#sumtime").text(sumhour + "小时" + summinutes + "分钟" + sumseconds + "秒了");
+			val.Timer.sumhour = parseInt("0x" + localStorage.getItem("studyh"));
+			val.Timer.summinutes = parseInt("0x" + localStorage.getItem("studym"));
+			val.Timer.sumseconds = parseInt("0x" + localStorage.getItem("studys"));
+			if (val.Timer.summinutes == '0' && val.Timer.sumhour == '0') {
+				$("#sumtime").text(val.Timer.sumseconds + "秒钟了");
+			} else if (val.Timer.sumhour != '0') {
+				$("#sumtime").text(val.Timer.sumhour + "小时" + val.Timer.summinutes + "分钟" + val.Timer.sumseconds + "秒了");
 			} else {
-				$("#sumtime").text(summinutes + "分钟" + sumseconds + "秒了");
+				$("#sumtime").text(val.Timer.summinutes + "分钟" + val.Timer.sumseconds + "秒了");
 			}
 		}
 	},
 	writestoragetime: function () {
 		localStorage.setItem("study", "GetDAZE");
-		localStorage.setItem("studyh", sumhour.toString(16));
-		localStorage.setItem("studym", summinutes.toString(16));
-		localStorage.setItem("studys", sumseconds.toString(16));
+		localStorage.setItem("studyh", val.Timer.sumhour.toString(16));
+		localStorage.setItem("studym", val.Timer.summinutes.toString(16));
+		localStorage.setItem("studys", val.Timer.sumseconds.toString(16));
 		util.readstoragetime();
 	},
 	//Timer END
 	//StrictMode BEGIN
 	addVisibilityListener: function () {
 		document.addEventListener('visibilitychange', function () {
-			if (recorded && ((util.checkStrictMode() && !lauched) || lauched == 2)) {
+			if (val.Timer.running && ((util.checkStrictMode() && !lauched) || lauched == 2)) {
 				if (document.visibilityState === 'hidden') {
 					$('#bt_rest').trigger('click');
 					document.title = '摸鱼中...';
@@ -616,7 +669,7 @@ var util = {
 			util.Tips.start();
 		},
 		start: function () {
-			attentionout = setTimeout(function () {
+			val.tipsTimers.attentionout = setTimeout(function () {
 				$(".attention").fadeOut(200, "linear");
 				if (util.readTipsconf("hitokoto") == 1) {
 					tipsrollnow = "hitokoto";
@@ -652,10 +705,10 @@ var util = {
 						hitokoto.innerText = hitokotoText;
 					}
 					fetchHitokoto();
-					hitokotoin = setTimeout(function () {
+					val.tipsTimers.hitokotoin = setTimeout(function () {
 						$(".hitokoto").fadeIn(300, "linear");
 					}, 1300);
-					hitokotoout = setTimeout(function () {
+					val.tipsTimers.hitokotoout = setTimeout(function () {
 						$(".hitokoto").fadeOut(300, "linear");
 					}, 8600);
 				} else if (tipsrollnow == "worldtime") {
@@ -664,10 +717,10 @@ var util = {
 					} else if (util.readTipsconf("hitokoto") == 1) {
 						tipsrollnow = "hitokoto";
 					}
-					worldtimein = setTimeout(function () {
+					val.tipsTimers.worldtimein = setTimeout(function () {
 						$(".worldtime").fadeIn(300, "linear");
 					}, 1300);
-					worldtimeout = setTimeout(function () {
+					val.tipsTimers.worldtimeout = setTimeout(function () {
 						$(".worldtime").fadeOut(300, "linear");
 					}, 8600);
 				} else {
@@ -676,30 +729,27 @@ var util = {
 					} else if (util.readTipsconf("worldtime") == 1) {
 						tipsrollnow = "worldtime";
 					}
-					studytimein = setTimeout(function () {
+					val.tipsTimers.studytimein = setTimeout(function () {
 						$(".studytime").fadeIn(300, "linear");
 					}, 1300);
-					studytimeout = setTimeout(function () {
+					val.tipsTimers.studytimeout = setTimeout(function () {
 						$(".studytime").fadeOut(300, "linear");
 					}, 8600);
 				}
-				rolltimeout = setTimeout(function () {
+				val.tipsTimers.rolltimeout = setTimeout(function () {
 					util.Tips.roll();
 				}, 10900);
 			}
 		},
 		stop: function () {
-			clearTimeout(rolltimeout);
-			clearTimeout(hitokotoin);
-			clearTimeout(hitokotoout);
-			clearTimeout(worldtimein);
-			clearTimeout(worldtimeout);
-			clearTimeout(studytimein);
-			clearTimeout(studytimeout);
-			clearInterval(attentionout);
-			$(".studytime").fadeOut(300, "linear");
-			$(".hitokoto").fadeOut(300, "linear");
-			$(".worldtime").fadeOut(300, "linear");
+			Object.values(val.tipsTimers).forEach(t => clearTimeout(t));
+
+			[
+				$(".studytime"),
+				$(".hitokoto"),
+				$(".worldtime"),
+			].forEach(t => t.fadeOut(300, "linear"));
+
 			setTimeout(function () {
 				$(".attention").fadeIn(300, "linear");
 			}, 300);
@@ -759,5 +809,5 @@ var util = {
 	checkFullscreen: function () {
 		return !!(document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.fullscreenElement);
 	}
-}, hour = minutes = seconds = rhour = rminutes = rseconds = recorded = sumhour = summinutes = sumseconds = tipstype = rolltimeout = worldtimein = worldtimeout = studytimein = studytimeout = hitokotoin = hitokotoout = attentionout = tipsrollnow = lauched = songlistid = 0;
+};
 console.log(`\n %c Study With Miku ${version} %c 在干什么呢(・∀・(・∀・(・∀・*) \n`, `color: #fadfa3; background: #030307; padding:5px 0;`, `background: #fadfa3; padding:5px 0; color: #000`);
