@@ -1,8 +1,8 @@
 /* STUDY WITH MIKU
 	CORE FUNCTION
-   V1.0.16 2025.05.11 */
+   V1.0.17 2025.12.11 */
 
-const version = "V1.0.16";
+const version = "V1.0.17";
 
 $(function () {
 	if (window.localStorage) {
@@ -283,8 +283,8 @@ const util = {
 				url: conf.Umami.apiurl + 'active',
 				headers: conf.Umami.headers,
 				success: function (data) {
-					conf.Umami.count_online.update(data['x']);
-					conf.Umami.count_online2.update(data['x']);
+					conf.Umami.count_online.update(data['visitors']);
+					conf.Umami.count_online2.update(data['visitors']);
 				},
 				error: function () {
 					setTimeout(util.getUmami.OnlineUser, 5000);
