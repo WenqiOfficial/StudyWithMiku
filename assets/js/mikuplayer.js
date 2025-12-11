@@ -277,7 +277,7 @@ const util = {
 	//APlayer END
 	//Umami START
 	getUmami: {
-		OnlineUser: async function () {
+		OnlineUser: async function (t=1) {
 			// console.log("Get OnlineUser");
 			$.get({
 				url: conf.Umami.apiurl + 'active',
@@ -287,14 +287,14 @@ const util = {
 					conf.Umami.count_online2.update(data['x']);
 				},
 				error: function () {
-					setTimeout(util.getUmami.OnlineUser, 5000);
+					setTimeout(util.getUmami.OnlineUser(t*2), 1000*t);
 				},
 				timeout: function () {
-					setTimeout(util.getUmami.OnlineUser, 5000);
+					setTimeout(util.getUmami.OnlineUser(t*2), 1000*t);
 				}
 			});
 		},
-		GetEvents: async function () {
+		GetEvents: async function (t=1) {
 			// console.log("Get Events");
 			let end_time = new Date().getTime();
 			$.get({
@@ -311,14 +311,14 @@ const util = {
 					conf.Umami.count_studytimes.update(data[s]['y']);
 				},
 				error: function () {
-					setTimeout(util.getUmami.GetEvents, 5000);
+					setTimeout(util.getUmami.GetEvents(t*2), 1000*t);
 				},
 				timeout: function () {
-					setTimeout(util.getUmami.GetEvents, 5000);
+					setTimeout(util.getUmami.GetEvents(t*2), 1000*t);
 				}
 			});
 		},
-		GetVV: async function () {
+		GetVV: async function (t=1) {
 			// console.log("Get VV");
 			let end_time = new Date().getTime();
 			$.get({
@@ -328,10 +328,10 @@ const util = {
 					conf.Umami.count_visitor.update(data['visitors']['value']);
 				},
 				error: function () {
-					setTimeout(util.getUmami.GetVV, 5000);
+					setTimeout(util.getUmami.GetVV(t*2), 1000*t);
 				},
 				timeout: function () {
-					setTimeout(util.getUmami.GetVV, 5000);
+					setTimeout(util.getUmami.GetVV(t*2), 1000*t);
 				}
 			});
 		},
@@ -352,6 +352,7 @@ const util = {
 		const webid = "b91d816b-91e7-4974-ba3d-ccb61dbecfd6",
 			apiurl = "https://umami.wenqi.icu/api/websites/" + webid + "/",
 			headers = {
+				// guest token
 				'Authorization': 'Bearer EJfpKblh2tLICYqBUDDs2eA/vd41CeoMtZpsZhrM5W6YkUyCJH/Dg64XEZp83nCVlIqgr8E2+oEeHL8HRSOf0lMsnHTdvsBsn/3rCSPXDI3kDmMBkG1m38JNIArp6Q1gaX6oZWDTph5H6KESaW4tKIhvwo7uaoFrU7OYDgZUG+YA8x41DZq+8HtAkdhJazAGIvyf2HYFRxZEHNb2tCkm2fwxDekKxnp91PYzZvpY0FoRtjKzq6znHmryoE4J42t8OFHv3g6oz/fFNN6RIXsPn9Nvlvr05qNlCNg5k3Iet+b3AkQPrxSpc2oTsvQPkpgctg1C/fYDs53+S8wMB+B4FtPmxn8vtQZnMw==',
 				'Access-Control-Allow-Origin': '*'
 			};
@@ -808,6 +809,24 @@ const util = {
 	},
 	checkFullscreen: function () {
 		return !!(document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.fullscreenElement);
+	},
+	//Nofication Start
+	notice: function (conf={title: "注意注意！", content: '', type: '', buttons: {}, callback: (result)=>{}}) {
+		switch(conf.type){
+			//TODO
+			case 'warning':
+				//Warning Notification
+				break;
+			case 'success':
+				//Success Notification
+				break;
+			case 'error':
+				//Error Notification
+				break;
+			default:
+				//Default Notification
+		}
 	}
+	//Nofication End
 };
-console.log(`\n %c Study With Miku ${version} %c 在干什么呢(・∀・(・∀・(・∀・*) \n`, `color: #fadfa3; background: #030307; padding:5px 0;`, `background: #fadfa3; padding:5px 0; color: #000`);
+console.log(`\n %c Study With Miku ${version} %c 被发现啦(・∀・(・∀・(・∀・*) \n`, `color: #fadfa3; background: #030307; padding:5px 0;`, `background: #fadfa3; padding:5px 0; color: #000`);

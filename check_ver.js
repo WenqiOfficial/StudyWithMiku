@@ -9,7 +9,7 @@ $(function () {
           localStorage.setItem("version", latestSha);
         } else if (localSha !== latestSha) {
           localStorage.setItem("version", latestSha);
-          alert("即将刷新以获取新版本");
+          alert("即将刷新缓存");
           location.reload(true);
         }
       }
