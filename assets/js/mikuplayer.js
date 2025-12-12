@@ -1,8 +1,8 @@
 /* STUDY WITH MIKU
 	CORE FUNCTION
-   V1.0.17 2025.12.11 */
+   V1.1.0 2025.12.11 */
 
-const version = "V1.0.17";
+const version = "V1.1.0";
 
 $(function () {
 	if (window.localStorage) {
@@ -45,7 +45,7 @@ class valStore {
 			studytimeout: 0,
 			attentionout: 0,
 		};
-
+		this.viewTimer = 0;
 	}
 };
 const conf = new confStore();
@@ -388,6 +388,9 @@ const util = {
 		$("#bt_rest").fadeIn(300, "linear");
 		$("video").trigger("play");
 		this.videoresize();
+		setTimeout(() => {
+			this.videoresize();
+		}, 500);
 		this.Tips.init();
 		this.timerecord.start();
 		$("#bt_stop").on('click', function () {
@@ -770,6 +773,12 @@ const util = {
 					$("video").trigger("load");
 					$("video").trigger("play");
 					break;
+				case "umi":
+					$("#btt_scene")[0].innerText = 'UMI';
+					$("video").attr("src", "assets/video/loop_umi.mp4");
+					$("video").trigger("load");
+					$("video").trigger("play");
+					break;
 				default:
 					localStorage.setItem("conf_scene", "normal");
 					$("#btt_scene")[0].innerText = '经典';
@@ -777,17 +786,32 @@ const util = {
 		},
 		swap: function () {
 			const scene = localStorage.getItem("conf_scene");
-			if (scene == "normal") {
-				localStorage.setItem("conf_scene", "sekai");
-				$("#btt_scene")[0].innerText = 'SEKAI';
-				$("video").attr("src", "assets/video/loop_sekai.mp4");
-			} else {
-				localStorage.setItem("conf_scene", "normal");
-				$("#btt_scene")[0].innerText = '经典';
-				$("video").attr("src", "assets/video/loop.mp4");
+			$("#scene_learning").fadeOut(100, "linear");
+			switch (scene) {
+				case "normal":
+					localStorage.setItem("conf_scene", "sekai");
+					$("#btt_scene")[0].innerText = 'SEKAI';
+					$("video").attr("src", "assets/video/loop_sekai.mp4");
+					break;
+				case "sekai":
+					localStorage.setItem("conf_scene", "umi");
+					$("#btt_scene")[0].innerText = 'UMI';
+					$("video").attr("src", "assets/video/loop_umi.mp4");
+					break;
+				case "umi":
+					localStorage.setItem("conf_scene", "normal");
+					$("#btt_scene")[0].innerText = '经典';
+					$("video").attr("src", "assets/video/loop.mp4");
+					break;
 			}
 			$("video").trigger("load");
 			$("video").trigger("play");
+			clearTimeout(val.viewTimer);
+			$("#scene_learning").fadeIn(300, "linear");
+			setTimeout(() => util.videoresize(), 100);
+			val.viewTimer = setTimeout(() => {
+				$("#scene_learning").fadeOut(300, "linear");
+			},1500);
 		}
 	},
 	videoresize: function () {
