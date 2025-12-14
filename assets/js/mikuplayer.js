@@ -1,8 +1,8 @@
 /* STUDY WITH MIKU
 	CORE FUNCTION
-   V1.1.0 2025.12.11 */
+   V1.1.2 2025.12.15 */
 
-const version = "V1.1.0";
+const version = "V1.1.2";
 
 $(function () {
 	if (window.localStorage) {
@@ -45,7 +45,6 @@ class valStore {
 			studytimeout: 0,
 			attentionout: 0,
 		};
-		this.viewTimer = 0;
 	}
 };
 const conf = new confStore();
@@ -783,6 +782,12 @@ const util = {
 					localStorage.setItem("conf_scene", "normal");
 					$("#btt_scene")[0].innerText = '经典';
 			}
+			console.log("视频加载中...");
+			$("video").on("loadedmetadata", function () {
+				$("#loading").fadeOut(300, "linear");
+				$("#btt_start").removeClass("disabled");
+				console.log("视频加载完成");
+			});
 		},
 		swap: function () {
 			const scene = localStorage.getItem("conf_scene");
@@ -804,14 +809,16 @@ const util = {
 					$("video").attr("src", "assets/video/loop.mp4");
 					break;
 			}
+			$("#loading").fadeIn(300, "linear");
+			$("#btt_start").addClass("disabled");
+			console.log("视频加载中...");
 			$("video").trigger("load");
 			$("video").trigger("play");
-			clearTimeout(val.viewTimer);
-			$("#scene_learning").fadeIn(300, "linear");
-			setTimeout(() => util.videoresize(), 100);
-			val.viewTimer = setTimeout(() => {
-				$("#scene_learning").fadeOut(300, "linear");
-			},1500);
+			$("video").on("loadedmetadata", function () {
+				$("#loading").fadeOut(300, "linear");
+				$("#btt_start").removeClass("disabled");
+				console.log("视频加载完成");
+			});
 		}
 	},
 	videoresize: function () {

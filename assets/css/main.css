@@ -41,7 +41,8 @@ html {
 #bt_top a {
     color: #fff;
     text-decoration: none;
-    border-bottom: dashed 1px #fff
+    border-bottom: dashed 1px #fff;
+    transition: opacity .2s ease;
 }
 
 body,
@@ -271,6 +272,11 @@ a:hover {
     display: block;
     position: absolute;
     z-index: 3;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: .5
 }
 
 @keyframes animover {
