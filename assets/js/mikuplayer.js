@@ -1,8 +1,8 @@
 /* STUDY WITH MIKU
 	CORE FUNCTION
-   V1.1.0 2025.12.11 */
+   V1.1.1 2025.12.15 */
 
-const version = "V1.1.0";
+const version = "V1.1.1";
 
 $(function () {
 	if (window.localStorage) {
@@ -45,7 +45,6 @@ class valStore {
 			studytimeout: 0,
 			attentionout: 0,
 		};
-		this.viewTimer = 0;
 	}
 };
 const conf = new confStore();
@@ -806,12 +805,6 @@ const util = {
 			}
 			$("video").trigger("load");
 			$("video").trigger("play");
-			clearTimeout(val.viewTimer);
-			$("#scene_learning").fadeIn(300, "linear");
-			setTimeout(() => util.videoresize(), 100);
-			val.viewTimer = setTimeout(() => {
-				$("#scene_learning").fadeOut(300, "linear");
-			},1500);
 		}
 	},
 	videoresize: function () {
