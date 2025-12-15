@@ -1,8 +1,8 @@
 /* STUDY WITH MIKU
 	CORE FUNCTION
-   V1.1.3 2025.12.15 */
+   V1.1.4 2025.12.15 */
 
-const version = "V1.1.3";
+const version = "V1.1.4";
 
 $(function () {
 	if (window.localStorage) {
@@ -788,6 +788,7 @@ const util = {
 			$("video").trigger("play");
 			console.log("视频加载中...");
 			$("video").on("loadedmetadata", function () {
+				util.videoresize();
 				$("#loading").fadeOut(300, "linear");
 				$("#btt_start").removeClass("disabled");
 				console.log("视频加载完成");
@@ -795,7 +796,8 @@ const util = {
 		},
 		swap: function () {
 			const scene = localStorage.getItem("conf_scene");
-			$("#scene_learning").fadeOut(100, "linear");
+			$("#loading").fadeIn(300, "linear");
+			$("#btt_start").addClass("disabled");
 			switch (scene) {
 				case "normal":
 					localStorage.setItem("conf_scene", "sekai");
@@ -816,16 +818,9 @@ const util = {
 					$("video").removeClass("video_sekai");
 					break;
 			}
-			$("#loading").fadeIn(300, "linear");
-			$("#btt_start").addClass("disabled");
 			console.log("视频加载中...");
 			$("video").trigger("load");
 			$("video").trigger("play");
-			$("video").on("loadedmetadata", function () {
-				$("#loading").fadeOut(300, "linear");
-				$("#btt_start").removeClass("disabled");
-				console.log("视频加载完成");
-			});
 		}
 	},
 	videoresize: function () {
