@@ -1,8 +1,8 @@
 /* STUDY WITH MIKU
 	CORE FUNCTION
-   V1.1.2 2025.12.15 */
+   V1.1.3 2025.12.15 */
 
-const version = "V1.1.2";
+const version = "V1.1.3";
 
 $(function () {
 	if (window.localStorage) {
@@ -765,23 +765,27 @@ const util = {
 			switch (localStorage.getItem("conf_scene")) {
 				case "normal":
 					$("#btt_scene")[0].innerText = '经典';
+					$("video").attr("src", "assets/video/loop.mp4");
+					$("video").removeClass("video_sekai");
 					break;
 				case "sekai":
 					$("#btt_scene")[0].innerText = 'SEKAI';
 					$("video").attr("src", "assets/video/loop_sekai.mp4");
-					$("video").trigger("load");
-					$("video").trigger("play");
+					$("video").removeClass("video_sekai");
 					break;
 				case "umi":
 					$("#btt_scene")[0].innerText = 'UMI';
 					$("video").attr("src", "assets/video/loop_umi.mp4");
-					$("video").trigger("load");
-					$("video").trigger("play");
+					$("video").addClass("video_sekai");
 					break;
 				default:
 					localStorage.setItem("conf_scene", "normal");
 					$("#btt_scene")[0].innerText = '经典';
+					$("video").attr("src", "assets/video/loop.mp4");
+					$("video").removeClass("video_sekai");
 			}
+			$("video").trigger("load");
+			$("video").trigger("play");
 			console.log("视频加载中...");
 			$("video").on("loadedmetadata", function () {
 				$("#loading").fadeOut(300, "linear");
@@ -797,16 +801,19 @@ const util = {
 					localStorage.setItem("conf_scene", "sekai");
 					$("#btt_scene")[0].innerText = 'SEKAI';
 					$("video").attr("src", "assets/video/loop_sekai.mp4");
+					$("video").removeClass("video_sekai");
 					break;
 				case "sekai":
 					localStorage.setItem("conf_scene", "umi");
 					$("#btt_scene")[0].innerText = 'UMI';
 					$("video").attr("src", "assets/video/loop_umi.mp4");
+					$("video").addClass("video_sekai");
 					break;
 				case "umi":
 					localStorage.setItem("conf_scene", "normal");
 					$("#btt_scene")[0].innerText = '经典';
 					$("video").attr("src", "assets/video/loop.mp4");
+					$("video").removeClass("video_sekai");
 					break;
 			}
 			$("#loading").fadeIn(300, "linear");

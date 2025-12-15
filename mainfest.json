@@ -1,5 +1,5 @@
 {
-  "name": "STUDY WITH MIKU",
+  "name": "STUDY WITH MIKU - 初音未来在线自习室",
   "icons": [
     {
       "src": "./assets/icon/icon_192x192.png",
@@ -21,7 +21,7 @@
   "display": "standalone",
   "background_color": "#448a91",
   "theme_color": "#448a91",
-  "description": "STUDY WITH MIKU 是一个为了与Miku一起学习而建立的网站! 与Miku一起学习吧！",
+  "description": "STUDY WITH MIKU 在线自习室！来享受一个与初音未来一起高效学习的时间吧！ STUDY WITH MIKU is an online study room! Join us for a Kawaii and Productive study environment!",
   "screenshots": [
     {
       "src": "./assets/cover.png",

@@ -55,5 +55,3 @@ STUDY WITH MIKU web version cover
 ---
 
 [![Cover](https://raw.githubusercontent.com/WenqiOfficial/wenqicdn/master/img/banner/studymiku.jpg)](https://www.bilibili.com/video/BV1rV41157DR)
-
-*当前 STUDY WITH MIKU 已进入到慢更新状态...*
