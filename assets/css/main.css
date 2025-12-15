@@ -55,7 +55,8 @@ html {
     background: #448a91;
     color: #fff;
     /* font-family:Quicksand,pmzdxxt,"游ゴシック","Yu Gothic","游ゴシック体",YuGothic,"Yu Gothic UI","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","Meiryo UI","メイリオ",Meiryo,sans-serif */
-    font-family: Quicksand, "SJsuqian Regular", "Microsoft YaHei", "游ゴシック", "Yu Gothic", "游ゴシック体", YuGothic, "Yu Gothic UI", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Meiryo UI", "メイリオ", Meiryo, sans-serif
+    font-family: Quicksand, "SJsuqian Regular", "Microsoft YaHei", "游ゴシック", "Yu Gothic", "游ゴシック体", YuGothic, "Yu Gothic UI", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Meiryo UI", "メイリオ", Meiryo, sans-serif;
+    text-shadow: 1px 1px 3px #000;
 }
 
 /* hidden utils */
@@ -390,6 +391,7 @@ a:hover {
 .aplayer {
     color: black;
     text-align: left;
+    text-shadow: none;
 }
 
 video {
@@ -398,11 +400,14 @@ video {
     top: 0px;
     height: auto;
     width: auto;
-    /*filter: blur(15px); //背景模糊设置 */
-    /*-webkit-filter: grayscale(100%);*/
-    /*filter:grayscale(100%); //背景灰度设置*/
     z-index: -11;
     object-fit: cover;
+    transition: filter .3s ease;
+}
+
+video.video_sekai {
+    -webkit-filter: brightness(0.8) !important;
+    filter: brightness(0.8) !important;
 }
 
 source {
