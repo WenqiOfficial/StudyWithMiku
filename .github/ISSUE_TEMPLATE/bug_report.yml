@@ -55,6 +55,14 @@ body:
       placeholder: "eg. Windows 11 64bit 22621.2134"
     validations:
       required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: 使用的网址
+      placeholder: "eg. https://studymiku.wenqi.icu/"
+    validations:
+      required: true
   
   - type: textarea
     id: context
