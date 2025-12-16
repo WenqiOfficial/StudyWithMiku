@@ -6,7 +6,7 @@ STUDY WITH MIKU web version cover
 
 [WEB](https://studymiku.wenqi.icu)
 
-[WEB(Cloudflare)](https://studymiku.cloudflare.wenqi.icu)
+[WEB(备用网址)](https://studymiku.cloudflare.wenqi.icu)
 
 ## 目前实现的功能
 
