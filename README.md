@@ -4,7 +4,7 @@ STUDY WITH MIKU web version cover
 
 突发奇想，将其变为现实
 
-[WEB](https://studymiku.wenqi.icu)
+[WEB](https://study.wenqi.icu)
 
 [WEB(备用网址)](https://studymiku.cloudflare.wenqi.icu)
 
