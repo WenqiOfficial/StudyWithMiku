@@ -33,8 +33,15 @@
   <link charset="utf-8" href="assets/css/main.css" rel="stylesheet"> 
   <link rel="stylesheet" href="https://cdnjs.snrat.com/ajax/libs/aplayer/1.10.1/APlayer.min.css" integrity="sha256-uqQQGnDcmRKvhKwc5Vm4XT1GQ2oV6t1U0NR2N9tV+BQ=" crossorigin="anonymous">
   <!-- Umami START -->
-  <script src="assets/js/umami.js" data-host-url="https://umami.wenqi.icu" data-website-id="b91d816b-91e7-4974-ba3d-ccb61dbecfd6" data-domains="study.wenqi.icu,studymiku.wenqi.icu,studymiku.dev.wenqi.icu,studymiku.cloudflare.wenqi.icu"></script>
+  <script defer src="assets/js/umami.js" data-host-url="https://umami.wenqi.icu" data-website-id="b91d816b-91e7-4974-ba3d-ccb61dbecfd6" data-domains="study.wenqi.icu,studymiku.wenqi.icu,studymiku.dev.wenqi.icu,studymiku.cloudflare.wenqi.icu"></script>
   <script src="assets/js/ufunction.js"></script>
+  <script>
+    setInterval(() => {
+      if (window.umami) {
+        umami.track('heartbeat');
+      }
+    }, 60000);
+  </script>
   <!-- Umami END -->
   <script src="https://cdnjs.snrat.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.snrat.com/ajax/libs/aplayer/1.10.1/APlayer.min.js" integrity="sha256-6Y7CJDaltoeNgk+ZftgCD9jLgmGv4xKUo8nQ0HgAwVo=" crossorigin="anonymous"></script>
