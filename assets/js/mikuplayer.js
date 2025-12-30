@@ -395,10 +395,27 @@ const util = {
 		let count_online2 = new countUp.CountUp('umami_value_onlineuser2', 0, options);
 		let count_studytimes = new countUp.CountUp('umami_value_studytimes', 0, options);
 		let count_visitor = new countUp.CountUp('umami_value_visitors', 0, options);
+
+		let hostUrl = "https://umami.wenqi.icu";
+		const umamiScript = document.querySelector('script[src*="umami.js"]');
+		if (umamiScript && umamiScript.getAttribute('data-host-url')) {
+			hostUrl = umamiScript.getAttribute('data-host-url');
+		}
+
+		const shareId = "4DoIF6XNsdsiwLLk";
+		let token = "";
+		try {
+			const response = await fetch(hostUrl + "/api/share/" + shareId);
+			const data = await response.json();
+			token = data.token;
+		} catch (e) {
+			console.error("Failed to get Umami share token", e);
+		}
+
 		const webid = "b91d816b-91e7-4974-ba3d-ccb61dbecfd6",
-			apiurl = "https://umami.wenqi.icu/api/websites/" + webid + "/",
+			apiurl = hostUrl + "/api/websites/" + webid + "/",
 			headers = {
-				'Authorization': 'Bearer EJfpKblh2tLICYqBUDDs2eA/vd41CeoMtZpsZhrM5W6YkUyCJH/Dg64XEZp83nCVlIqgr8E2+oEeHL8HRSOf0lMsnHTdvsBsn/3rCSPXDI3kDmMBkG1m38JNIArp6Q1gaX6oZWDTph5H6KESaW4tKIhvwo7uaoFrU7OYDgZUG+YA8x41DZq+8HtAkdhJazAGIvyf2HYFRxZEHNb2tCkm2fwxDekKxnp91PYzZvpY0FoRtjKzq6znHmryoE4J42t8OFHv3g6oz/fFNN6RIXsPn9Nvlvr05qNlCNg5k3Iet+b3AkQPrxSpc2oTsvQPkpgctg1C/fYDs53+S8wMB+B4FtPmxn8vtQZnMw==',
+				'x-umami-share-token': token,
 				'Access-Control-Allow-Origin': '*'
 			};
 
