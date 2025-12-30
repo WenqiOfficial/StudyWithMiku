@@ -371,7 +371,7 @@ const util = {
 				url: conf.Umami.apiurl + 'stats' + '?startAt=1691596800000&endAt=' + end_time,
 				headers: conf.Umami.headers,
 				success: function (data) {
-					conf.Umami.count_visitor.update(data['visitors']['value']);
+					conf.Umami.count_visitor.update(data['visitors']);
 				},
 				error: function () {
 					setTimeout(util.getUmami.GetVV, 5000);
