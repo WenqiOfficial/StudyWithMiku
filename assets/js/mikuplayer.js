@@ -257,6 +257,7 @@ const util = {
 	},
 	AplayerInteraction: async function () {
 		if (!$(".aplayer").length) { setTimeout(util.AplayerInteraction, 500); return; }
+		util.initMediaSession();
 		$('.aplayer-miniswitcher button').on('click', function () {
 			$('.aplayer-list').addClass('aplayer-list-hide');
 			if ($('.aplayer').hasClass('aplayer-narrow')) {
@@ -272,6 +273,52 @@ const util = {
 				$('.aplayer-miniswitcher button').click();
 			}
 		});
+	},
+	initMediaSession: function () {
+		const meting = document.querySelector('meting-js');
+		if (!meting || !meting.aplayer) {
+			setTimeout(util.initMediaSession, 500);
+			return;
+		}
+		const ap = meting.aplayer;
+		const updateMetadata = () => {
+			if (!ap.list.audios[ap.list.index]) return;
+			const audio = ap.list.audios[ap.list.index];
+			if ('mediaSession' in navigator) {
+				navigator.mediaSession.metadata = new MediaMetadata({
+					title: audio.name,
+					artist: audio.artist,
+					album: audio.album || '',
+					artwork: [
+						{ src: audio.cover, sizes: '96x96', type: 'image/jpeg' },
+						{ src: audio.cover, sizes: '128x128', type: 'image/jpeg' },
+						{ src: audio.cover, sizes: '192x192', type: 'image/jpeg' },
+						{ src: audio.cover, sizes: '256x256', type: 'image/jpeg' },
+						{ src: audio.cover, sizes: '384x384', type: 'image/jpeg' },
+						{ src: audio.cover, sizes: '512x512', type: 'image/jpeg' },
+					]
+				});
+			}
+		};
+		ap.on('play', () => {
+			updateMetadata();
+			navigator.mediaSession.playbackState = 'playing';
+		});
+		ap.on('pause', () => {
+			navigator.mediaSession.playbackState = 'paused';
+		});
+		ap.on('ended', () => {
+			navigator.mediaSession.playbackState = 'none';
+		});
+		ap.on('listswitch', () => {
+			updateMetadata();
+		});
+		if ('mediaSession' in navigator) {
+			navigator.mediaSession.setActionHandler('play', () => ap.play());
+			navigator.mediaSession.setActionHandler('pause', () => ap.pause());
+			navigator.mediaSession.setActionHandler('previoustrack', () => ap.skipBack());
+			navigator.mediaSession.setActionHandler('nexttrack', () => ap.skipForward());
+		}
 	},
 	//APlayer END
 	//Umami START
